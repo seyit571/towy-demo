@@ -118,7 +118,7 @@ $("#resetAll").addEventListener("click",()=>{if(!confirm("Réinitialiser toute l
 window.addEventListener("storage",e=>{if(e.key===KEY){state=load();render()}});
 function render(){renderPro();renderOps()}
 $$("[data-service]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.service===service)));
-quote();render();
+quote();render();if(location.hash==="#pro")go("pro");else if(location.hash==="#ops")go("ops");
 })();
 </script>
 </body></html>
