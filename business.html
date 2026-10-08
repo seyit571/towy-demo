@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#151719"><meta name="description" content="TOWY Business, votre espace garage : créez et suivez vos missions de récupération, remorquage et transfert de véhicules dans une démonstration interactive."><title>TOWY Business — L'espace des professionnels de l'auto</title><link rel="stylesheet" href="./towy-site.css"></head>
+<body>
+<div class="microline">TOWY BUSINESS <em>●</em> ENVIRONNEMENT DE DÉMONSTRATION · AUCUN TRANSPORTEUR RÉEL N'EST CONTACTÉ</div>
+<header class="sitehead"><div class="container"><a href="./index.html" class="logo">towy<b>.</b></a><nav aria-label="Navigation principale"><a class="active" href="./business.html">Garages & professionnels</a><a href="./depannage.html">Dépannage & remorquage</a><a href="./transport.html">Transport de véhicules</a></nav><div class="head-action"><a class="account-link" href="./index.html">Accueil</a><a class="btn orange small" href="#demande" data-tab="create">Nouvelle mission <span class="arr">↗</span></a></div></div></header>
+<main>
+<section class="pagehead"><div class="container"><div><div class="tagline">TOWY BUSINESS / GARAGES & CONCESSIONS</div><h1>LE BON VÉHICULE.<br><em>AU BON ENDROIT.</em></h1><p>Récupérez une voiture chez un client, transférez un véhicule entre garages ou organisez un remorquage. Un seul espace pour toutes vos demandes, avec suivi de chaque mission.</p></div><span class="demo-badge">● PROTOTYPE · DONNÉES LOCALES</span></div></section>
+<section class="appzone"><div class="container">
+<div class="metricrow" id="metrics">
+<div class="metric"><label>Missions créées</label><strong>0</strong><small>Dans ce navigateur</small></div><div class="metric"><label>À attribuer</label><strong>0</strong><small>Demandes de test</small></div><div class="metric"><label>En cours</label><strong>0</strong><small>Missions simulées</small></div><div class="metric"><label>Terminées</label><strong>0</strong><small>Interventions fictives</small></div>
+</div>
+<div class="dashboard-grid">
+<aside class="panel"><div class="tagline">VOTRE ESPACE</div><h2 style="margin-top:19px">Bienvenue sur TOWY Business.</h2><p class="hint">Testez l'ensemble du processus d'une demande de garage, jusqu'à sa clôture par le dispatch.</p>
+<div class="pro-tile"><b>TOWY Garage Démo</b><small>Compte de test · Moselle · Accès sans connexion</small></div>
+<div class="appnav" id="appNav" style="display:grid"><button class="active" data-tab="create">01 / Nouvelle demande</button><button data-tab="missions">02 / Mes missions</button><button data-tab="dispatch">03 / Dispatch démo</button></div>
+<div class="asidebox"><b>Important :</b> aucune demande n'est envoyée. Les données ne sont stockées que sur cet appareil. Un véritable service multi-utilisateur nécessitera une base sécurisée et des partenaires agréés.</div>
+<a href="./transport.html" class="btn outline block" style="margin-top:20px">Transport longue distance ↗</a>
+<a href="./depannage.html" class="btn outline block" style="margin-top:9px">Dépannage particulier ↗</a>
+</aside>
+<div class="stack">
+<section id="createView" class="panel appview active"><div class="tagline">01 / NOUVELLE MISSION</div><h2 style="margin-top:14px">Un véhicule à récupérer ?</h2><p class="hint">Créez une mission test pour visualiser le circuit TOWY. Aucun véritable devis n'est généré.</p>
+<form id="missionForm"><div class="formgrid"><div class="formstep">Votre entreprise</div>
+<label class="field wide">Nom du garage (nom fictif recommandé) *<input id="garage" required minlength="2" maxlength="75" placeholder="Ex. Garage des Trois Frontières" autocomplete="organization"></label>
+<div class="formstep">Mission & véhicule</div>
+<label class="field">Type de mission *<select id="service"><option value="recovery">Récupération chez un client</option><option value="tow">Remorquage vers garage</option><option value="transfer">Transfert entre établissements</option><option value="delivery">Livraison du véhicule</option></select></label>
+<label class="field">Véhicule *<select id="vehicle"><option value="car">Voiture</option><option value="suv">SUV / 4x4</option><option value="van">Utilitaire léger</option><option value="moto">Moto / scooter</option></select></label>
+<label class="field wide">Marque et modèle (facultatif)<input id="model" maxlength="75" placeholder="Ex. Renault Clio V"></label>
+<label class="field">État du véhicule *<select id="condition"><option value="rolling">Roulant / chargeable</option><option value="nonrolling">En panne / non roulant</option></select></label>
+<label class="field">Priorité *<select id="priority"><option value="planned">Planifié</option><option value="today">Dans la journée</option><option value="urgent">Urgent (hors autoroute)</option></select></label>
+<div class="formstep">Enlèvement & destination</div>
+<label class="field">Ville de départ *<input id="origin" required minlength="2" maxlength="80" placeholder="Ex. Thionville"></label>
+<label class="field">Ville d'arrivée *<input id="destination" required minlength="2" maxlength="80" placeholder="Ex. Metz"></label>
+<label class="field">Distance indicative (km) *<input id="distance" type="number" min="1" max="300" step="1" value="12" required></label>
+<label class="field">Date souhaitée *<input id="date" type="date" required></label>
+<label class="field wide">Instructions pour le dépanneur <textarea id="instructions" maxlength="350" placeholder="État du véhicule, contraintes de chargement, accès, horaires d'atelier…"></textarea></label></div>
+<div class="pricebox"><div><small>Estimation fictive · démo</small><strong id="estimate">—</strong></div><p>Hypothèse de test seulement, sans tarif contractuel ni réservation.</p></div>
+<label class="check"><input type="checkbox" id="outside" required><span>Je confirme que cette demande test ne concerne <b>pas une autoroute ni une route express</b> et qu'aucune prestation réelle n'est commandée.</span></label>
+<button class="btn orange block" type="submit">Créer la mission test <span class="arr">↗</span></button>
+<p class="smallnote">Pour la démonstration, évitez de saisir des données personnelles (client, adresse précise, téléphone ou immatriculation).</p>
+</form></section>
+<section id="missionsView" class="panel appview"><div class="tagline">02 / SUIVI DES MISSIONS</div><h2 style="margin-top:14px">Mes interventions</h2><p class="hint">Retrouvez les missions créées ici et consultez leurs statuts.</p>
+<div class="filters" id="missionFilters"><button class="active" data-status="all">Toutes</button><button data-status="pending">À attribuer</button><button data-status="assigned">En cours</button><button data-status="done">Terminées</button></div>
+<div id="missionList"></div><button class="btn outline small" data-tab="create" style="margin-top:20px">+ Nouvelle mission</button></section>
+<section id="dispatchView" class="panel appview"><div class="tagline">03 / CENTRE D'ATTRIBUTION</div><h2 style="margin-top:14px">Dispatch TOWY</h2><p class="hint">Sélectionnez un dépanneur fictif, attribuez une demande et terminez-la. Cette console n'est pas un vrai outil partagé.</p>
+<label class="field" style="margin-top:22px;max-width:440px">Professionnel de démonstration<select id="provider"><option value="p1">Dépannage Moselle Démo — Plateau / Assistance</option><option value="p2">Transport Metz Démo — Plateau / Remorquage</option><option value="p3">TOWY Nord Démo — Assistance / Moto</option></select></label>
+<h3 style="margin:25px 0 10px">Missions à attribuer</h3><div id="pendingList"></div>
+<h3 style="margin:26px 0 10px">Missions en cours</h3><div id="activeList"></div>
+<div class="asidebox">Cette attribution est simulée. Aucun vrai dépanneur n'est notifié et aucun véhicule n'est déplacé.</div>
+<button class="btn outline small" id="clearAll" style="margin-top:20px">Réinitialiser les missions test</button>
+</section>
+</div></div></div></section></main>
+<footer class="footer"><div class="container"><div class="footer-top"><a href="./index.html" class="logo">towy<b>.</b></a><div class="footer-links"><a href="./business.html">Business</a><a href="./depannage.html">Dépannage</a><a href="./transport.html">Transport</a><a href="./index.html">Accueil</a></div></div><div class="footer-bottom"><span>© 2026 TOWY — Démonstration métier sans services réels.</span><span>GitHub Pages · Usage de test uniquement, sans comptes sécurisés ni traitement des paiements.</span></div></div></footer>
+<div class="modalbg" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><button class="dismiss" id="modalClose" aria-label="Fermer">×</button><span class="status">DEMANDE FICTIVE</span><h2 id="modalTitle">Mission créée</h2><p id="modalLead">Cette demande a bien été enregistrée dans votre navigateur.</p><div class="detailbox" id="modalInfo"></div><div class="modalcontrols" id="modalActions"><button class="btn orange" data-tab="missions">Suivre cette mission ↗</button><button class="btn outline" data-tab="dispatch">Ouvrir le dispatch</button></div></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./business.js" defer></script></body></html>
