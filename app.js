@@ -143,7 +143,7 @@ $$('.modalback').forEach(x=>x.addEventListener('click',e=>{if(e.target===x)close
 document.addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modalback.open').forEach(m=>close(m.id))});
 $('#resetDemo').addEventListener('click',()=>{if(!confirm('Réinitialiser toutes les missions et partenaires fictifs de cette plateforme ?'))return;state=fresh();selectedProvider='p1';save();render();say('Données de démonstration réinitialisées.')});
 window.addEventListener('storage',e=>{if(e.key===KEY){state=load();render()}});
-function activateHash(){const v=location.hash.slice(1).toLowerCase();go(['home','client','garage','partner','control'].includes(v)?v:'home',false)}
+function activateHash(){const v=location.hash.slice(1).toLowerCase();if(v==='new-roadside'){go('client',false);openCreate('roadside','client');return}if(v==='new-transport'){go('client',false);openCreate('transport','client');return}if(v==='new-business'){go('garage',false);openCreate('business','garage');return}go(['home','client','garage','partner','control'].includes(v)?v:'home',false)}
 window.addEventListener('hashchange',activateHash);
 $('#jobDate').min=tomorrow(0);$('#jobDate').value=tomorrow(0);
 setCategory('roadside');render();activateHash();
