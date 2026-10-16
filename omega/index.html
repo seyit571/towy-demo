@@ -83,6 +83,21 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <p class="caption">Résultats des logs de simulation officiels, non des transactions mainnet. Les frais supplémentaires de données L1 Base, les aléas d'inclusion et de concurrence ne sont pas déduits : les gains nets positifs exigent donc une marge supplémentaire de 0,00005 ETH. Une simulation réussie ne garantit pas l'encaissement.</p>
 <div class="toolbar"><a href="https://github.com/seyit571/towy-demo/blob/main/omega/beefy-base.cjs" target="_blank" rel="noopener noreferrer">Code du scanner ↗</a><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/beefy-base.json" target="_blank" rel="noopener noreferrer">Résultats horodatés ↗</a></div>
 </div></section>
+<section id="beefyBaseAudit">
+<div class="head"><h2>BASE — Récompenses Beefy et preuve d'exécution</h2><span class="pill" id="baseRewardStatus">Lecture en cours…</span></div>
+<p class="sub">Plus de 200 stratégies interrogées simultanément directement sur Base. <strong>Récompense estimée ≠ bénéfice capturable</strong> : le compteur de profit reste à zéro tant que le fork n'a pas réellement transféré un surplus après gas au wallet de test.</p>
+<div class="toolbar"><span class="caption">Scan multicall on-chain · classement par récompense annoncée</span><button id="baseRewardRefresh">Actualiser les preuves</button></div>
+<div class="grid">
+<div class="card"><div class="label">Stratégies vérifiées</div><div class="big" id="baseRewardScanned">—</div></div>
+<div class="card"><div class="label">Devis callReward non nuls</div><div class="big orange" id="baseRewardQuoted">—</div></div>
+<div class="card"><div class="label">Transactions complètes testées sur fork</div><div class="big" id="baseRewardForked">—</div></div>
+<div class="card"><div class="label">Net positif prouvé après gas</div><div class="big" id="baseRewardPositive">—</div></div>
+</div>
+<div class="box">
+<div class="scroll"><table><thead><tr><th>Beefy Base</th><th>Récompense annoncée</th><th>Vérification fork</th><th>Net wallet testé</th></tr></thead><tbody id="baseRewardRows"><tr><td colspan="4">Chargement…</td></tr></tbody></table></div>
+<p class="caption">Devis lus directement dans les stratégies. Pour les contrats testés, les appels RPC et les forks locaux peuvent aboutir à des résultats différents. Les opérations non testées ne sont ni comptées comme exécutables ni ajoutées au P&L. Les transactions sur fork ne sont pas des encaissements réels.</p>
+<p class="caption"><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/base-beefy-quotes.json" target="_blank" rel="noopener noreferrer">Devis bruts horodatés ↗</a> · <a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/base-beefy-fork.json" target="_blank" rel="noopener noreferrer">Résultats de simulation ↗</a></p>
+</div></section>
 <section id="beefyAudit">
 <div class="head"><h2>BEEFY CASH — audit des récompenses de harvest</h2><span id="beefyStatus" class="pill">En attente des reçus…</span></div>
 <p class="sub">Les contrats Beefy proposent une rémunération à l'appelant. J'ai simulé l'appel <code>harvest(address)</code> sur un vrai fork BNB, et mesuré la différence entre <strong>récompense annoncée et WBNB réellement reçu</strong>. C'est cette différence qui compte.</p>
@@ -311,4 +326,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
