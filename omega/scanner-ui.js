@@ -7,7 +7,7 @@
  const compact=v=>{const x=Number(v);if(!Number.isFinite(x))return '—';if(x>=1e9)return '$'+(x/1e9).toFixed(2)+' Md';if(x>=1e6)return '$'+(x/1e6).toFixed(2)+' M';if(x>=1e3)return '$'+(x/1e3).toFixed(1)+' k';return usd(x)};
  const safe=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  let last=null;
- const raw='https://raw.githubusercontent.com/seyit571/towy-demo/main/omega/data/';
+ const raw='https://raw.githubusercontent.com/seyit571/towy-demo/omega-data/omega/data/';
  async function read(filename){
   const r=await fetch(raw+filename+'?t='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw Error('HTTP '+r.status);
