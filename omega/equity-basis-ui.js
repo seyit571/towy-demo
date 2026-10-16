@@ -3,7 +3,7 @@
 (function(){
  const $=id=>document.getElementById(id);
  const fmt=(n,digits=2)=>Number.isFinite(Number(n))?Number(n).toLocaleString('fr-FR',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'—';
- const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&#39;'}[c]));
+ const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const URL='https://raw.githubusercontent.com/seyit571/towy-demo/omega-data/omega/data/equity-basis.json';
  let fetching=false;
  async function refresh(){
