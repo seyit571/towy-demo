@@ -114,6 +114,22 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <p class="caption">* Santé basée sur un contrôle au bloc sans accrual complet des intérêts depuis la dernière opération : résultat indicatif. Plafond du bonus calculé avec les valorisations API et hypothèse de 650 000 unités de gas, hors swaps, impact de marché, frais éventuels et compétition. Le plafond n'est pas disponible comme profit réel. <span id="evmErrors"></span></p>
 </section>
 </section>
+
+<section style="scroll-margin-top:16px" id="bscShadow">
+<div class="head"><h2>BNB Chain — Arbitrages entre vraies réserves</h2><span id="bscStatus" class="pill">Chargement…</span></div>
+<p class="sub">PancakeSwap V2 ↔ Biswap V2 · 5 tokens · 10 paires comparables. Maths AMM calculées sur un même bloc, avec frais réels annoncés par les DEX. <strong>Pas de transaction atomique simulée.</strong></p>
+<div class="toolbar"><span class="caption">Bloc contrôlé : <strong id="bscBlock">—</strong></span><button id="bscReload">Actualiser BNB</button></div>
+<div class="grid">
+<div class="card"><div class="label">Pools lus on-chain</div><div class="big" id="bscPools">—</div></div>
+<div class="card"><div class="label">Cycles testés</div><div class="big" id="bscTests">—</div></div>
+<div class="card"><div class="label">Profits bruts après frais DEX</div><div class="big" id="bscPositive">—</div></div>
+<div class="card"><div class="label">Meilleur cycle (en token)</div><div class="big orange" id="bscBest">—</div></div>
+</div>
+<section class="box"><div class="head"><strong>Les 12 meilleurs résultats mesurés, même négatifs</strong><span class="tag">VRAIES RÉSERVES · READ ONLY</span></div>
+<div class="scroll"><table><thead><tr><th>Marché</th><th>Route</th><th>Taille</th><th>P&L après frais DEX</th><th>Rendement</th></tr></thead><tbody id="bscRows"><tr><td colspan="5">Chargement des réserves…</td></tr></tbody></table></div>
+<p class="caption">Frais du modèle : Pancake V2 0,25 %, Biswap V2 0,20 % (0,10 % sur certaines stables). Estimations en unités du token initial, pas en euros. Gas, frais flashloan, bloc futur, taxes de token et MEV non inclus : <strong>aucun gain exécutable n'est encore confirmé.</strong></p>
+</section>
+</section>
 <footer>Sources : <a href="https://docs.morpho.org/developers/api/morpho/" target="_blank" rel="noopener noreferrer">Morpho API</a> · <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket" target="_blank" rel="noopener noreferrer">Hyperliquid WebSocket</a>. Site hébergé sur GitHub Pages : accessible 24h/24, mais le flux tourne uniquement pendant que cette page est ouverte. Ce site statique ne peut pas exécuter de liquidations en arrière-plan ni promettre les mêmes profits après connexion d'un wallet.</footer>
 </main><script>
 'use strict';
@@ -155,4 +171,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script></body></html>
+</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script></body></html>
