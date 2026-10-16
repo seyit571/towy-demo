@@ -22,7 +22,7 @@ RPCS = [
     "https://api.mainnet-beta.solana.com",
 ]
 L3 = "https://dlob.velocity.exchange/l3"
-MARKETS = ["SOL-PERP", "BTC-PERP", "ETH-PERP", "HYPE-PERP", "JUP-PERP", "WIF-PERP"]
+MARKETS = ["SOL-PERP", "BTC-PERP", "ETH-PERP", "HYPE-PERP"]
 UA = {"User-Agent": "OMEGA-ReadOnly-FlowMonitor/1.0", "Accept": "application/json"}
 ERRORS = []
 
@@ -91,7 +91,7 @@ def scan_orders(market):
 
 
 def get_tx(signature):
-    doc = rpc("getTransaction", [signature, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0}])
+    doc = rpc("getTransaction", [signature, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 255}])
     if not isinstance(doc, dict):
         return None
     meta = doc.get("meta") or {}
@@ -134,7 +134,7 @@ def main():
         ERRORS.append("Kamino signatures: " + str(exc)[:170])
 
     success = [x for x in signatures if isinstance(x, dict) and x.get("signature") and not x.get("err")]
-    successful_sample = success[:18]
+    successful_sample = success[:30]
     transactions = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         futures = {pool.submit(get_tx, x["signature"]): x for x in successful_sample}
