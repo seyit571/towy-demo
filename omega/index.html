@@ -21,6 +21,32 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <h1>Le flux réel. Pas de faux profits.</h1>
 <p class="sub">Radar live Hyperliquid + candidats liquidation Morpho Blue. Analyse ouverte sur téléphone, sans EC2 ni wallet.</p>
 <div class="toolbar"><span class="pill ok">● DONNÉES RÉELLES</span><span class="pill warn">SIMULATEUR EVM NON CONNECTÉ</span><span class="pill">AUCUN ORDRE ENVOYÉ</span></div>
+<section id="omegaCommander" style="scroll-margin-top:14px">
+<div class="head"><h2>OMEGA COMMANDER — Centre de capture multichaînes</h2><span class="pill" id="cmdStatus">Connexion au routeur…</span></div>
+<p class="sub">Dix sources vérifiées : candidats de liquidation sur Morpho, primes Sky/Curve/Beefy, soldes des transactions flash sur fork, ordres perpétuels Solana et cycles BNB optimisés. Le moteur classe les dossiers par <strong>marge économique, niveau de preuve et fraîcheur</strong>, sans convertir un volume de marché en bénéfice.</p>
+<div class="toolbar"><span class="caption">Rapport : <strong id="cmdLast">—</strong> · ancienneté <span id="cmdAge">—</span></span><button id="cmdManual">Actualiser le centre de contrôle</button></div>
+<div class="grid">
+ <div class="card"><div class="label">Sources vérifiées et fraîches</div><div class="big" id="cmdSources">—</div><div class="caption"><span id="cmdStale">—</span> sources absentes ou anciennes</div></div>
+ <div class="card"><div class="label">Opérations candidates classées</div><div class="big orange" id="cmdQueue">—</div><div class="caption">À qualifier, pas encore capturables</div></div>
+ <div class="card"><div class="label">Ordres atomiques exécutables et vérifiés</div><div class="big" id="cmdReady">—</div><div class="caption">Après contrôle complet du profit</div></div>
+ <div class="card"><div class="label">Captures positives validées</div><div class="big" id="cmdVerified">—</div><div class="caption">Sans dupliquer une opération</div></div>
+</div>
+<div class="grid">
+ <div class="card"><div class="label">Net simulé vérifié · minute</div><div class="big ok" id="cmdMinute">—</div><div class="caption">USD, par reçus et soldes wallet</div></div>
+ <div class="card"><div class="label">Net simulé vérifié · heure</div><div class="big ok" id="cmdHour">—</div><div class="caption">USD, non projetés</div></div>
+ <div class="card"><div class="label">Net simulé vérifié · cumul</div><div class="big ok" id="cmdTotal">—</div><div class="caption">USD, historique indépendant</div></div>
+ <div class="card"><div class="label">Wallet réel</div><div class="big" id="cmdWallet">—</div><div class="caption">Aucune signature ni transaction envoyée</div></div>
+</div>
+<div class="box">
+ <div class="head"><strong>Recherche de surplus : candidats triés par validation</strong><span class="tag">READ ONLY</span></div>
+ <div class="scroll"><table><thead><tr><th>Rang</th><th>Réseau</th><th>Opération</th><th>Plafond après gas supposé</th><th>Gas estimé</th><th>État</th></tr></thead><tbody id="cmdCandidates"><tr><td colspan="6">Évaluation en cours…</td></tr></tbody></table></div>
+ <p class="caption">Un plafond positif n'est pas une transaction profitable : les swaps, intérêts, frais flash éventuels, latence, compétition et liquidation du collatéral doivent encore être simulés. Aucun ordre en mainnet.</p>
+</div>
+<div class="head"><h3>Activité des moteurs</h3><span class="caption">Données contrôlées, non profits</span></div>
+<div class="grid" id="cmdMarkets"></div>
+<div class="box"><div class="head"><strong>Disponibilité des flux et preuves</strong><span class="tag">ALERTE SI DONNÉE ANCIENNE</span></div><div id="cmdFreshness">Chargement…</div><p class="caption" id="cmdError"></p>
+<p class="caption"><a href="https://github.com/seyit571/towy-demo/blob/main/omega/commander.py" target="_blank" rel="noopener noreferrer">Code du routeur ↗</a> · <a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/commander.json" target="_blank" rel="noopener noreferrer">État comptable actuel ↗</a></p></div>
+</section>
 <section id="captureTruth" style="scroll-margin-top:18px">
 <div class="head"><h2>OMEGA CAPTURE — Bénéfices vérifiés</h2><span class="pill" id="captureStatus">Lecture des reçus…</span></div>
 <p class="sub">Comptabilité stricte : <strong>flash ou keeper exécuté → transaction atomique réussie → solde du wallet de test mesuré → frais déduits</strong>. Une opportunité détectée, un devis positif ou la répétition du même historique ne rapporte pas un centime à ce registre.</p>
@@ -431,4 +457,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./solana-keepers-ui.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./capture-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./solana-keepers-ui.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./commander-ui.js" defer></script><script src="./capture-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
