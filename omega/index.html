@@ -68,6 +68,22 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="toolbar"><a href="https://github.com/seyit571/towy-demo/tree/main/omega/research" target="_blank" rel="noopener noreferrer">Scripts reproductibles ↗</a><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/truth-v3.json" target="_blank" rel="noopener noreferrer">Rapport horodaté ↗</a></div>
 </div>
 </section>
+<section id="triEngine">
+<div class="head"><h2>OMEGA SOLVER — routes fermées en stablecoins</h2><span id="triStatus" class="pill">En attente du scan…</span></div>
+<p class="sub">Notre propre moteur teste les échanges de 2 ou 3 swaps sur PancakeSwap, Biswap et ApeSwap. Il doit revenir au départ en <strong>USDT ou USDC</strong> : aucune plus-value en token exotique non revendable n'est comptée.</p>
+<div class="toolbar"><span class="caption">Bloc BNB : <strong id="triBlock">—</strong></span><button id="triRefresh">Actualiser les routes</button></div>
+<div class="grid">
+  <div class="card"><div class="label">Pools effectivement lus</div><div class="big" id="triPools">—</div></div>
+  <div class="card"><div class="label">Routes fermées distinctes</div><div class="big" id="triPaths">—</div></div>
+  <div class="card"><div class="label">Tailles et routes évaluées</div><div class="big" id="triTests">—</div></div>
+  <div class="card"><div class="label">Tests au rendement brut positif</div><div class="big" id="triGross">—</div></div>
+</div>
+<div class="box">
+  <div class="head"><strong>Opportunités indicatives après buffers et frais supposés</strong><span class="pill">Profits possibles : <b id="triNet">—</b></span></div>
+  <div class="scroll"><table><thead><tr><th>Cycle complet</th><th>DEX successifs</th><th>Taille</th><th>Résultat DEX</th><th>Après flash + gas + stress</th></tr></thead><tbody id="triRows"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+  <p class="caption">Modèle de réserves à bloc fixé, frais DEX intégrés. Hypothèses : 9 bps flash, 0,035 à 0,065 $ de gas, stress 10 bps, jetons stables supposés proches du dollar. <strong>Ce ne sont pas des simulations complètes de transactions.</strong> Toute route positive doit réussir un fork avant d'être considérée exécutable.</p>
+  <p class="caption"><a href="https://github.com/seyit571/towy-demo/blob/main/omega/triangles.cjs" target="_blank" rel="noopener noreferrer">Code du solveur ↗</a> · <a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/triangles.json" target="_blank" rel="noopener noreferrer">Preuve brute horodatée ↗</a></p>
+</div></section>
 <div class="head"><h2>Performance de nos simulations</h2><span class="caption" id="overviewFresh">Chargement des sources…</span></div>
 <div class="grid">
 <div class="card"><div class="label">Cycles BNB calculés</div><div class="big" id="overviewTests">—</div><div class="caption">Pancake/Biswap, V2 + V3</div></div>
@@ -265,4 +281,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
