@@ -100,16 +100,18 @@ if eligible:
   state["open"].append(x)
  state["seenSnapshots"].append(snapshot["timestamp"])
  state["seenSnapshots"]=state["seenSnapshots"][-2000:]
+state["cumulativePaperUsd"]=round(float(state.get("cumulativePaperUsd") or 0)+sum(float(p.get("paperNetUsd") or 0) for p in closed_new),6)
+state["closedCountAll"]=int(state.get("closedCountAll") or 0)+len(closed_new)
 state["closed"]=state["closed"][-1000:]
 (PATH/"equity-paper-state.json").write_text(json.dumps(state,indent=2,ensure_ascii=False)+"\n")
 closed=state["closed"]
-profit=money(sum(float(p.get("paperNetUsd") or 0) for p in closed))
+profit=money(state["cumulativePaperUsd"])
 report={"schema":1,"timestamp":nowiso(),"mode":"VIRTUAL_TWO_VENUE_PAPER_SIMULATOR",
         "lastSnapshot":snapshot.get("timestamp"),"quoteEligible":eligible,
         "notionalPerVirtualPairUsd":SYMBOL_CAPITAL_USD,
         "assumedCashAndMarginAtLeastUsd":SYMBOL_CAPITAL_USD*2*MAX_CONCURRENT,
         "openPositions":state["open"],"openCount":len(state["open"]),
-        "closedCount":len(closed),"closedPaperNetUsd":profit,
+        "closedCount":state["closedCountAll"],"closedPaperNetUsd":profit,
         "newlyClosedCount":len(closed_new),"lastClosings":closed[-12:],
         "actualOrdersSent":0,"realizedWalletProfitUsd":None,
         "profitTargetsAreNotGuaranteed":True,
