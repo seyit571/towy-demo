@@ -19,7 +19,7 @@ NOW=dt.datetime.now(dt.timezone.utc)
 SYMBOL_CAPITAL_USD=5000.0
 MAX_CONCURRENT=2
 ENTRY_MIN_SURPLUS_BPS=2.0
-HL_TAKER_BPS_PER_SIDE=4.5
+HL_TAKER_BPS_PER_SIDE=4.5 # fallback for old snapshots only; live HIP-3 effective fee from API
 EQUITY_BROKER_AND_FINANCING_COST_BPS=5.0
 EXIT_SLIPPAGE_BUFFER_BPS=5.0
 MAX_HOLD_HOURS=4.0
@@ -57,7 +57,9 @@ if eligible:
   px_perp=float(row["perpBestAsk"])
   if float(row["perpBookAskSize"])<qty:continue
   gross=qty*((px_stock-float(p["stockEntryAsk"]))+(float(p["perpEntryBid"])-px_perp))
-  hl_fees=(qty*(px_perp+float(p["perpEntryBid"])))*HL_TAKER_BPS_PER_SIDE/10000
+  entry_fee=float(p.get("perpTakerFeeBpsAtEntry",HL_TAKER_BPS_PER_SIDE))
+  exit_fee=float(row.get("perpTakerSideBps") or HL_TAKER_BPS_PER_SIDE)
+  hl_fees=(qty*px_perp*exit_fee+qty*float(p["perpEntryBid"])*entry_fee)/10000
   financing_cost=qty*float(p["stockEntryAsk"])*EQUITY_BROKER_AND_FINANCING_COST_BPS/10000
   close_slippage=qty*float(p["stockEntryAsk"])*EXIT_SLIPPAGE_BUFFER_BPS/10000
   hourly_funding_bps=abs(float(row.get("perpFundingHourly") or 0))*10000
@@ -93,6 +95,7 @@ if eligible:
   x={"id":hashlib.sha256((r["ticker"]+"|"+snapshot["timestamp"]).encode()).hexdigest()[:16],
      "ticker":r["ticker"],"entryTimestamp":nowiso(),"direction":best["direction"],
      "quantity":quantity,"stockEntryAsk":stock_px,"perpEntryBid":perp_px,
+     "perpTakerFeeBpsAtEntry":float(r.get("perpTakerSideBps") or HL_TAKER_BPS_PER_SIDE),
      "modeledNotionalUsd":SYMBOL_CAPITAL_USD,
      "initialGrossBps":best["grossEntryDislocationBps"],
      "initialNetIfConvergesBps":best["ifFullConvergenceNetScenarioBps"],
