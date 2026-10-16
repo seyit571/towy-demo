@@ -1,0 +1,47 @@
+name: OMEGA capture ledger (verified wallet deltas only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'omega/capture-ledger.py'
+      - '.github/workflows/omega-capture-ledger.yml'
+  schedule:
+    - cron: '2-59/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: omega-capture-ledger
+  cancel-in-progress: false
+jobs:
+  accounting:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout maintained scanner scripts
+        uses: actions/checkout@v4
+      - name: Use Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Collect evidence branch
+        run: |
+          cp omega/capture-ledger.py /tmp/omega-capture-ledger.py
+          git fetch origin omega-data
+          git checkout -B omega-data origin/omega-data
+          cp /tmp/omega-capture-ledger.py omega/capture-ledger.py
+      - name: Recalculate unique settled wallet profits
+        run: python omega/capture-ledger.py
+      - name: Commit updated verified PnL timeline
+        run: |
+          git config user.name "omega-capture-ledger[bot]"
+          git config user.email "omega-capture@users.noreply.github.com"
+          git add omega/data/capture-ledger.json
+          if git diff --cached --quiet; then
+            echo "No ledger changes."
+          else
+            git commit -m "omega: update deduplicated capture ledger"
+            git fetch origin omega-data
+            git rebase origin/omega-data
+            git push origin HEAD:omega-data
+          fi
