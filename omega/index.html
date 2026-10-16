@@ -68,6 +68,21 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="toolbar"><a href="https://github.com/seyit571/towy-demo/tree/main/omega/research" target="_blank" rel="noopener noreferrer">Scripts reproductibles ↗</a><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/truth-v3.json" target="_blank" rel="noopener noreferrer">Rapport horodaté ↗</a></div>
 </div>
 </section>
+<section id="beefyAudit">
+<div class="head"><h2>BEEFY CASH — audit des récompenses de harvest</h2><span id="beefyStatus" class="pill">En attente des reçus…</span></div>
+<p class="sub">Les contrats Beefy proposent une rémunération à l'appelant. J'ai simulé l'appel <code>harvest(address)</code> sur un vrai fork BNB, et mesuré la différence entre <strong>récompense annoncée et WBNB réellement reçu</strong>. C'est cette différence qui compte.</p>
+<div class="toolbar"><span class="caption">Bloc testé : <strong id="beefyBlock">—</strong></span><button id="beefyRefresh">Afficher les preuves</button></div>
+<div class="grid">
+<div class="card"><div class="label">Stratégies auditées</div><div class="big" id="beefyChecked">—</div></div>
+<div class="card"><div class="label">Harvests atomiques réussis</div><div class="big" id="beefyPassed">—</div></div>
+<div class="card"><div class="label">Revenus nets positifs</div><div class="big" id="beefyPositive">—</div></div>
+<div class="card"><div class="label">Gains réels transférés en mainnet</div><div class="big">0 €</div></div>
+</div>
+<div class="box">
+<div class="scroll"><table><thead><tr><th>Vault</th><th>Annonce callReward()</th><th>Crédit wallet fork</th><th>Gas payé</th><th>Net sur fork</th></tr></thead><tbody id="beefyRows"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+<p class="caption">Toutes les transactions sont locales sur fork ; il n'existe pas de transaction mainnet ni de wallet financé. Gas 0,05 gwei dans cette simulation, BNB valorisé à environ 725,8 $. Les récompenses annoncées ne sont pas des P&L. L'écart s'explique notamment par le fait qu'une estimation de récompense n'est pas une exécution garantie.</p>
+<p class="caption"><a href="https://github.com/seyit571/towy-demo/blob/main/omega/lab/beefy-fork.cjs" target="_blank" rel="noopener noreferrer">Code de reproduction ↗</a> · <a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/beefy-fork.json" target="_blank" rel="noopener noreferrer">Reçus et soldes mesurés ↗</a></p>
+</div></section>
 <section id="triEngine">
 <div class="head"><h2>OMEGA SOLVER — routes fermées en stablecoins</h2><span id="triStatus" class="pill">En attente du scan…</span></div>
 <p class="sub">Notre propre moteur teste les échanges de 2 ou 3 swaps sur PancakeSwap, Biswap et ApeSwap. Il doit revenir au départ en <strong>USDT ou USDC</strong> : aucune plus-value en token exotique non revendable n'est comptée.</p>
@@ -281,4 +296,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
