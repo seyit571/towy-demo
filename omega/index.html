@@ -21,6 +21,51 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <h1>Le flux réel. Pas de faux profits.</h1>
 <p class="sub">Radar live Hyperliquid + candidats liquidation Morpho Blue. Analyse ouverte sur téléphone, sans EC2 ni wallet.</p>
 <div class="toolbar"><span class="pill ok">● DONNÉES RÉELLES</span><span class="pill warn">SIMULATEUR EVM NON CONNECTÉ</span><span class="pill">AUCUN ORDRE ENVOYÉ</span></div>
+<section id="megaFlowLab">
+<div class="head"><h2>OMEGA BIGFLOW — échelle globale vérifiée</h2><span class="pill" id="bigflowStatus">Connexion API…</span></div>
+<p class="sub">Mesures officielles : <strong>Hyperliquid (234 marchés perpétuels)</strong>, <strong>Raydium Solana (volume DEX)</strong>, et taux USD/EUR. Les volumes sont échangés par le marché, <strong>pas capturés par OMEGA</strong>.</p>
+<div class="toolbar"><span class="caption">Actualisé : <span id="bigflowUpdated">—</span> · <span id="bigflowFxDate">—</span></span><button id="bigflowRefresh">Rafraîchir les flux</button></div>
+<div class="grid">
+<div class="card"><div class="label">Hyperliquid · 24 h · USD</div><div class="big orange" id="bigflowHyper">—</div><div class="caption"><span id="bigflowMarkets">—</span> marchés observés</div></div>
+<div class="card"><div class="label">Raydium · 24 h · USD</div><div class="big" id="bigflowRay">—</div><div class="caption">Volume Raydium officiel</div></div>
+<div class="card"><div class="label">Flux total observé · EUR</div><div class="big" id="bigflowCombined">—</div><div class="caption">Somme de ces deux plateformes seulement</div></div>
+<div class="card"><div class="label">Conversion monétaire</div><div class="big" id="bigflowRate">—</div><div class="caption">Frankfurter / données de change</div></div>
+</div>
+<h2>Laboratoire de potentiel économique · pas un P&amp;L simulé atomiquement</h2>
+<div class="subgrid">
+<div class="box">
+<label class="label" for="bigflowShareSlider">Part hypothétique du volume comportant des opérations accessibles à notre moteur</label>
+<div class="head"><strong id="bigflowShare" class="orange">1,00 %</strong><span class="caption">De 0,1 % à 25 %</span></div>
+<input aria-label="Part hypothétique accessible" id="bigflowShareSlider" type="range" min="0.1" max="25" step="0.1" value="1" style="width:100%;accent-color:var(--orange)">
+<p class="caption">Une part de volume hypothétique n'est PAS un droit d'exécuter les transactions : cette valeur n'est pas mesurée.</p>
+<label class="label" for="bigflowEdgeSlider">Marge nette hypothétique par dollar de volume accessible, tous frais inclus</label>
+<div class="head"><strong id="bigflowEdge" class="orange">1,0 bps nets</strong><span class="caption">De 0,1 à 25 bps</span></div>
+<input aria-label="Marge nette théorique en points de base" id="bigflowEdgeSlider" type="range" min="0.1" max="25" step="0.1" value="1" style="width:100%;accent-color:var(--orange)">
+<p class="caption">1 bps = 0,01 %. Cette marge doit être prouvée par des simulations et des transactions ; aucune marge positive n'est actuellement validée pour OMEGA.</p>
+</div>
+<div class="box">
+<div class="label">Scénario théorique, non encaissable</div>
+<div class="big orange" id="bigflowScenarioMinute">—</div><div class="caption">euros par minute dans l'hypothèse choisie</div>
+<div class="label" style="margin-top:14px">Scénario théorique sur 24 h</div><div class="big" id="bigflowScenarioDay">—</div>
+<div class="label" style="margin-top:14px">Part de l'objectif de 50 € / minute</div><div style="height:7px;background:#283548;border-radius:6px;margin-top:6px;overflow:hidden"><div id="bigflowProgressLine" style="height:100%;width:0%;background:var(--orange)"></div></div>
+<div class="caption" id="bigflowTargetProgress">—</div>
+<div class="divider"></div>
+<div class="label">Marge nécessaire pour tenir la cible avec cette part de flux</div><div class="big" id="bigflowRequiredEdge">—</div>
+<div class="label">Part du flux nécessaire avec cette marge</div><div class="big" id="bigflowRequiredShare">—</div>
+</div>
+</div>
+<p class="caption"><strong>Calcul de sensibilité seulement :</strong> volume des marchés × part de volume attribuable hypothétique × marge nette hypothétique. Aucun ordre, quote exécutable, flashloan ou transaction n'est simulé par cet encadré. Les gains validés d'OMEGA restent à 0 €. Volume Hyperliquid et volume Raydium ne signifient pas qu'un bot sans capital peut en prélever une commission. <span id="bigflowMissing"></span></p>
+<div class="box">
+<div class="head"><strong>Moteurs à construire à partir de droits économiques réels</strong><span class="tag">HORS PROJECTION</span></div>
+<div class="quad">
+<div class="stage"><strong>Solana · Drift Keeper</strong><small>Récompense native liée au matching des ordres et aux liquidations. Nécessite la construction d'instructions, une configuration Drift et du SOL pour les frais.</small><em>PRIORITÉ FLUX RÉCURRENT</em></div>
+<div class="stage"><strong>Solana · Jupiter Lend</strong><small>Financement flash atomique sans collatéral, pour liquidations et conversion de collatéral. L'opportunité rentable doit être validée séparément.</small><em>PRIORITÉ CAPITAL ZÉRO</em></div>
+<div class="stage"><strong>EVM · Aave / Morpho</strong><small>Liquidations avec bonus ; profondeur et concurrence à vérifier au bloc courant. Nos essais Morpho n'ont pas démontré la rentabilité.</small><em>PRIORITÉ GROS TICKET</em></div>
+<div class="stage"><strong>Keeper · Curve / Beefy / Sky</strong><small>Récompenses versées par contrat lorsqu'un appel est éligible. Nos tests existants ne démontrent pas une cadence suffisante.</small><em>OPPORTUNITÉS SECONDAIRES</em></div>
+</div>
+</div>
+<p class="caption">Documentation : <a href="https://docs.drift.trade/protocol/about-v3/keepers/keeper-incentives" target="_blank" rel="noopener noreferrer">Drift incentives</a> · <a href="https://developers.jup.ag/docs/lend/flashloan/index" target="_blank" rel="noopener noreferrer">Jupiter flashloan</a> · <a href="https://aave.com/docs/aave-v3/markets/advanced" target="_blank" rel="noopener noreferrer">Aave liquidation</a>.</p>
+</section>
 <div class="grid">
 <div class="card"><div class="label">Bénéfices encaissés</div><div class="big">0 €</div><div class="caption">Aucune TX émise par OMEGA</div></div>
 <div class="card"><div class="label">Bénéfices simulés nets positifs</div><div class="big">0 €</div><div class="caption">6 transactions atomiques réussies sur fork, aucune rentable après gas</div></div>
@@ -326,4 +371,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./overview.js" defer></script></body></html>
