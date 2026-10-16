@@ -18,6 +18,17 @@
       $('triTests').textContent=Number(d.amountsSampled||0).toLocaleString('fr-FR');
       $('triGross').textContent=d.grossPositiveTests??'—';
       $('triNet').textContent=d.indicativePositivePaths??'—';
+      $('triOptimal').textContent=Number(d.optimalCandidates||0).toLocaleString('fr-FR');
+      const best=(d.top||[])[0];
+      $('triBestNet').textContent=best&&Number.isFinite(Number(best.netIndicativeUsd))?Number(best.netIndicativeUsd).toLocaleString('fr-FR',{minimumFractionDigits:4,maximumFractionDigits:5})+' 
+      $('triRows').innerHTML=(d.top||[]).slice(0,12).map(x=>
+        '<tr><td>'+safe(x.route)+'</td><td>'+safe(x.steps.map(s=>s.venue).join(' → '))+'</td><td>'+fmt(x.amount)+' '+safe(x.route.split('→')[0])+'</td><td>'+fmt(x.grossUsdAssumingPeg)+' $</td><td><b class="'+(x.netIndicativeUsd>0?'ok':'red')+'">'+fmt(x.netIndicativeUsd)+' $</b></td></tr>'
+      ).join('')||'<tr><td colspan="5">No data</td></tr>';
+    }catch(e){$('triStatus').textContent='⚠ '+String(e.message).slice(0,55);$('triStatus').className='pill red'}
+  }
+  $('triRefresh').onclick=get;get();setInterval(get,300000);
+})();:'—';
+      $('triBestSize').textContent=best?Number(best.amount).toLocaleString('fr-FR',{maximumFractionDigits:6})+' '+safe(best.route.split('→')[0]):'—';
       $('triRows').innerHTML=(d.top||[]).slice(0,12).map(x=>
         '<tr><td>'+safe(x.route)+'</td><td>'+safe(x.steps.map(s=>s.venue).join(' → '))+'</td><td>'+fmt(x.amount)+' '+safe(x.route.split('→')[0])+'</td><td>'+fmt(x.grossUsdAssumingPeg)+' $</td><td><b class="'+(x.netIndicativeUsd>0?'ok':'red')+'">'+fmt(x.netIndicativeUsd)+' $</b></td></tr>'
       ).join('')||'<tr><td colspan="5">No data</td></tr>';
