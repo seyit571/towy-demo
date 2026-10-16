@@ -30,7 +30,31 @@ async function main(){
    edges.push({from:pool.b,to:pool.a,rin:pool.rout,rout:pool.rin,fee:feeBps[pool.venue],venue:pool.venue,pool:pool.address});
  }
  const adj={};for(const e of edges)(adj[e.from]??=[]).push(e);
- const samples=[1,3,10,30,100,300,1000,3000,10000,30000,100000];
+ const samples=[0.001,0.01,0.1,1,3,10,30,100,300,1000,3000,10000,30000,100000];
+ let optimalCandidates=0;
+ function optimalAmount(steps){
+   // AMM constant-product composition: y = K*x/(M+N*x), reserves measured in
+   // human tokens. Profit after flash fee and market stress is
+   // (1-stress)*y - (1+flashFee)*x - gas. Gas is input-size invariant here.
+   let K=1,M=1,N=0;
+   for(const st of steps){
+     const rin=Number(ethers.formatUnits(st.rin,dec[st.from]));
+     const rout=Number(ethers.formatUnits(st.rout,dec[st.to]));
+     const factor=(10000-Number(st.fee))/10000;
+     if(!(rin>0&&rout>0&&factor>0))return null;
+     const A=factor*rout,B=rin,C=factor;
+     const nextK=A*K,nextM=B*M,nextN=B*N+C*K;
+     K=nextK;M=nextM;N=nextN;
+     // Scale out redundant multiplier to avoid overflow on 3+ large-reserve legs
+     const scale=Math.max(Math.abs(K),Math.abs(M),Math.abs(N));
+     if(!Number.isFinite(scale)||scale===0)return null;
+     K/=scale;M/=scale;N/=scale;
+   }
+   if(!(K>0&&M>0&&N>0))return null;
+   const critical=Math.sqrt((0.999*K*M)/(1.0009));
+   const size=(critical-M)/N;
+   return Number.isFinite(size)&&size>0?size:null;
+ }
  let uniquePaths=new Set();
  for(const base of ['USDT','USDC']){
   for(const hopA of adj[base]||[]){
@@ -44,8 +68,20 @@ async function main(){
      const id=steps.map(e=>e.from+':'+e.to+':'+e.venue).join('|');
      if(uniquePaths.has(id))continue;uniquePaths.add(id);
      let best=null;
-     for(const amount of samples){
-      let n=ethers.parseUnits(String(amount),dec[base]);
+     const opt=optimalAmount(steps);
+     const choices=[...samples];
+     if(opt!==null){
+       for(const multiplier of [0.8,0.95,1,1.05,1.2]){
+         const x=opt*multiplier;
+         if(x>=0.000001&&x<=200000000){
+           const precision=dec[base];
+           choices.push(Number(x.toFixed(Math.min(precision,6))));
+           optimalCandidates++;
+         }
+       }
+     }
+     for(const amount of new Set(choices.filter(x=>x>0))){
+      let n;try{n=ethers.parseUnits(String(amount),dec[base])}catch(e){continue}
       const initial=n;let pass=true;const values=[];
       for(const step of steps){
        if(step.rin<=0n||step.rout<=0n){pass=false;break;}
@@ -72,13 +108,13 @@ async function main(){
  }
  all.sort((a,b)=>b.netIndicativeUsd-a.netIndicativeUsd);
  const viable=all.filter(x=>x.netIndicativeUsd>0);
- const result={timestamp:new Date().toISOString(),block,chainId:56,scope:'9 tokens, 3 venue factories, all V2 2/3 hop cycles starting and ending USDC or USDT, discrete sizing',
+ const result={timestamp:new Date().toISOString(),block,chainId:56,scope:'9 tokens, 3 venue factories, all V2 2/3 hop stablecoin cycles with analytical sizing optimizer',sizeOptimizer:'closed_form_constant_product_after_fees',optimalCandidates,
    method:'V2_RESERVE_MODEL_ONLY_NOT_TRANSACTION',venues:Object.keys(venues),poolsRead:count,distinctPaths:uniquePaths.size,amountsSampled:tests,
    grossPositiveTests:positive,indicativePositivePaths:viable.length,positiveAfterFullAtomicSimulation:0,
    positiveAfterFullAtomicSimulationNetUsd:0,realizedUsd:0,
    caveat:'Assumed token USD parity, flash premium 9 bps, gas $0.035/$0.065, 10 bps competition stress, ApeSwap fee 30 bps conservative. Results NOT executable until exact fork transaction and token tax checks.',
    top:all.slice(0,80),topIndicativePositive:viable.slice(0,40)};
  fs.writeFileSync(require('path').join(__dirname,'data','triangles.json'),JSON.stringify(result,null,2)+'\n');
- console.log(JSON.stringify({block,pools:count,paths:uniquePaths.size,tests,grossPositiveTests:positive,netPositivePaths:viable.length,top:all.slice(0,12).map(x=>({route:x.route,amount:x.amount,gross:x.grossUsdAssumingPeg,net:x.netIndicativeUsd,steps:x.steps.map(z=>z.venue)}))},null,2));
+ console.log(JSON.stringify({block,pools:count,paths:uniquePaths.size,tests,optimalCandidates,grossPositiveTests:positive,netPositivePaths:viable.length,top:all.slice(0,12).map(x=>({route:x.route,amount:x.amount,gross:x.grossUsdAssumingPeg,net:x.netIndicativeUsd,steps:x.steps.map(z=>z.venue)}))},null,2));
 }
 main().catch(e=>{console.log('ERR',e.message);process.exitCode=1});
