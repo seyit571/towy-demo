@@ -1,0 +1,56 @@
+name: OMEGA TRON Energy buyer router
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'omega/energy-router.py'
+      - '.github/workflows/omega-energy-router.yml'
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: omega-tron-energy-router
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install public-page parser
+        run: pip install --disable-pip-version-check beautifulsoup4==4.14.2
+      - name: Select data branch
+        run: |
+          cp omega/energy-router.py /tmp/omega_energy_router.py
+          git fetch origin omega-data
+          git checkout -B omega-data origin/omega-data
+          cp /tmp/omega_energy_router.py omega/energy-router.py
+      - name: Scan public buyer orders and independent supplier quotes
+        run: python omega/energy-router.py
+      - name: Publish only observation evidence
+        run: |
+          git config user.name "omega-tron-router[bot]"
+          git config user.email "omega-tron-router@users.noreply.github.com"
+          git add omega/data/energy-router.json
+          if git diff --cached --quiet; then
+            echo "No price change"
+            exit 0
+          fi
+          git commit -m "omega: refresh Tron Energy market quote comparisons"
+          git reset --hard HEAD
+          git clean -f omega/energy-router.py
+          for attempt in 1 2 3; do
+            git fetch origin omega-data
+            git rebase -X theirs origin/omega-data
+            if git push origin HEAD:omega-data; then
+              echo "Energy snapshot published"
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
