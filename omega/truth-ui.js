@@ -10,8 +10,8 @@ const res=await fetch('https://raw.githubusercontent.com/seyit571/towy-demo/omeg
 if(!res.ok)throw Error('HTTP '+res.status);
 const j=await res.json();if(j.version!==3)throw Error('Version non prise en charge');
 const old=Math.max(0,Math.floor((Date.now()-Date.parse(j.timestamp))/60000));
-id('truthStatus').textContent=old>30?'⚠ SNAPSHOT HISTORIQUE ('+old+' min)':'● SNAPSHOT VALIDÉ';
-id('truthStatus').className='pill '+(old>30?'red':'ok');
+id('truthStatus').textContent=old>90?'⚠ SNAPSHOT HISTORIQUE ('+old+' min)':'● SNAPSHOT VALIDÉ';
+id('truthStatus').className='pill '+(old>90?'red':'ok');
 id('truthRoutes').textContent=Number(j.bscOptimizer.tested).toLocaleString('fr-FR');
 id('truthPositive').textContent=Number(j.bscOptimizer.positiveAfterAssumptions);
 id('truthRewardPreflight').textContent=j.beefy.networks.reduce((a,x)=>a+Number(x.positivePreflightAfterGas||0),0);
