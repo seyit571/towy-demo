@@ -1,10 +1,11 @@
 {
   "schema": 1,
-  "timestamp": "2026-10-16T19:18:55Z",
+  "timestamp": "2026-10-16T19:19:35Z",
   "mode": "UNPOSTED_MAKER_TAPE_REPLAY",
   "marketSource": "Hyperliquid XYZ recentTrades + Nasdaq public stock L1",
-  "stocksFreshForPaper": 30,
-  "virtualMakerQuotesWatched": 30,
+  "stocksFreshForPaper": 2,
+  "virtualMakerQuotesWatched": 2,
+  "makerQuotesPricedAtActualBestAsk": 2,
   "openVirtualQuotes": 29,
   "totalPotentialTradeThroughs": 5,
   "recentThroughs": [
@@ -119,7 +120,7 @@
       "profitEligibleForWalletLedger": false
     }
   ],
-  "newPotentialThroughs": 1,
+  "newPotentialThroughs": 0,
   "conditionallyPositiveTradeThroughs": 0,
   "conditionallyPositiveNetUsd": 0,
   "paperModelGrossNetUsd": -7.1054,
@@ -130,7 +131,9 @@
   "limits": {
     "maxQuoteAgeSeconds": 540,
     "maxStockMidDriftBps": 25,
-    "replayTimeResolution": "scheduled GitHub job roughly once every five minutes; recentTrades sampling is not comprehensive"
+    "replayTimeResolution": "scheduled GitHub job roughly once every five minutes; recentTrades sampling is not comprehensive",
+    "strictTradeThrough": true,
+    "onlyPositiveAtCurrentBook": true
   },
   "caution": "This is NOT a real maker fill or profit. Observed taker transactions crossing hypothetical prices do not establish OMEGA queue priority. Trades and Nasdaq quotes are sampled, short-lived and non-synchronous; the broker hedge cannot be guaranteed. Never add any modeled PnL to the verified wallet ledger."
 }
