@@ -36,6 +36,22 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="card"><div class="label">Quotes Solana évaluées</div><div class="big" id="overviewSol">—</div><div class="caption">Jupiter non atomique</div></div>
 </div>
 <div class="toolbar"><span class="pill">Atomicité confirmée : <strong id="overviewAtomic">—</strong></span><span class="pill">Total encaissé dans le wallet : <strong id="overviewRealized">—</strong></span></div>
+
+<section id="keeperLab" style="scroll-margin-top:20px">
+ <div class="head"><h2>Keeper Cash — Curve V2 : récompenses exploitables</h2><span id="keeperStatus" class="pill">Chargement…</span></div>
+ <p class="sub">Lecture directe des contrats Curve sur Ethereum. <strong>Récompenses effectivement proposées à l'appelant</strong>, sans avancer de capital de trading. Appel <code>update</code> simulé seulement si récompense non nulle ; aucun appel payant envoyé.</p>
+ <div class="toolbar"><span class="caption">Bloc Ethereum : <strong id="keeperBlock">—</strong></span><button id="keeperReload">Actualiser les récompenses</button></div>
+ <div class="grid">
+  <div class="card"><div class="label">PegKeepers rémunérateurs maintenant</div><div class="big orange" id="keeperReward">—</div></div>
+  <div class="card"><div class="label">Profits positifs après gas estimé</div><div class="big" id="keeperPositive">—</div></div>
+  <div class="card"><div class="label">Mises à jour simulées par eth_call</div><div class="big" id="keeperSimulated">—</div></div>
+  <div class="card"><div class="label">Total réellement encaissé</div><div class="big">0 €</div></div>
+ </div>
+ <div class="box">
+  <div class="scroll"><table><thead><tr><th>Marché Curve</th><th>Récompense LP valorisée</th><th>Validation</th><th>Net estimé</th></tr></thead><tbody id="keeperTable"><tr><td colspan="4">Chargement des contrats…</td></tr></tbody></table></div>
+  <p class="caption">Récompenses en LP valorisées via le prix virtuel du pool (non converties en USDC). Toute valeur positive exige une simulation de l'appel, la vérification des frais et la concurrence avant de compter du profit.</p>
+ </div>
+</section>
 <div class="head"><h2>Morpho Blue — positions à risque</h2><span class="caption">GraphQL officiel · actualisation 30 secondes</span></div>
 <section class="box">
 <div class="toolbar"><div class="toolbar" style="justify-content:flex-start"><select id="chain"><option value="8453">Base</option><option value="1">Ethereum</option><option value="42161">Arbitrum</option></select><select id="hf"><option value="1.02">HF ≤ 1,02</option><option value="1">HF ≤ 1,00</option><option value="1.05">HF ≤ 1,05</option></select><button id="reload">Actualiser</button></div><span class="pill" id="mstatus">API en attente…</span></div>
@@ -195,4 +211,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
