@@ -66,6 +66,20 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 </div>
 <p class="caption">Documentation : <a href="https://docs.drift.trade/protocol/about-v3/keepers/keeper-incentives" target="_blank" rel="noopener noreferrer">Drift incentives</a> · <a href="https://developers.jup.ag/docs/lend/flashloan/index" target="_blank" rel="noopener noreferrer">Jupiter flashloan</a> · <a href="https://aave.com/docs/aave-v3/markets/advanced" target="_blank" rel="noopener noreferrer">Aave liquidation</a>.</p>
 </section>
+<section id="velocityLab">
+<div class="head"><h2>Solana · Carnet de liquidité et ordres individuels</h2><span class="pill" id="velocityStatus">Connexion L3…</span></div>
+<p class="sub">Ordres individuels sur le DLOB <strong>Velocity Exchange</strong>, réseau Solana, actualisés toutes les 12 secondes. Contrairement à un volume notionnel, ces données identifient des makers et des ordres concrets. <strong>Aucun ordre n'est encore assemblé, simulé ou exécuté par OMEGA.</strong></p>
+<div class="toolbar"><span class="caption">Dernière lecture <span id="velocityTs">—</span></span><button id="velocityRefresh">Actualiser les carnets</button></div>
+<div class="grid">
+<div class="card"><div class="label">Ordres visibles L3</div><div class="big" id="velocityOrders">—</div><div class="caption">Quatre marchés analysés</div></div>
+<div class="card"><div class="label">Nouveaux identifiants vus depuis ouverture</div><div class="big" id="velocityChanges">—</div><div class="caption">Créations visibles, pas forcément des trades</div></div>
+<div class="card"><div class="label">Carnets croisés observés</div><div class="big" id="velocityCrosses">—</div><div class="caption">Signaux seulement : non exécutables confirmés</div></div>
+<div class="card"><div class="label">Récompense keeper simulée et validée</div><div class="big">0 €</div><div class="caption">L3 seul ne permet pas de confirmer un fill</div></div>
+</div>
+<div class="box"><div class="scroll"><table><thead><tr><th>Marché Solana</th><th>Meilleur bid</th><th>Meilleur ask</th><th>Spread</th><th>Ordres</th><th>Nouveaux</th><th>Signal</th></tr></thead><tbody id="velocityRows"><tr><td colspan="7">Connexion…</td></tr></tbody></table></div>
+<p class="caption">Le flux Velocity est distinct d'Hyperliquid et des autres marchés Solana. Un prix croisé n'est pas nécessairement remplissable : statut d'enchère, compte maker, slots, frais prioritaires et instructions du protocole doivent être validés. La disparition d'un ordre ne prouve pas qu'il a été exécuté.</p>
+<p class="caption"><a href="https://docs.velocity.exchange/developers/ecosystem-builders/orderbook-and-ws" target="_blank" rel="noopener noreferrer">Documentation du DLOB ↗</a></p>
+</div></section>
 <div class="grid">
 <div class="card"><div class="label">Bénéfices encaissés</div><div class="big">0 €</div><div class="caption">Aucune TX émise par OMEGA</div></div>
 <div class="card"><div class="label">Bénéfices simulés nets positifs</div><div class="big">0 €</div><div class="caption">6 transactions atomiques réussies sur fork, aucune rentable après gas</div></div>
@@ -371,4 +385,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./overview.js" defer></script></body></html>
