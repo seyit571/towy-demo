@@ -130,6 +130,21 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <p class="caption">Frais du modèle : Pancake V2 0,25 %, Biswap V2 0,20 % (0,10 % sur certaines stables). Estimations en unités du token initial, pas en euros. Gas, frais flashloan, bloc futur, taxes de token et MEV non inclus : <strong>aucun gain exécutable n'est encore confirmé.</strong></p>
 </section>
 </section>
+
+<section id="v3Proof">
+<div class="head"><h2>Pancake V3 : cycles à frais réduits</h2><span id="v3Status" class="pill">Chargement…</span></div>
+<p class="sub">Comparaisons directes Pancake V3 (1, 5, 25 bps) ↔ V2 et Biswap, cotées au <strong>même bloc BNB Chain</strong>. Le gas est estimé à 800 000 unités, le prix BNB est coté on-chain et le financement flash est supposé à 9 bps.</p>
+<div class="toolbar"><span class="caption">Bloc BSC V3 : <strong id="v3Block">—</strong></span><button id="v3Reload">Actualiser V3</button></div>
+<div class="grid">
+<div class="card"><div class="label">Scénarios exacts de prix</div><div class="big" id="v3Scenarios">—</div></div>
+<div class="card"><div class="label">Positifs après frais supposés</div><div class="big" id="v3Positive">—</div></div>
+<div class="card"><div class="label">Meilleur P&L théorique</div><div class="big orange" id="v3Best">—</div></div>
+<div class="card"><div class="label">Transactions atomiques simulées</div><div class="big">0</div></div>
+</div>
+<div class="box"><div class="head"><strong>Meilleurs prix sur les marchés USDT</strong><span class="tag">ETH_CALL QUOTER</span></div>
+<div class="scroll"><table><thead><tr><th>Paire</th><th>Route</th><th>Capital flash hypothétique</th><th>P&L frais DEX inclus</th><th>P&L gas + flash supposés</th></tr></thead><tbody id="v3Rows"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+<p class="caption">Le P&L est <strong>seulement une estimation économique de deux swaps</strong> : frais flash de 9 bps supposés (pas confirmés par un prêteur), gas 800 000 unités supposé, aucune prime au validateur, aucune exécution ni garantie de même prix. Un résultat positif ici ne serait pas un bénéfice exécutable prouvé tant qu'un bundle n'a pas réussi sa simulation intégrale.</p></div>
+</section>
 <footer>Sources : <a href="https://docs.morpho.org/developers/api/morpho/" target="_blank" rel="noopener noreferrer">Morpho API</a> · <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket" target="_blank" rel="noopener noreferrer">Hyperliquid WebSocket</a>. Site hébergé sur GitHub Pages : accessible 24h/24, mais le flux tourne uniquement pendant que cette page est ouverte. Ce site statique ne peut pas exécuter de liquidations en arrière-plan ni promettre les mêmes profits après connexion d'un wallet.</footer>
 </main><script>
 'use strict';
@@ -171,4 +186,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script></body></html>
+</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script></body></html>
