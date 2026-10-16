@@ -78,7 +78,7 @@ async function main(){
    positiveAfterFullAtomicSimulationNetUsd:0,realizedUsd:0,
    caveat:'Assumed token USD parity, flash premium 9 bps, gas $0.035/$0.065, 10 bps competition stress, ApeSwap fee 30 bps conservative. Results NOT executable until exact fork transaction and token tax checks.',
    top:all.slice(0,80),topIndicativePositive:viable.slice(0,40)};
- fs.writeFileSync('/tmp/omega-evm/data/triangles.json',JSON.stringify(result,null,2)+'\n');
+ fs.writeFileSync(require('path').join(__dirname,'data','triangles.json'),JSON.stringify(result,null,2)+'\n');
  console.log(JSON.stringify({block,pools:count,paths:uniquePaths.size,tests,grossPositiveTests:positive,netPositivePaths:viable.length,top:all.slice(0,12).map(x=>({route:x.route,amount:x.amount,gross:x.grossUsdAssumingPeg,net:x.netIndicativeUsd,steps:x.steps.map(z=>z.venue)}))},null,2));
 }
 main().catch(e=>{console.log('ERR',e.message);process.exitCode=1});
