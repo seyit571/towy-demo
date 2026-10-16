@@ -63,7 +63,7 @@ def fetch_nasdaq(ticker):
     if not timestamp:raise ValueError("stock trade timestamp unavailable")
     observed=dt.datetime.strptime(timestamp," %b %d, %Y %I:%M %p ET") if timestamp.startswith(" ") else dt.datetime.strptime(timestamp,"%b %d, %Y %I:%M %p ET")
     observed=observed.replace(tzinfo=ET).astimezone(dt.timezone.utc)
-    age=(NOW-observed).total_seconds()
+    age=(dt.datetime.now(dt.timezone.utc)-observed).total_seconds()
     if age< -90 or age>MAX_STOCK_TRADE_AGE_S:raise ValueError(f"stock reference stale {age:.0f}s")
     if p.get("isRealTime") is not True:raise ValueError("Nasdaq quote not real-time")
     return {"ticker":ticker,"equityBid":bid,"equityAsk":ask,"equityLast":parse_price(p.get("lastSalePrice")),
@@ -87,7 +87,7 @@ def fetch_hl_meta():
 def fetch_perp_book(ticker):
     book=req(HL_URL,{"type":"l2Book","coin":"xyz:"+ticker},timeout=13)
     stamp=book.get("time")
-    age=NOW.timestamp()-float(stamp)/1000 if stamp else None
+    age=dt.datetime.now(dt.timezone.utc).timestamp()-float(stamp)/1000 if stamp else None
     if age is None or not math.isfinite(age) or age< -15 or age>MAX_PERP_BOOK_AGE_S:
         raise ValueError(f"perp book stale {age}")
     levels=book.get("levels",[])
@@ -159,22 +159,32 @@ def scan_one(ticker,metadata):
     maker_cost_bps=(maker_roundtrip_fee_bps+
                     BROKER_FINANCING_AND_EQUITY_EXECUTION_BUFFER_BPS+
                     CLOSING_SLIPPAGE_BUFFER_BPS+funding_cost_bps)
-    target_bps=maker_cost_bps+2.0
-    maker_short_ask=max(book["asks"][0]["px"],
-                        book["bids"][0]["px"]+0.01,
-                        math.ceil(stock["equityAsk"]*(1+target_bps/10000)*100)/100)
-    maker_gross_bps=(maker_short_ask-stock["equityAsk"])/mid*10000
+    # Never set an artificially distant price solely to force positive model PnL.
+    # Rest at the ACTUAL best visible ask; queue priority is unknown.
+    maker_short_ask=book["asks"][0]["px"]
+    gross_bps=(maker_short_ask-stock["equityAsk"])/mid*10000
+    net_bps=gross_bps-maker_cost_bps
+    target_bps=maker_cost_bps+2
+    breakeven_ask=stock["equityAsk"]*(1+target_bps/10000)
+    # Top-of-book maker fill cannot be assumed for a larger order.
+    top_ask_qty=book["asks"][0]["sz"]
+    capped_notional=min(NOTIONAL,top_ask_qty*maker_short_ask)
     maker_model={
         "side":"SELL_PERP_MAKER_THEN_BUY_STOCK",
-        "virtualAskLimit":round(maker_short_ask,4),
-        "perpBestAskAtQuote":book["asks"][0]["px"],
+        "virtualAskLimit":round(maker_short_ask,6),
+        "perpBestAskAtQuote":maker_short_ask,
         "equityAskAtQuote":stock["equityAsk"],
-        "grossBpsIfQuoteFilled":round(maker_gross_bps,3),
+        "grossBpsIfQuoteFilled":round(gross_bps,3),
         "costAndCarryHurdleBps":round(maker_cost_bps,3),
-        "conditionalNetIfHedgedUsd":round((maker_gross_bps-maker_cost_bps)*NOTIONAL/10000,5),
-        "quoteAboveBestAskUsd":round(max(0,maker_short_ask-book["asks"][0]["px"]),4),
+        "conditionalNetIfHedgedUsd":round(net_bps*NOTIONAL/10000,5),
+        "netIfOnlyTopAskQtyFilledUsd":round(net_bps*capped_notional/10000,5),
+        "maxTopLevelNotionalUsd":round(capped_notional,3),
+        "requiredAskFor2BpsBuffer":round(breakeven_ask,6),
+        "requiredAskDistanceFromMarketUsd":round(max(0,breakeven_ask-maker_short_ask),6),
+        "positiveAtCurrentBestAsk":net_bps>0,
+        "quoteAboveBestAskUsd":0,
         "realOrderPlaced":False,"realFill":False,"realProfit":None,
-        "note":"Unposted maker limit: needs future buyer aggressor trade-through and actual hedge; no assurance of queue fill"
+        "note":"Real best-ask queue price only; no order posted, queue unknown, only subsequent buyer trade-through can support a tentative touch"
     }
     return {
       "ticker":ticker,"market":metadata["market"],"makerQuote":maker_model,
@@ -203,7 +213,7 @@ def main():
             try:result.append(fut.result(timeout=32))
             except Exception as e:errors.append({"ticker":ticker,"detail":str(e)[:135]})
     result.sort(key=lambda x:x["best"]["ifFullConvergenceNetScenarioUsd"],reverse=True)
-    maker_scens=[x for x in result if x["makerQuote"]["conditionalNetIfHedgedUsd"]>0]
+    maker_scens=[x for x in result if x["makerQuote"]["positiveAtCurrentBestAsk"]]
     positive=[x for x in result if x["hypotheticalPositiveAfterBuffers"]]
     report={
      "schema":1,"timestamp":NOW.isoformat(timespec="seconds").replace("+00:00","Z"),
@@ -211,6 +221,7 @@ def main():
      "marketCountXYZ":len(meta),"stocksRequested":len(chosen),"stocksFresh":len(result),
      "stocksWithTheoreticalPositiveDislocation":len(positive),
      "positiveConditionalMakerQuotes":len(maker_scens),
+     "makerSimulationMethod":"Only displayed best ask, no imposed hypothetical far-away sell quote",
      "fundedNotionalPerCaseUsd":NOTIONAL,
      "realizedProfitUsd":None,"verifiedNetSimulatedUsd":0,"executedProfitPerMinuteEur":0,
      "fullTwoLegExecutionSimulations":0,"capitalReady":False,
