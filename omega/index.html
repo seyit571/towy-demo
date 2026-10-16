@@ -21,6 +21,28 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <h1>Le flux réel. Pas de faux profits.</h1>
 <p class="sub">Radar live Hyperliquid + candidats liquidation Morpho Blue. Analyse ouverte sur téléphone, sans EC2 ni wallet.</p>
 <div class="toolbar"><span class="pill ok">● DONNÉES RÉELLES</span><span class="pill warn">SIMULATEUR EVM NON CONNECTÉ</span><span class="pill">AUCUN ORDRE ENVOYÉ</span></div>
+<section id="energyRouter" style="scroll-margin-top:20px">
+<div class="head"><h2>OMEGA ENERGY ROUTER — Ordres d'achat TRON</h2><span id="energyStatus" class="pill">Connexion au marché…</span></div>
+<p class="sub">Vrais ordres d'achat publics TronBid et TronEnergize, comparés aux devis de délégation d'Energy TronEnergyRent. <strong>Un écart de prix n'est pas une transaction exécutable :</strong> la marketplace exige une délégation éligible depuis un vendeur autorisé.</p>
+<div class="toolbar"><span class="caption">Dernier relevé : <strong id="energyAge">—</strong> · TRX : <strong id="energyFx">—</strong></span><button id="energyRefresh">Actualiser les prix</button></div>
+<div class="grid">
+<div class="card"><div class="label">Ordres acheteurs visibles</div><div class="big" id="energyBids">—</div><div class="caption">Carnets publics, sans portefeuille</div></div>
+<div class="card"><div class="label">Devis fournisseur comparés</div><div class="big" id="energyQuotes">—</div><div class="caption">Même durée, même quantité</div></div>
+<div class="card"><div class="label">Écarts de prix positifs</div><div class="big orange" id="energySpreads">—</div><div class="caption">Hypothèses non encaissables sans autorisation vendeur</div></div>
+<div class="card"><div class="label">Meilleur écart après commission supposée</div><div class="big orange" id="energyBestSpread">—</div><div class="caption">Prix théorique par ordre, non bénéfice validé</div></div>
+</div>
+<div class="grid">
+<div class="card"><div class="label">Bénéfice confirmé / minute</div><div class="big" id="energyMinute">—</div></div>
+<div class="card"><div class="label">Bénéfice confirmé / heure</div><div class="big" id="energyHour">—</div></div>
+<div class="card"><div class="label">Bénéfice confirmé · cumul</div><div class="big" id="energyTotal">—</div></div>
+<div class="card"><div class="label">Ordres réellement livrés par OMEGA</div><div class="big" id="energyExecuted">—</div></div>
+</div>
+<div class="box"><div class="head"><strong>Classement des écarts : marché acheteur ↔ fournisseur</strong><span class="tag">LECTURE SEULE</span></div>
+<div class="scroll"><table><thead><tr><th>Carnet</th><th>Durée</th><th>Energy restante</th><th>Prix demandé</th><th>Coût d'achat</th><th>Écart après commission hypothétique</th><th>Validation</th></tr></thead><tbody id="energyRows"><tr><td colspan="7">Chargement…</td></tr></tbody></table></div>
+<p class="caption">Calcul indicatif avec une retenue prudente de 20 % sur le prix acheteur. Le vrai taux vendeur peut varier. Le fournisseur doit pouvoir déléguer directement à l'adresse de destination et le marketplace doit attribuer le paiement à OMEGA ; <strong>ces conditions ne sont pas remplies actuellement</strong>. Ne pas engager de fonds sur la seule base d'un écart affiché.</p>
+<p class="caption" id="energyWhy"></p>
+<p class="caption"><a href="https://tronbid.com/en" target="_blank" rel="noopener noreferrer">Marché d'acheteurs TronBid ↗</a> · <a href="https://tronenergize.com" target="_blank" rel="noopener noreferrer">Ordres TronEnergize ↗</a> · <a href="https://github.com/seyit571/towy-demo/blob/main/omega/energy-router.py" target="_blank" rel="noopener noreferrer">Moteur et calculs ↗</a> · <a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/energy-router.json" target="_blank" rel="noopener noreferrer">Résultats horodatés ↗</a></p>
+</div></section>
 <section id="omegaCommander" style="scroll-margin-top:14px">
 <div class="head"><h2>OMEGA COMMANDER — Centre de capture multichaînes</h2><span class="pill" id="cmdStatus">Connexion au routeur…</span></div>
 <p class="sub">Dix sources vérifiées : candidats de liquidation sur Morpho, primes Sky/Curve/Beefy, soldes des transactions flash sur fork, ordres perpétuels Solana et cycles BNB optimisés. Le moteur classe les dossiers par <strong>marge économique, niveau de preuve et fraîcheur</strong>, sans convertir un volume de marché en bénéfice.</p>
@@ -457,4 +479,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./solana-keepers-ui.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./commander-ui.js" defer></script><script src="./capture-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./solana-keepers-ui.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./energy-router-ui.js" defer></script><script src="./commander-ui.js" defer></script><script src="./capture-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
