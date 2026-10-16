@@ -27,6 +27,15 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="card"><div class="label">Objectif net / minute</div><div class="big orange">50 €</div><div class="caption">Cible non démontrée</div></div>
 <div class="card"><div class="label">État de l'exécuteur</div><div class="big">SHADOW</div><div class="caption">Aucun wallet connecté</div></div>
 </div>
+
+<div class="head"><h2>Performance de nos simulations</h2><span class="caption" id="overviewFresh">Chargement des sources…</span></div>
+<div class="grid">
+<div class="card"><div class="label">Cycles BNB calculés</div><div class="big" id="overviewTests">—</div><div class="caption">Pancake/Biswap, V2 + V3</div></div>
+<div class="card"><div class="label">Cycles BNB positifs après hypothèses</div><div class="big orange" id="overviewPositive">—</div><div class="caption">Pas encore des transactions simulées</div></div>
+<div class="card"><div class="label">Positions vérifiées sur EVM</div><div class="big" id="overviewOnchain">—</div><div class="caption">Prix, collatéral et gas analysés</div></div>
+<div class="card"><div class="label">Quotes Solana évaluées</div><div class="big" id="overviewSol">—</div><div class="caption">Jupiter non atomique</div></div>
+</div>
+<div class="toolbar"><span class="pill">Atomicité confirmée : <strong id="overviewAtomic">—</strong></span><span class="pill">Total encaissé dans le wallet : <strong id="overviewRealized">—</strong></span></div>
 <div class="head"><h2>Morpho Blue — positions à risque</h2><span class="caption">GraphQL officiel · actualisation 30 secondes</span></div>
 <section class="box">
 <div class="toolbar"><div class="toolbar" style="justify-content:flex-start"><select id="chain"><option value="8453">Base</option><option value="1">Ethereum</option><option value="42161">Arbitrum</option></select><select id="hf"><option value="1.02">HF ≤ 1,02</option><option value="1">HF ≤ 1,00</option><option value="1.05">HF ≤ 1,05</option></select><button id="reload">Actualiser</button></div><span class="pill" id="mstatus">API en attente…</span></div>
@@ -186,4 +195,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script></body></html>
+</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
