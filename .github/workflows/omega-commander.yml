@@ -1,0 +1,57 @@
+name: OMEGA Commander multi-chain ranking
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'omega/commander.py'
+      - '.github/workflows/omega-commander.yml'
+  schedule:
+    - cron: '4-59/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: omega-commander-evidence
+  cancel-in-progress: false
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Checkout main source
+        uses: actions/checkout@v4
+      - name: Python runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Switch to isolated evidence branch
+        run: |
+          cp omega/commander.py /tmp/omega_commander.py
+          git fetch origin omega-data
+          git checkout -B omega-data origin/omega-data
+          cp /tmp/omega_commander.py omega/commander.py
+      - name: Refresh economic qualification and evidence
+        run: python omega/commander.py
+      - name: Commit ranked queue with concurrency protection
+        run: |
+          git config user.name "omega-commander[bot]"
+          git config user.email "omega-commander@users.noreply.github.com"
+          git add omega/data/commander.json
+          if git diff --cached --quiet; then
+            echo "No change"
+            exit 0
+          fi
+          git commit -m "omega: refresh cross-chain economic command queue"
+          git reset --hard HEAD
+          git clean -f omega/commander.py
+          for attempt in 1 2 3; do
+            git fetch origin omega-data
+            git rebase -X theirs origin/omega-data
+            if git push origin HEAD:omega-data; then
+              echo "Published commander snapshot on attempt $attempt"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Commander could not publish its snapshot"
+          exit 1
