@@ -37,6 +37,20 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 </div>
 <div class="toolbar"><span class="pill">Atomicité confirmée : <strong id="overviewAtomic">—</strong></span><span class="pill">Total encaissé dans le wallet : <strong id="overviewRealized">—</strong></span></div>
 
+
+<section id="skyLab">
+ <div class="head"><h2>Sky / Maker — primes d'enchères en DAI</h2><span class="pill" id="skyStatus">En attente…</span></div>
+ <p class="sub">Récompenses fixes paramétrées dans les contrats. Un appel <code>redo</code> peut rémunérer son exécutant lorsqu'une enchère existante est éligible. Le radar ne couvre pas encore les nouvelles liquidations <code>Dog.bark</code>.</p>
+ <div class="toolbar"><span class="caption">Bloc : <strong id="skyBlock">—</strong></span><button id="skyReload">Actualiser Sky</button></div>
+ <div class="grid">
+ <div class="card"><div class="label">Contrats vérifiés</div><div class="big" id="skyScanned">—</div></div>
+ <div class="card"><div class="label">Avec primes configurées</div><div class="big orange" id="skyConfigured">—</div></div>
+ <div class="card"><div class="label">Enchères ouvertes</div><div class="big" id="skyOpen">—</div></div>
+ <div class="card"><div class="label">Relances éligibles</div><div class="big" id="skyRedo">—</div></div>
+ </div>
+ <div class="box"><div class="scroll"><table><thead><tr><th>Marché</th><th>Prime théorique au déclenchement</th><th>Ouvertes</th><th>À relancer</th></tr></thead><tbody id="skyRows"><tr><td colspan="4">Chargement…</td></tr></tbody></table></div>
+ <p class="caption">Des primes configurées ne sont pas des profits disponibles. Leur obtention dépend de conditions d'éligibilité à l'instant de l'exécution, du gas et de la concurrence. Aucune transaction n'a été envoyée, aucun revenu comptabilisé.</p></div>
+</section>
 <section id="keeperLab" style="scroll-margin-top:20px">
  <div class="head"><h2>Keeper Cash — Curve V2 : récompenses exploitables</h2><span id="keeperStatus" class="pill">Chargement…</span></div>
  <p class="sub">Lecture directe des contrats Curve sur Ethereum. <strong>Récompenses effectivement proposées à l'appelant</strong>, sans avancer de capital de trading. Appel <code>update</code> simulé seulement si récompense non nulle ; aucun appel payant envoyé.</p>
@@ -211,4 +225,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
