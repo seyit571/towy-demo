@@ -8,6 +8,7 @@ on:
       - 'omega/bsc-arb.cjs'
       - 'omega/bsc-v3.cjs'
       - 'omega/keepers.cjs'
+      - 'omega/sky.cjs'
       - '.github/workflows/omega-shadow.yml'
   schedule:
     - cron: '3-59/5 * * * *'
@@ -39,6 +40,7 @@ jobs:
           cp omega/bsc-arb.cjs /tmp/omega_main_bsc.cjs
           cp omega/bsc-v3.cjs /tmp/omega_main_bsc_v3.cjs
           cp omega/keepers.cjs /tmp/omega_main_keepers.cjs
+          cp omega/sky.cjs /tmp/omega_main_sky.cjs
           git fetch origin omega-data
           git checkout -B omega-data origin/omega-data
           cp /tmp/omega_main_scanner.py omega/scanner.py
@@ -46,6 +48,7 @@ jobs:
           cp /tmp/omega_main_bsc.cjs omega/bsc-arb.cjs
           cp /tmp/omega_main_bsc_v3.cjs omega/bsc-v3.cjs
           cp /tmp/omega_main_keepers.cjs omega/keepers.cjs
+          cp /tmp/omega_main_sky.cjs omega/sky.cjs
       - name: Public market snapshot
         run: python omega/scanner.py
       - name: Install EVM read-only dependency
@@ -58,11 +61,13 @@ jobs:
         run: node omega/bsc-v3.cjs
       - name: Curve PegKeeper read-only reward checks
         run: node omega/keepers.cjs
+      - name: Sky Clipper redo reward checks
+        run: node omega/sky.cjs
       - name: Commit observed data to separate branch
         run: |
           git config user.name "omega-quant-shadow[bot]"
           git config user.email "omega-shadow@users.noreply.github.com"
-          git add omega/data/snapshot.json omega/data/history.json omega/data/evm.json omega/data/bsc.json omega/data/bsc-v3.json omega/data/keepers.json
+          git add omega/data/snapshot.json omega/data/history.json omega/data/evm.json omega/data/bsc.json omega/data/bsc-v3.json omega/data/keepers.json omega/data/sky.json
           if git diff --cached --quiet; then
             echo "No new observations"
           else
