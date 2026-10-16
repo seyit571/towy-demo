@@ -13,6 +13,8 @@ a{color:#80c9ff;text-decoration:none}button,select{background:#202c3e;color:var(
 .marketgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.coin{font-size:21px;font-weight:800}.mvals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:10px}.val{font-size:20px;font-weight:750}
 footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{padding:13px;border:1px solid var(--line);border-radius:10px}.stage strong{display:block;font-size:13px}.stage small{display:block;color:var(--sub);margin-top:4px}.stage em{display:block;font-style:normal;color:var(--orange);font-size:11px;margin-top:8px}
 @media(max-width:820px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quad{grid-template-columns:repeat(2,minmax(0,1fr))}.marketgrid{grid-template-columns:1fr}}@media(max-width:440px){main{padding:20px 11px}.card,.box{padding:13px}.grid{gap:8px}.big{font-size:23px}td,th{padding:11px 9px}}
+
+.feedline{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;gap:12px;border-bottom:1px solid var(--line)}.feedline:last-child{border:0}.feedstat{text-align:right;font-weight:800;font-size:17px}.feedstat small{display:block;color:var(--sub);font-size:11px;font-weight:400}.subgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.smallgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}@media(max-width:660px){.smallgrid,.subgrid{grid-template-columns:1fr}}
 </style></head>
 <body><main>
 <header><div class="logo">Ω <b>OMEGA</b> / QUANT</div><span class="pill" id="hlstatus">● Flux Hyperliquid en connexion</span></header>
@@ -52,6 +54,44 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="stage"><strong>03 · eth_call</strong><small>Simulation atomique au bloc courant</small><em>NON IMPLÉMENTÉ</em></div>
 <div class="stage"><strong>04 · Wallet</strong><small>TX confirmée et solde vérifié</small><em>NON ACTIVÉ</em></div>
 </div>
+
+<section id="cloudQuant" style="scroll-margin-top:15px">
+<div class="head"><h2>OMEGA SHADOW CLOUD — Multi-chain + Solana</h2><span class="pill" id="cloudStatus">Chargement…</span></div>
+<p class="sub">Scanner distant GitHub Actions toutes les 5 minutes (selon exécution GitHub). Mesures publiques persistées ; indépendante du Mac fermé. Ce n'est PAS un exécuteur flashloan.</p>
+<div class="toolbar"><span class="pill" id="cloudAge">En attente</span><span class="caption">Dernier scan : <strong id="cloudTime">—</strong></span><button id="cloudRefresh">Actualiser le snapshot</button></div>
+<div class="grid">
+<div class="card"><div class="label">Morpho multi-chaînes</div><div class="big" id="liveChains">—</div><div class="caption">Réseaux interrogés / configurés</div></div>
+<div class="card"><div class="label">Positions à risque</div><div class="big orange" id="riskGlobal">—</div><div class="caption">HF ≤ 1,02 · cumul API, pas liquidations</div></div>
+<div class="card"><div class="label">SOL via Jupiter</div><div class="big" id="solPriceLive">—</div><div class="caption">Prix indicatif USDC par SOL</div></div>
+<div class="card"><div class="label">Stratégies Kamino</div><div class="big" id="solanaStrats">—</div><div class="caption">Listing public · pas de liquidations</div></div>
+</div>
+<div class="subgrid">
+<section class="box"><div class="head"><h2 style="margin:0">Morpho — 10 réseaux</h2><span class="tag">SOURCE OFFICIELLE</span></div><div id="chainRows"><p class="caption">Chargement…</p></div><p class="caption">Les réseaux sans position ne sont pas masqués. Les résultats HF de l'API doivent être vérifiés à l'état du bloc.</p></section>
+<section class="box">
+<div class="head"><h2 style="margin:0">Solana — Raydium</h2><span class="tag">TOP 15 POOLS</span></div>
+<div class="label" style="margin-top:18px">Volume 24 h cumulé, échantillon</div><div class="big" id="rayVolume">—</div>
+<p class="caption">Volume notionnel sur les 15 pools les plus actifs retournés par Raydium ; non exhaustif. Ne correspond pas à un revenu ou à un arbitrage.</p>
+<div class="scroll"><table><thead><tr><th>Pool</th><th>Type</th><th>Vol. 24 h</th><th>TVL</th></tr></thead><tbody id="rayRows"><tr><td colspan="4">Chargement…</td></tr></tbody></table></div>
+</section></div>
+<h2>Solana Jupiter — aller-retour coté sur le marché</h2>
+<div class="smallgrid">
+<div class="card"><div class="label">Devis complets (2 jambes)</div><div class="big" id="quoteCount">—</div><div class="caption">Mesurés, pas transactions simulées</div></div>
+<div class="card"><div class="label">Devis positifs après frais hypothétiques</div><div class="big orange" id="quotePositive">—</div><div class="caption">Avant stress de slippage</div></div>
+<div class="card"><div class="label">Devis positifs après stress</div><div class="big" id="quoteStressPositive">—</div><div class="caption">Toujours non atomiques</div></div>
+</div>
+<div class="box">
+<div class="head"><div><div class="label">Meilleur résultat indicatif après stress</div><div class="big orange" id="simBest">—</div></div><span class="pill warn">NON EXÉCUTABLE / NON ON-CHAIN</span></div>
+<p class="caption" id="simNote">Chargement des cotations réelles…</p>
+<div class="scroll"><table><thead><tr><th>Cycle Jupiter</th><th>Taille</th><th>Quote après frais</th><th>Stress</th><th>Vérification</th></tr></thead><tbody id="quoteRows"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+<p class="caption">Les prix viennent de Jupiter. Les frais sont hypothétiques, pas mesurés sur une transaction. Un aller-retour de deux devis ne garantit ni atomicité, ni liquidité au même bloc, ni disponibilité d'un flashloan. Les résultats après stress ne sont donc PAS des bénéfices simulés on-chain.</p>
+</div>
+<h2>Historique et qualité des données</h2><div class="subgrid">
+<div class="box"><div class="head"><strong>Positions sous surveillance</strong><span class="caption" id="historyCount">—</span></div><div id="cloudHistory" class="caption">Premier snapshot en attente.</div></div>
+<div class="box"><div class="head"><strong>Erreurs / limites des API</strong><span class="pill" id="errorCount">—</span></div><div id="errorRows" class="caption">En attente.</div></div>
+</div>
+<p class="pill" style="display:inline-block;margin-top:22px" id="executionProof">0 transaction · en attente de moteur exécutable</p>
+<p class="caption">Sources : <a href="https://api.morpho.org/graphql" target="_blank" rel="noopener noreferrer">Morpho GraphQL</a> · <a href="https://dev.jup.ag/docs/swap-api/get-quote" target="_blank" rel="noopener noreferrer">Jupiter Swap API</a> · <a href="https://api-v3.raydium.io/pools/info/list?poolType=all&poolSortField=volume24h&sortType=desc&pageSize=5&page=1" target="_blank" rel="noopener noreferrer">Raydium Pools</a> · <a href="https://api.kamino.finance/strategies?env=mainnet-beta&status=LIVE" target="_blank" rel="noopener noreferrer">Kamino public API</a>. Les snapshots ont des horodatages et l'historique est public sur <a href="https://github.com/seyit571/towy-demo/tree/main/omega" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+</section>
 <footer>Sources : <a href="https://docs.morpho.org/developers/api/morpho/" target="_blank" rel="noopener noreferrer">Morpho API</a> · <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket" target="_blank" rel="noopener noreferrer">Hyperliquid WebSocket</a>. Site hébergé sur GitHub Pages : accessible 24h/24, mais le flux tourne uniquement pendant que cette page est ouverte. Ce site statique ne peut pas exécuter de liquidations en arrière-plan ni promettre les mêmes profits après connexion d'un wallet.</footer>
 </main><script>
 'use strict';
@@ -93,4 +133,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script></body></html>
+</script><script src="./scanner-ui.js" defer></script></body></html>
