@@ -140,8 +140,41 @@ for item in proofs:
     unique[item["id"]] = item
 proofs = list(unique.values())
 
-positive = [p for p in proofs if p["profitEligible"] is True
-            and (num(p["netUsdIndicative"]) or 0) > 0]
+# One economic opportunity is countable only once for its market/block.
+# Multiple flash-size optimizations of the same pools and block are alternatives,
+# not independent revenue events. Keep the best validated opportunity only.
+candidates = [p for p in proofs if p["profitEligible"] is True
+              and (num(p["netUsdIndicative"]) or 0) > 0]
+current_by_opportunity = {}
+for p in candidates:
+    group = (p["network"], p["mechanism"], p["block"],
+             "FLASH_POOL_PAIR" if p["mechanism"] == "Pancake/Biswap flash swap"
+             else p["id"])
+    economic_key = safe_id(*group)
+    candidate = dict(p, economicKey=economic_key)
+    old = current_by_opportunity.get(economic_key)
+    if old is None or candidate["netUsdIndicative"] > old["netUsdIndicative"]:
+        current_by_opportunity[economic_key] = candidate
+
+# Persist accepted independent captures across scheduled scans, not just the
+# latest status snapshot. Verified fork gains remain separate from mainnet.
+history_path = DATA / "capture-history.json"
+try:
+    historical = json.loads(history_path.read_text())
+    historical = historical if isinstance(historical, list) else []
+except (OSError, ValueError):
+    historical = []
+history = {}
+for p in historical:
+    if (isinstance(p, dict) and p.get("economicKey")
+            and p.get("profitEligible") is True and
+            (num(p.get("netUsdIndicative")) or 0) > 0):
+        history[p["economicKey"]] = p
+for key, p in current_by_opportunity.items():
+    if key not in history:
+        history[key] = p
+positive = list(history.values())
+history_path.write_text(json.dumps(positive[-10000:], indent=2, ensure_ascii=False) + "\n")
 now_secs = NOW.timestamp()
 def within(seconds):
     return [p for p in positive
