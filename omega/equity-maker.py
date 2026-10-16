@@ -61,8 +61,13 @@ def main():
  fresh=(doc.get("schema")==1 and dt_snap is not None
         and 0<=(NOW-dt_snap).total_seconds()<=600)
  tracks=sorted(
-   (x for x in doc.get("signals",[]) if isinstance(x,dict)),
-   key=lambda x:x.get("perpVolume24hUsd",0),reverse=True
+   (x for x in doc.get("signals",[])
+    if isinstance(x,dict)
+    and x.get("makerQuote",{}).get("positiveAtCurrentBestAsk")
+    and x.get("stockTradeAgeSeconds",1000)<=50
+    and x.get("bookAgeSeconds",1000)<=15
+    and float(x.get("perpBookAskSize") or 0)>0),
+   key=lambda x:x["makerQuote"]["netIfOnlyTopAskQtyFilledUsd"],reverse=True
  )[:MAX_QUOTES] if fresh else []
  indexes={x.get("ticker"):x for x in tracks}
  prev_quotes={k:v for k,v in state["quotes"].items() if k in indexes}
@@ -95,7 +100,8 @@ def main():
     if not tm or not px or not sz or sz<MIN_EVENT_SIZE:continue
     created=when(q.get("createdAt"))
     if not created or tm<=created.timestamp()*1000+250 or tm>NOW.timestamp()*1000+2000:continue
-    if px+1e-9<limit:continue
+    # Require STRICT trade-through: prints at our ask do not prove queue priority.
+    if px<=limit:continue
     tid=t.get("tid")
     id_=str(ticker)+"|"+str(tid)+"|"+str(int(tm))
     if id_ in seen:continue
@@ -136,7 +142,7 @@ def main():
    maker=row.get("makerQuote") or {}
    price=num(maker.get("virtualAskLimit"))
    stockask=num(row.get("equityAsk"))
-   if not price or not stockask or price<=stockask:continue
+   if not price or not stockask or price<=stockask or not maker.get("positiveAtCurrentBestAsk"):continue
    created=when(state["quotes"].get(ticker,{}).get("createdAt"))
    if created and (NOW-created).total_seconds()<QUOTE_LIFETIME_SECONDS and ticker not in {z["ticker"] for z in newthrough}:
     # Existing candidate stays, until next cycle or stale reference.
@@ -144,7 +150,9 @@ def main():
    state["quotes"][ticker]={
      "ticker":ticker,"market":row["market"],"createdAt":NOW.isoformat(),
      "limitAsk":price,"stockAskAtQuote":stockask,
-     "qtyBase":round(5000/stockask,6),
+     "qtyBase":round(min(5000/stockask,float(row.get("perpBookAskSize") or 0)),6),
+     "queueAheadBaseAtQuote":float(row.get("perpBookAskSize") or 0),
+     "quoteCompetitive":True,
      "makerFeeBps":float(row.get("perpMakerSideBps") or 0),
      "takerFeeBps":float(row.get("perpTakerSideBps") or 0),
      "holdHours":4,
@@ -163,6 +171,7 @@ def main():
    "mode":"UNPOSTED_MAKER_TAPE_REPLAY",
    "marketSource":"Hyperliquid XYZ recentTrades + Nasdaq public stock L1",
    "stocksFreshForPaper":len(indexes),"virtualMakerQuotesWatched":len(watch),
+   "makerQuotesPricedAtActualBestAsk":len(indexes),
    "openVirtualQuotes":len(state["quotes"]),"totalPotentialTradeThroughs":len(state["throughs"]),
    "recentThroughs":state["throughs"][-18:],
    "newPotentialThroughs":len(newthrough),
@@ -173,7 +182,8 @@ def main():
    "capitalReady":False,"errors":errors[:18],
    "limits":{
       "maxQuoteAgeSeconds":QUOTE_LIFETIME_SECONDS,"maxStockMidDriftBps":PRICE_DRIFT_LIMIT_BPS,
-      "replayTimeResolution":"scheduled GitHub job roughly once every five minutes; recentTrades sampling is not comprehensive"
+      "replayTimeResolution":"scheduled GitHub job roughly once every five minutes; recentTrades sampling is not comprehensive",
+      "strictTradeThrough":True,"onlyPositiveAtCurrentBook":True
    },
    "caution":"This is NOT a real maker fill or profit. Observed taker transactions crossing hypothetical prices "
              "do not establish OMEGA queue priority. Trades and Nasdaq quotes are sampled, short-lived and non-synchronous; "
