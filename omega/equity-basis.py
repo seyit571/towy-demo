@@ -27,7 +27,9 @@ HL_URL="https://api.hyperliquid.xyz/info"
 TICKERS=("NVDA","TSLA","AAPL","MSFT","AMD","AMZN","GOOGL","META","COIN","PLTR","HOOD","INTC","MU","MSTR","SNDK","CRCL","SOXL","NBIS","CRWV","MRNA","MRVL","DELL","RKLB","LITE","IREN","TSM","GME","BE","AAOI","ORCL","ARM","CVX","HIMS","BABA","CRWD","AVGO","WDC","LLY","NFLX","ASML","AMAT","BB","IBM","NOW","QCOM","RIVN","GLW","GEV","COST","EBAY","DKNG")
 NOTIONAL=5000.0
 # Baseline assumptions only: real account tier, borrow and trading costs vary.
-HL_PERP_TAKER_ROUNDTRIP_BPS=9.0
+HL_BASE_TAKER_SIDE_BPS=4.5
+HL_BASE_MAKER_SIDE_BPS=1.5
+# True HIP-3 fees depend on growthMode and deployerFeeScale per market.
 BROKER_FINANCING_AND_EQUITY_EXECUTION_BUFFER_BPS=5.0
 CLOSING_SLIPPAGE_BUFFER_BPS=5.0
 HOLD_HOURS=4
@@ -78,7 +80,8 @@ def fetch_hl_meta():
         c=contexts[i] if i<len(contexts) else {}
         m[sym]={"market":item["name"],"mark":parse_price(c.get("markPx")),
                 "oracle":parse_price(c.get("oraclePx")),"volume24hUsd":float(c.get("dayNtlVlm") or 0),
-                "fundingHourly":float(c.get("funding") or 0),"openInterest":float(c.get("openInterest") or 0)}
+                "fundingHourly":float(c.get("funding") or 0),"openInterest":float(c.get("openInterest") or 0),
+                "growthMode":item.get("growthMode")=="enabled","deployerFeeScale":float(item.get("deployerFeeScale") or 1)}
     return m
 
 def fetch_perp_book(ticker):
@@ -120,7 +123,13 @@ def scan_one(ticker,metadata):
     buy_px,can_buy=vwap_for_quantity(book["asks"],qty)
     if not sell_px or not buy_px:raise ValueError("insufficient perp order depth")
     funding_cost_bps=abs(metadata["fundingHourly"])*10000*HOLD_HOURS
-    worst_cost_bps=HL_PERP_TAKER_ROUNDTRIP_BPS+BROKER_FINANCING_AND_EQUITY_EXECUTION_BUFFER_BPS+CLOSING_SLIPPAGE_BUFFER_BPS+funding_cost_bps
+    fee_scale=metadata["deployerFeeScale"]
+    hip_multiplier=(1+fee_scale) if fee_scale<=1 else 2*fee_scale
+    hip_multiplier*=0.1 if metadata["growthMode"] else 1.0
+    taker_side_bps=HL_BASE_TAKER_SIDE_BPS*hip_multiplier
+    maker_side_bps=HL_BASE_MAKER_SIDE_BPS*hip_multiplier
+    perp_taker_roundtrip_bps=2*taker_side_bps
+    worst_cost_bps=perp_taker_roundtrip_bps+BROKER_FINANCING_AND_EQUITY_EXECUTION_BUFFER_BPS+CLOSING_SLIPPAGE_BUFFER_BPS+funding_cost_bps
     cases=[]
     for direction,perp_price,stock_price,book_ok in [
       ("SHORT_PERP_LONG_EQUITY",sell_px,stock["equityAsk"],can_sell),
@@ -144,8 +153,35 @@ def scan_one(ticker,metadata):
           "status":"THEORETICAL_CONVERGENCE_ONLY" if book_ok else "INSUFFICIENT_PERP_BOOK",
         })
     best=max(cases,key=lambda c:c["ifFullConvergenceNetScenarioBps"])
+    # Maker quote: NOT posted. Price must improve over the equity hedge and be
+    # above the live perp bid. Any hypothetical reward requires future taker trades.
+    maker_roundtrip_fee_bps=maker_side_bps+taker_side_bps
+    maker_cost_bps=(maker_roundtrip_fee_bps+
+                    BROKER_FINANCING_AND_EQUITY_EXECUTION_BUFFER_BPS+
+                    CLOSING_SLIPPAGE_BUFFER_BPS+funding_cost_bps)
+    target_bps=maker_cost_bps+2.0
+    maker_short_ask=max(book["asks"][0]["px"],
+                        book["bids"][0]["px"]+0.01,
+                        math.ceil(stock["equityAsk"]*(1+target_bps/10000)*100)/100)
+    maker_gross_bps=(maker_short_ask-stock["equityAsk"])/mid*10000
+    maker_model={
+        "side":"SELL_PERP_MAKER_THEN_BUY_STOCK",
+        "virtualAskLimit":round(maker_short_ask,4),
+        "perpBestAskAtQuote":book["asks"][0]["px"],
+        "equityAskAtQuote":stock["equityAsk"],
+        "grossBpsIfQuoteFilled":round(maker_gross_bps,3),
+        "costAndCarryHurdleBps":round(maker_cost_bps,3),
+        "conditionalNetIfHedgedUsd":round((maker_gross_bps-maker_cost_bps)*NOTIONAL/10000,5),
+        "quoteAboveBestAskUsd":round(max(0,maker_short_ask-book["asks"][0]["px"]),4),
+        "realOrderPlaced":False,"realFill":False,"realProfit":None,
+        "note":"Unposted maker limit: needs future buyer aggressor trade-through and actual hedge; no assurance of queue fill"
+    }
     return {
-      "ticker":ticker,"market":metadata["market"],
+      "ticker":ticker,"market":metadata["market"],"makerQuote":maker_model,
+      "hip3GrowthMode":metadata["growthMode"],"hip3DeployerFeeScale":fee_scale,
+      "perpTakerSideBps":round(taker_side_bps,4),
+      "perpMakerSideBps":round(maker_side_bps,4),
+      "perpTakerRoundtripBps":round(perp_taker_roundtrip_bps,4),
       **stock,
       "perpBestBid":book["bids"][0]["px"],"perpBestAsk":book["asks"][0]["px"],
       "perpBookBidSize":book["bids"][0]["sz"],"perpBookAskSize":book["asks"][0]["sz"],
@@ -167,18 +203,20 @@ def main():
             try:result.append(fut.result(timeout=32))
             except Exception as e:errors.append({"ticker":ticker,"detail":str(e)[:135]})
     result.sort(key=lambda x:x["best"]["ifFullConvergenceNetScenarioUsd"],reverse=True)
+    maker_scens=[x for x in result if x["makerQuote"]["conditionalNetIfHedgedUsd"]>0]
     positive=[x for x in result if x["hypotheticalPositiveAfterBuffers"]]
     report={
      "schema":1,"timestamp":NOW.isoformat(timespec="seconds").replace("+00:00","Z"),
      "mode":"DUAL_MARKET_QUOTE_PRECHECK_ONLY",
      "marketCountXYZ":len(meta),"stocksRequested":len(chosen),"stocksFresh":len(result),
      "stocksWithTheoreticalPositiveDislocation":len(positive),
+     "positiveConditionalMakerQuotes":len(maker_scens),
      "fundedNotionalPerCaseUsd":NOTIONAL,
      "realizedProfitUsd":None,"verifiedNetSimulatedUsd":0,"executedProfitPerMinuteEur":0,
      "fullTwoLegExecutionSimulations":0,"capitalReady":False,
      "brokerQuoteSource":"Public Nasdaq listed bid/ask; latest trade timestamp only, not independent quote timestamp",
      "perpQuoteSource":"Hyperliquid xyz HIP-3 best 20 L2 levels",
-     "roundtripPerpTakerBps":HL_PERP_TAKER_ROUNDTRIP_BPS,
+     "perpFees":"Per-market calculated from HIP-3 growthMode, deployerFeeScale and baseline tier0 perps fees",
      "brokerAndFinancingBufferBps":BROKER_FINANCING_AND_EQUITY_EXECUTION_BUFFER_BPS,
      "closingSlippageBufferBps":CLOSING_SLIPPAGE_BUFFER_BPS,
      "carryHorizonHours":HOLD_HOURS,
@@ -195,7 +233,7 @@ def main():
     (DATA/"equity-basis.json").write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n")
     print(json.dumps({"asof":report["timestamp"],"total":len(meta),"fresh":len(result),
                       "positivesScenario":len(positive),
-                      "top":[{"symbol":x["ticker"],"grossBps":x["best"]["grossEntryDislocationBps"],
+                      "makerConditionalQuotes":len(maker_scens),"top":[{"symbol":x["ticker"],"grossBps":x["best"]["grossEntryDislocationBps"],
                               "netScenarioUsd":x["best"]["ifFullConvergenceNetScenarioUsd"],
                               "direction":x["best"]["direction"]} for x in result[:8]],
                       "errors":errors[:8]},ensure_ascii=False))
