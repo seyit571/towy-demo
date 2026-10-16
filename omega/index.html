@@ -92,6 +92,28 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <p class="pill" style="display:inline-block;margin-top:22px" id="executionProof">0 transaction · en attente de moteur exécutable</p>
 <p class="caption">Sources : <a href="https://api.morpho.org/graphql" target="_blank" rel="noopener noreferrer">Morpho GraphQL</a> · <a href="https://dev.jup.ag/docs/swap-api/get-quote" target="_blank" rel="noopener noreferrer">Jupiter Swap API</a> · <a href="https://api-v3.raydium.io/pools/info/list?poolType=all&poolSortField=volume24h&sortType=desc&pageSize=5&page=1" target="_blank" rel="noopener noreferrer">Raydium Pools</a> · <a href="https://api.kamino.finance/strategies?env=mainnet-beta&status=LIVE" target="_blank" rel="noopener noreferrer">Kamino public API</a>. Les snapshots ont des horodatages et l'historique est public sur <a href="https://github.com/seyit571/towy-demo/tree/main/omega" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
 </section>
+
+<section id="evmProof" style="scroll-margin-top:14px">
+<div class="head"><h2>EVM — vérification directement sur les contrats</h2><span class="pill" id="evmStatus">Rapport en chargement</span></div>
+<p class="sub">Contrôle des positions avec les données des contrats Morpho, oracles de marché et estimation de gas. <strong>Un plafond de bonus n'est pas une simulation atomique.</strong></p>
+<div class="toolbar"><span class="caption" id="evmAge">En attente de données on-chain</span><button id="evmRefresh">Recharger les preuves</button></div>
+<div class="grid">
+<div class="card"><div class="label">Positions contrôlées on-chain</div><div class="big" id="evmChecked">—</div></div>
+<div class="card"><div class="label">Sous seuil au bloc analysé*</div><div class="big orange" id="evmUnderwater">—</div></div>
+<div class="card"><div class="label">Bornes positives avant swap</div><div class="big" id="evmUpperCount">—</div></div>
+<div class="card"><div class="label">Meilleur plafond après gas supposé</div><div class="big orange" id="evmUpperMax">—</div></div>
+</div>
+<div class="grid">
+<div class="card"><div class="label">P&L simulé atomiquement / min</div><div class="big" id="evmProfitMinute">—</div></div>
+<div class="card"><div class="label">P&L simulé atomiquement / h</div><div class="big" id="evmProfitHour">—</div></div>
+<div class="card"><div class="label">P&L simulé total validé</div><div class="big" id="evmProfitTotal">—</div></div>
+<div class="card"><div class="label">eth_call exécuteur réussis</div><div class="big" id="evmSimPassed">—</div></div>
+</div>
+<section class="box"><div class="head"><strong>Candidats contrôlés</strong><span class="tag">RAPPORT PUBLIC</span></div>
+<div class="scroll"><table><thead><tr><th>Réseau</th><th>Collatéral → dette</th><th>Dette</th><th>Plafond de bonus</th><th>Gas estimé</th><th>Plafond après gas</th><th>Statut</th></tr></thead><tbody id="evmRows"><tr><td colspan="7">Chargement…</td></tr></tbody></table></div>
+<p class="caption">* Santé basée sur un contrôle au bloc sans accrual complet des intérêts depuis la dernière opération : résultat indicatif. Plafond du bonus calculé avec les valorisations API et hypothèse de 650 000 unités de gas, hors swaps, impact de marché, frais éventuels et compétition. Le plafond n'est pas disponible comme profit réel. <span id="evmErrors"></span></p>
+</section>
+</section>
 <footer>Sources : <a href="https://docs.morpho.org/developers/api/morpho/" target="_blank" rel="noopener noreferrer">Morpho API</a> · <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket" target="_blank" rel="noopener noreferrer">Hyperliquid WebSocket</a>. Site hébergé sur GitHub Pages : accessible 24h/24, mais le flux tourne uniquement pendant que cette page est ouverte. Ce site statique ne peut pas exécuter de liquidations en arrière-plan ni promettre les mêmes profits après connexion d'un wallet.</footer>
 </main><script>
 'use strict';
@@ -133,4 +155,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./scanner-ui.js" defer></script></body></html>
+</script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script></body></html>
