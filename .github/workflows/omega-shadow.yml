@@ -1,0 +1,36 @@
+name: OMEGA Quant shadow snapshots
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: omega-quant-snapshot
+  cancel-in-progress: false
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Public market data observation
+        run: python omega/scanner.py
+      - name: Commit public read-only metrics
+        run: |
+          git config user.name "omega-quant-shadow[bot]"
+          git config user.email "omega-shadow@users.noreply.github.com"
+          git add omega/data/snapshot.json omega/data/history.json
+          if git diff --cached --quiet; then
+            echo "No snapshot changes"
+          else
+            git commit -m "omega: record market snapshot"
+            git push origin HEAD:main
+          fi
