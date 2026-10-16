@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-16T18:01:44Z",
+  "mode": "AUTONOMOUS_READ_ONLY_ROUTER",
+  "automation": "Scheduled on GitHub Actions. Freshness depends on GitHub scheduler; not per-block HFT.",
+  "targetNetEURPerMinute": 50,
+  "targetNetEURPerHour": 3000,
+  "targetNetEURPerDay": 72000,
+  "economicSafetyGate": "ONLY FINAL SETTLED WALLET DELTAS AFTER ALL FEES COUNT",
+  "realExecutionEnabled": false,
+  "walletMainnetConnected": false,
+  "walletProfitMainnetEUR": null,
+  "proofNetSimulatedUsd": {
+    "minuteUsd": 0.0,
+    "hourUsd": 0.0,
+    "totalUsd": 0.0,
+    "uniquePositive": 0.0,
+    "atomicReceiptsOk": 8.0,
+    "walletBalanceVerifications": 8.0
+  },
+  "signalQueue": [
+    {
+      "network": "Base",
+      "mechanism": "Morpho onchain liquidation",
+      "action": "wsrUSD/USDC",
+      "status": "NEEDS_SWAP_AND_FORK",
+      "source": "evm.json",
+      "sourceFresh": true,
+      "reason": "Onchain pre-accrual health check; upper bound excludes swap/slippage/funding and competition",
+      "upperBoundUsd": 0.09107,
+      "gasEstimateUsd": 0.01732,
+      "requiresFullAtomicSimulation": true,
+      "walletProfitVerified": false,
+      "proof": {
+        "marketId": "0x5f42e9a47335fc15507f0ab6ac362e9d0fcd2f6fd881852198824c5b01045cb7",
+        "borrower": "0xfeed46c11F57B7126a773EeC6ae9cA7aE1C03C9a",
+        "block": 52691637
+      },
+      "rank": 1,
+      "dispatchReady": false
+    }
+  ],
+  "queueTotal": 1,
+  "actionableNow": 0,
+  "dispatchReady": 0,
+  "sourceStatus": {
+    "evm.json": {
+      "timestamp": "2026-10-16T17:43:46.267Z",
+      "ageMinutes": 18.0,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    },
+    "sky.json": {
+      "timestamp": "2026-10-16T17:44:08.985Z",
+      "ageMinutes": 17.6,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    },
+    "keepers.json": {
+      "timestamp": "2026-10-16T17:44:01.357Z",
+      "ageMinutes": 17.7,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    },
+    "beefy-base.json": {
+      "timestamp": "2026-10-16T16:32:00.736Z",
+      "ageMinutes": 89.7,
+      "status": "STALE",
+      "maxAgeMinutes": 30
+    },
+    "bsc-v3.json": {
+      "timestamp": "2026-10-16T17:43:59.850Z",
+      "ageMinutes": 17.7,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    },
+    "bsc.json": {
+      "timestamp": "2026-10-16T17:43:49.508Z",
+      "ageMinutes": 17.9,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    },
+    "triangles.json": {
+      "timestamp": "2026-10-16T17:44:24.854Z",
+      "ageMinutes": 17.3,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    },
+    "solana-keepers.json": {
+      "timestamp": "2026-10-16T17:26:07Z",
+      "ageMinutes": 35.6,
+      "status": "STALE",
+      "maxAgeMinutes": 20
+    },
+    "capture-ledger.json": {
+      "timestamp": "2026-10-16T17:10:17Z",
+      "ageMinutes": 51.5,
+      "status": "STALE",
+      "maxAgeMinutes": 25
+    },
+    "snapshot.json": {
+      "timestamp": "2026-10-16T17:43:00Z",
+      "ageMinutes": 18.7,
+      "status": "FRESH",
+      "maxAgeMinutes": 20
+    }
+  },
+  "degradedSources": [
+    "beefy-base.json",
+    "solana-keepers.json",
+    "capture-ledger.json"
+  ],
+  "degradedCount": 3,
+  "ecosystems": {
+    "Morpho": {
+      "totalUnderwaterAPI": 30,
+      "onchainScreened": 13,
+      "grossUpperBoundPositive": 1
+    },
+    "Sky": {
+      "contractsInspected": 46,
+      "redoEligible": 0
+    },
+    "Curve": {
+      "inspected": 4,
+      "positiveAfterGasEstimate": 0
+    },
+    "BeefyBase": {
+      "liveStrategies": 226,
+      "positiveAfterSafetyMargin": 0
+    },
+    "Solana": {
+      "kaminoTransactionsSampled": 100,
+      "recentLiquidations": 0,
+      "l3Orders": 56,
+      "l3Crosses": 0
+    },
+    "BNB": {
+      "optimalCycles": 29332,
+      "candidateCyclesPositiveAfterAssumptions": 0
+    }
+  },
+  "whyZero": "No transaction has demonstrated a settled strictly positive profit after all expenses. Live market volume is not a fee entitlement; provisional quotes never become wallet profit.",
+  "nextExecutionGate": [
+    "Build official protocol instructions and flash callback",
+    "Simulate complete bundle against a block/slot fork",
+    "Assert lending repayment and stablecoin payout",
+    "Measure gas, priority fees, slippage, slashing and inclusion competitiveness",
+    "Deduplicate opportunity by block/slot and economic event",
+    "Require risk-limit approval before any real wallet action"
+  ]
+}
