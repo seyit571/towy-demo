@@ -68,6 +68,21 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="toolbar"><a href="https://github.com/seyit571/towy-demo/tree/main/omega/research" target="_blank" rel="noopener noreferrer">Scripts reproductibles ↗</a><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/truth-v3.json" target="_blank" rel="noopener noreferrer">Rapport horodaté ↗</a></div>
 </div>
 </section>
+<section id="baseBeefy">
+<div class="head"><h2>BEEFY BASE — récompenses réelles vs annonces</h2><span class="pill" id="baseBeefyStatus">Attente du scan…</span></div>
+<p class="sub">Lecture des 226 stratégies Base et exécution virtuelle des meilleurs appels <code>harvest(address)</code> via <strong>eth_simulateV1 officiel</strong>, avec vérification des logs ERC-20 WETH qui créditent le bénéficiaire. Le compteur ne compte jamais la récompense <code>callReward()</code> sans exécution.</p>
+<div class="toolbar"><span class="caption">Dernière vérification : <strong id="baseBeefyUpdated">—</strong></span><button id="baseBeefyReload">Actualiser les tests</button></div>
+<div class="grid">
+<div class="card"><div class="label">Stratégies actives</div><div id="baseBeefyActive" class="big">—</div></div>
+<div class="card"><div class="label">Récompenses annoncées non nulles</div><div id="baseBeefyQuotes" class="big orange">—</div></div>
+<div class="card"><div class="label">Simulations réussies</div><div id="baseBeefyPassed" class="big">—</div></div>
+<div class="card"><div class="label">Net positif avec marge de sécurité</div><div id="baseBeefyPositive" class="big">—</div></div>
+</div>
+<div class="box">
+<div class="scroll"><table><thead><tr><th>Vault</th><th>Annonce (ETH)</th><th>WETH reçu sur simulation</th><th>Gas estimé (ETH)</th><th>Net estimé (ETH)</th><th>Exécution</th></tr></thead><tbody id="baseBeefyRows"><tr><td colspan="6">Chargement du rapport…</td></tr></tbody></table></div>
+<p class="caption">Résultats des logs de simulation officiels, non des transactions mainnet. Les frais supplémentaires de données L1 Base, les aléas d'inclusion et de concurrence ne sont pas déduits : les gains nets positifs exigent donc une marge supplémentaire de 0,00005 ETH. Une simulation réussie ne garantit pas l'encaissement.</p>
+<div class="toolbar"><a href="https://github.com/seyit571/towy-demo/blob/main/omega/beefy-base.cjs" target="_blank" rel="noopener noreferrer">Code du scanner ↗</a><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/beefy-base.json" target="_blank" rel="noopener noreferrer">Résultats horodatés ↗</a></div>
+</div></section>
 <section id="beefyAudit">
 <div class="head"><h2>BEEFY CASH — audit des récompenses de harvest</h2><span id="beefyStatus" class="pill">En attente des reçus…</span></div>
 <p class="sub">Les contrats Beefy proposent une rémunération à l'appelant. J'ai simulé l'appel <code>harvest(address)</code> sur un vrai fork BNB, et mesuré la différence entre <strong>récompense annoncée et WBNB réellement reçu</strong>. C'est cette différence qui compte.</p>
@@ -296,4 +311,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
