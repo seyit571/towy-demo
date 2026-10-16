@@ -1,0 +1,60 @@
+name: OMEGA Truth Engine hourly
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'omega/research/tri-optimizer.cjs'
+      - 'omega/research/beefy-scan.cjs'
+      - 'omega/research/beefy-trace-all.cjs'
+      - 'omega/research/build-truth.py'
+      - '.github/workflows/omega-truth.yml'
+  schedule:
+    - cron: '13 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: omega-truth-hourly
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Source checkout
+        uses: actions/checkout@v4
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prepare isolated keyless sandbox
+        run: |
+          mkdir -p /tmp/omega-evm
+          cp omega/research/*.cjs /tmp/omega-evm/
+          cd /tmp/omega-evm
+          npm install --no-audit --no-fund --silent --no-save ethers@6
+      - name: Evaluate two and three leg BSC routes
+        run: node /tmp/omega-evm/tri-optimizer.cjs
+      - name: Estimate permissionless caller rewards
+        run: node /tmp/omega-evm/beefy-scan.cjs
+      - name: Trace payouts to beneficiary
+        run: node /tmp/omega-evm/beefy-trace-all.cjs
+      - name: Validate sample coverage and combine
+        run: python3 omega/research/build-truth.py
+      - name: Switch to isolated data branch and publish
+        run: |
+          git fetch origin omega-data
+          git checkout -B omega-data origin/omega-data
+          mkdir -p omega/data
+          cp /tmp/omega-evm/truth-v3.json omega/data/truth-v3.json
+          git config user.name "omega-quant-shadow[bot]"
+          git config user.email "omega-shadow@users.noreply.github.com"
+          git add omega/data/truth-v3.json
+          if ! git diff --cached --quiet; then
+            git commit -m "omega: refresh validated read-only truth snapshot"
+            git push origin HEAD:omega-data
+          fi
