@@ -28,6 +28,28 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <div class="card"><div class="label">État de l'exécuteur</div><div class="big">SHADOW</div><div class="caption">Aucun wallet connecté</div></div>
 </div>
 
+
+<section id="forkLab" style="scroll-margin-top:20px">
+ <div class="head"><h2>FLASH CAPTURE — Exécution atomique sur fork BNB</h2><span id="forkStatus" class="pill">Chargement du rapport…</span></div>
+ <p class="sub">Contrat <strong>OmegaForkFlash</strong> déployé dans Ganache sur une copie de BNB Chain. Il emprunte des BUSD au pool PancakeSwap, les échange contre des BSW sur Biswap, rembourse le premier pool et transfère le surplus au wallet de test. Aucun capital réel utilisé.</p>
+ <div class="toolbar"><span class="pill" id="forkTestWallet">FORK TEST — PAS D'ORDRE MAINNET</span><span class="caption">Bloc d'origine : <strong id="forkSourceBlock">—</strong></span><button id="forkRefresh">Actualiser la preuve</button></div>
+ <div class="grid">
+   <div class="card"><div class="label">Transactions atomiques réussies</div><div id="forkSuccessful" class="big">—</div><div class="caption">Succès avec remboursement et surplus wallet</div></div>
+   <div class="card"><div class="label">Meilleur surplus wallet de test</div><div id="forkGross" class="big orange">—</div><div class="caption">Tokens BSW, pas euros</div></div>
+   <div class="card"><div class="label">Meilleur net après gas estimé</div><div id="forkNet" class="big">—</div><div class="caption">Valuation BSW au prix spot, conversion non exécutée</div></div>
+   <div class="card"><div class="label">Captures réellement positives après gas</div><div id="forkNetPositive" class="big">—</div><div class="caption">Critère nécessaire avant une transaction live</div></div>
+ </div>
+ <div class="box">
+   <div class="head"><strong>Preuves : 9 transactions distinctes, réinitialisées sur la même copie</strong><span class="caption">BNB/USD coté on-chain : <span id="forkPriceBNB">—</span></span></div>
+   <div class="scroll"><table><thead><tr><th>Emprunt flash</th><th>Simulation</th><th>Solde wallet +</th><th>Coût gas $</th><th>Résultat net $</th><th>Hash local</th></tr></thead><tbody id="forkRows"><tr><td colspan="6">Lecture du rapport…</td></tr></tbody></table></div>
+   <p class="caption">Les hashes sont ceux des transactions sur le <strong>fork local</strong> et n'existent pas sur l'explorateur mainnet. Le wallet est fictif et alimenté uniquement pour le gas de test. Les résultats nets sont des estimations avec valorisation spot BSW ; une vente réelle, la concurrence et le déploiement ajoutent des coûts. Un net négatif n'est jamais comptabilisé comme gain.</p>
+   <div class="toolbar">
+    <a href="https://github.com/seyit571/towy-demo/blob/main/omega/lab/OmegaForkFlash.sol" target="_blank" rel="noopener noreferrer">Code du contrat ↗</a>
+    <a href="https://github.com/seyit571/towy-demo/blob/main/omega/lab/flash-sim.cjs" target="_blank" rel="noopener noreferrer">Reproduire les tests ↗</a>
+    <a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/atomic-fork.json" target="_blank" rel="noopener noreferrer">Rapport complet ↗</a>
+   </div>
+ </div>
+</section>
 <div class="head"><h2>Performance de nos simulations</h2><span class="caption" id="overviewFresh">Chargement des sources…</span></div>
 <div class="grid">
 <div class="card"><div class="label">Cycles BNB calculés</div><div class="big" id="overviewTests">—</div><div class="caption">Pancake/Biswap, V2 + V3</div></div>
@@ -225,4 +247,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
