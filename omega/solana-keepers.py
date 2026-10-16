@@ -129,14 +129,14 @@ def main():
 
     signatures = []
     try:
-        signatures = rpc("getSignaturesForAddress", [KLEND, {"limit": 100}], timeout=10) or []
+        signatures = rpc("getSignaturesForAddress", [KLEND, {"limit": 300}], timeout=10) or []
     except Exception as exc:
         ERRORS.append("Kamino signatures: " + str(exc)[:170])
 
     success = [x for x in signatures if isinstance(x, dict) and x.get("signature") and not x.get("err")]
-    successful_sample = success[:30]
+    successful_sample = success[:100]
     transactions = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
         futures = {pool.submit(get_tx, x["signature"]): x for x in successful_sample}
         for task, signature in futures.items():
             try:
