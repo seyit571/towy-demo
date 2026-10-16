@@ -24,7 +24,7 @@ DATA.mkdir(exist_ok=True)
 NOW=dt.datetime.now(dt.timezone.utc)
 ET=ZoneInfo("America/New_York")
 HL_URL="https://api.hyperliquid.xyz/info"
-TICKERS=("NVDA","TSLA","AAPL","MSFT","AMD","AMZN","GOOGL","META","COIN","PLTR","HOOD","INTC","MU","MSTR")
+TICKERS=("NVDA","TSLA","AAPL","MSFT","AMD","AMZN","GOOGL","META","COIN","PLTR","HOOD","INTC","MU","MSTR","SNDK","CRCL","SOXL","NBIS","CRWV","MRNA","MRVL","DELL","RKLB","LITE","IREN","TSM","GME","BE","AAOI","ORCL","ARM","CVX","HIMS","BABA","CRWD","AVGO","WDC","LLY","NFLX","ASML","AMAT","BB","IBM","NOW","QCOM","RIVN","GLW","GEV","COST","EBAY","DKNG")
 NOTIONAL=5000.0
 # Baseline assumptions only: real account tier, borrow and trading costs vary.
 HL_PERP_TAKER_ROUNDTRIP_BPS=9.0
@@ -159,9 +159,9 @@ def scan_one(ticker,metadata):
 
 def main():
     meta=fetch_hl_meta()
-    chosen=[t for t in TICKERS if t in meta and meta[t]["volume24hUsd"]>100000]
+    chosen=sorted([t for t in TICKERS if t in meta and meta[t]["volume24hUsd"]>100000],key=lambda t:meta[t]["volume24hUsd"],reverse=True)[:45]
     result=[]
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as p:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=9) as p:
         futures={p.submit(scan_one,t,meta[t]):t for t in chosen}
         for fut,ticker in futures.items():
             try:result.append(fut.result(timeout=32))
