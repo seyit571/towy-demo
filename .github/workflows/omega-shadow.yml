@@ -77,6 +77,10 @@ jobs:
             echo "No new observations"
           else
             git commit -m "omega: read-only quant snapshot"
+            # The runner copied fresh source files onto the data branch.
+            # Keep only the committed snapshots; discard uncommitted source copies
+            # before rebasing on simultaneous branch updates.
+            git reset --hard HEAD
             for attempt in 1 2 3; do
               git fetch origin omega-data
               git rebase -X theirs origin/omega-data
