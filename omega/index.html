@@ -50,6 +50,24 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
    </div>
  </div>
 </section>
+
+<section id="truthLab" style="scroll-margin-top:18px">
+<div class="head"><h2>OMEGA TRUTH ENGINE — Vérification des captures</h2><span class="pill" id="truthStatus">Connexion au rapport…</span></div>
+<p class="sub">Ce tableau distingue les opportunités de prix, les récompenses <em>annoncées</em> par un protocole et les montants <strong>réellement transférés au bénéficiaire dans une simulation EVM</strong>. Aucun ordre mainnet n'a été transmis.</p>
+<div class="toolbar"><span class="caption">Rapport vérifié : <strong id="truthTimestamp">—</strong></span><button id="truthReload">Actualiser les preuves</button></div>
+<div class="grid">
+<div class="card"><div class="label">Cycles AMM 2–3 swaps testés</div><div id="truthRoutes" class="big">—</div><div class="caption">Optimisation sur données de réserves on-chain</div></div>
+<div class="card"><div class="label">Cycles positifs après hypothèses de gas</div><div id="truthPositive" class="big">—</div><div class="caption">Meilleur net calculé : <strong id="truthBestTri">—</strong></div></div>
+<div class="card"><div class="label">Harvests positifs au pré-filtre</div><div id="truthRewardPreflight" class="big orange">—</div><div class="caption">Simple callReward moins gas estimé</div></div>
+<div class="card"><div class="label">Harvests positifs après trace complète</div><div id="truthTracePositive" class="big">—</div><div class="caption">Appels sans erreur : <strong id="truthTraced">—</strong></div></div>
+</div>
+<div class="box">
+<div class="head"><div><strong>Beefy Base — De la prime affichée à la vraie prime reçue</strong><div class="caption">Prix réel du token WETH, journaux ERC-20 Transfer du simulateur, gas au prix RPC.</div></div><span class="pill">NET RÉALISÉ : <strong id="truthConfirmedProfit">0 €</strong></span></div>
+<div class="scroll"><table><thead><tr><th>Stratégie</th><th>callReward brut</th><th>WETH reçu en trace</th><th>Gas estimé</th><th>Net du test</th><th>État</th></tr></thead><tbody id="truthRows"><tr><td colspan="6">Chargement de la preuve…</td></tr></tbody></table></div>
+<p class="caption">Ces résultats sont des **traces simulées à un bloc donné**, et peuvent expirer immédiatement. Un bénéfice ne serait définitivement réalisé qu'après inclusion et vérification du solde sur la blockchain. Les opportunités uniques ne sont jamais extrapolées artificiellement en €/minute.</p>
+<div class="toolbar"><a href="https://github.com/seyit571/towy-demo/tree/main/omega/research" target="_blank" rel="noopener noreferrer">Scripts reproductibles ↗</a><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/truth-v3.json" target="_blank" rel="noopener noreferrer">Rapport horodaté ↗</a></div>
+</div>
+</section>
 <div class="head"><h2>Performance de nos simulations</h2><span class="caption" id="overviewFresh">Chargement des sources…</span></div>
 <div class="grid">
 <div class="card"><div class="label">Cycles BNB calculés</div><div class="big" id="overviewTests">—</div><div class="caption">Pancake/Biswap, V2 + V3</div></div>
@@ -247,4 +265,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
