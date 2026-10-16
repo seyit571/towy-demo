@@ -17,7 +17,7 @@ UA = {"User-Agent": "OMEGA-Quant-Shadow/2.0", "Accept": "application/json"}
 SOL = "So11111111111111111111111111111111111111112"
 TOKENS = {
     "USDC": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-    "USDT": "Es9vMFrzaCERmJfrF4H2FYD4KCoNvSZezyQPzfwD",
+    "USDT": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
     "JUP": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
     "RAY": "4k3Dyjzvzp8eMZWUXbWuo4U8oXc78gq9jRprQe6K87CP",
     "BONK": "DezXAZ8z7PnrnRJjz3wXBoRgixCaKGj7sZXqoQ2WEzJd",
