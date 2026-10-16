@@ -77,5 +77,15 @@ jobs:
             echo "No new observations"
           else
             git commit -m "omega: read-only quant snapshot"
-            git push origin HEAD:omega-data
+            for attempt in 1 2 3; do
+              git fetch origin omega-data
+              git rebase -X theirs origin/omega-data
+              if git push origin HEAD:omega-data; then
+                echo "Observation saved on attempt $attempt"
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "Failed to save after 3 rebase/push attempts"
+            exit 1
           fi
