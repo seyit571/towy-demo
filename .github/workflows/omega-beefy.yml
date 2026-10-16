@@ -6,7 +6,7 @@ on:
       - 'omega/beefy-base.cjs'
       - '.github/workflows/omega-beefy.yml'
   schedule:
-    - cron: '17 * * * *'
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -41,5 +41,7 @@ jobs:
           git add omega/data/beefy-base.json
           if ! git diff --cached --quiet; then
             git commit -m "omega: exact read-only Beefy payout proof"
+            git fetch origin omega-data
+            git rebase origin/omega-data
             git push origin HEAD:omega-data
           fi
