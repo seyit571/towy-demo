@@ -21,6 +21,27 @@ footer{font-size:12px;color:var(--sub);margin-top:24px;line-height:1.7}.stage{pa
 <h1>Le flux réel. Pas de faux profits.</h1>
 <p class="sub">Radar live Hyperliquid + candidats liquidation Morpho Blue. Analyse ouverte sur téléphone, sans EC2 ni wallet.</p>
 <div class="toolbar"><span class="pill ok">● DONNÉES RÉELLES</span><span class="pill warn">SIMULATEUR EVM NON CONNECTÉ</span><span class="pill">AUCUN ORDRE ENVOYÉ</span></div>
+<section id="captureTruth" style="scroll-margin-top:18px">
+<div class="head"><h2>OMEGA CAPTURE — Bénéfices vérifiés</h2><span class="pill" id="captureStatus">Lecture des reçus…</span></div>
+<p class="sub">Comptabilité stricte : <strong>flash ou keeper exécuté → transaction atomique réussie → solde du wallet de test mesuré → frais déduits</strong>. Une opportunité détectée, un devis positif ou la répétition du même historique ne rapporte pas un centime à ce registre.</p>
+<div class="toolbar"><span class="caption">Preuves mises à jour <span id="captureTimestamp">—</span> · <span id="captureKnownRate">—</span></span><button id="captureRefresh">Vérifier les captures</button></div>
+<div class="grid">
+<div class="card"><div class="label">Net simulé vérifié · 60 secondes</div><div class="big ok" id="captureMinute">—</div><div class="caption">Transactions éligibles et horodatées uniquement</div></div>
+<div class="card"><div class="label">Net simulé vérifié · 1 heure</div><div class="big ok" id="captureHour">—</div><div class="caption">Aucune projection artificielle</div></div>
+<div class="card"><div class="label">Net simulé vérifié · cumul</div><div class="big ok" id="captureTotal">—</div><div class="caption">Résultats indépendants dédoublonnés</div></div>
+<div class="card"><div class="label">Profit réel · blockchain mainnet</div><div class="big" id="captureRealized">—</div><div class="caption">Wallet bénéficiaire non connecté</div></div>
+</div>
+<div class="grid">
+<div class="card"><div class="label">TX atomiques fork réussies</div><div class="big" id="captureReceipts">—</div><div class="caption">Remboursement et états persistants testés</div></div>
+<div class="card"><div class="label">Preuves de soldes wallet</div><div class="big" id="captureDeltas">—</div></div>
+<div class="card"><div class="label">Captures rentables vérifiées</div><div class="big orange" id="capturePositive">—</div></div>
+<div class="card"><div class="label">Tests économiques uniques</div><div class="big" id="captureDedup">—</div></div>
+</div>
+<div class="box"><div class="head"><strong>Journal des transactions et pré-simulations</strong><a href="https://github.com/seyit571/towy-demo/blob/omega-data/omega/data/capture-ledger.json" target="_blank" rel="noopener noreferrer">Registre de preuves ↗</a></div>
+<div class="scroll"><table><thead><tr><th>Réseau</th><th>Mécanisme</th><th>Statut</th><th>Net indicatif après gas</th><th>Éligibilité au cumul</th></tr></thead><tbody id="captureRows"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+<p class="caption">Les nets indicatifs peuvent être incomplets (par exemple BSW non reconverti en stablecoin ou frais de L1 Base). <strong>Ils ne sont jamais additionnés au cumul vérifié tant qu'ils ne sont pas entièrement soldés et prouvés.</strong> Hashes de fork non consultables sur un explorateur public.</p>
+<p class="caption" id="captureWarning">En attente du registre…</p></div>
+</section>
 <section id="megaFlowLab">
 <div class="head"><h2>OMEGA BIGFLOW — échelle globale vérifiée</h2><span class="pill" id="bigflowStatus">Connexion API…</span></div>
 <p class="sub">Mesures officielles : <strong>Hyperliquid (234 marchés perpétuels)</strong>, <strong>Raydium Solana (volume DEX)</strong>, et taux USD/EUR. Les volumes sont échangés par le marché, <strong>pas capturés par OMEGA</strong>.</p>
@@ -385,4 +406,4 @@ async function morpho(){
  }catch(e){$('mstatus').textContent='⚠ '+String(e.message).slice(0,45);$('mstatus').className='pill red';$('pipe').textContent='ERREUR API';}finally{clearTimeout(timeout);loading=false}
 }
 $('reload').onclick=morpho;$('chain').onchange=morpho;$('hf').onchange=morpho;connect();setInterval(draw,1000);morpho();setInterval(morpho,30000);
-</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./overview.js" defer></script></body></html>
+</script><script src="./sky-ui.js" defer></script><script src="./keepers-ui.js" defer></script><script src="./scanner-ui.js" defer></script><script src="./evm-ui.js" defer></script><script src="./bsc-ui.js" defer></script><script src="./bsc-v3-ui.js" defer></script><script src="./atomic-ui.js" defer></script><script src="./truth-ui.js" defer></script><script src="./beefy-base-ui.js" defer></script><script src="./base-beefy-ui.js" defer></script><script src="./beefy-ui.js" defer></script><script src="./triangles-ui.js" defer></script><script src="./bigflow.js" defer></script><script src="./velocity-l3.js" defer></script><script src="./capture-ui.js" defer></script><script src="./overview.js" defer></script></body></html>
