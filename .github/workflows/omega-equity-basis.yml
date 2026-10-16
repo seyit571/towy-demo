@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'omega/equity-basis.py'
+      - 'omega/equity-paper.py'
       - '.github/workflows/omega-equity-basis.yml'
   schedule:
     - cron: '*/5 * * * *'
@@ -25,22 +26,26 @@ jobs:
       - name: Move to evidence branch
         run: |
           cp omega/equity-basis.py /tmp/omega-equity-basis.py
+          cp omega/equity-paper.py /tmp/omega-equity-paper.py
           git fetch origin omega-data
           git checkout -B omega-data origin/omega-data
           cp /tmp/omega-equity-basis.py omega/equity-basis.py
+          cp /tmp/omega-equity-paper.py omega/equity-paper.py
       - name: Check live XYZ L2 against fresh Nasdaq bid and ask
         run: python omega/equity-basis.py
+      - name: Update persistent simulated paper hedges and costs
+        run: python omega/equity-paper.py
       - name: Publish latest evidence without recording hypothetical profits as captured
         run: |
           git config user.name "omega-equity-basis[bot]"
           git config user.email "omega-equity-basis@users.noreply.github.com"
-          git add omega/data/equity-basis.json
+          git add omega/data/equity-basis.json omega/data/equity-paper.json omega/data/equity-paper-state.json
           if git diff --cached --quiet; then
             echo "No update"; exit 0
           fi
           git commit -m "omega: update XYZ and Nasdaq basis entry preflight"
           git reset --hard HEAD
-          git clean -f omega/equity-basis.py
+          git clean -f omega/equity-basis.py omega/equity-paper.py
           for attempt in 1 2 3; do
             git fetch origin omega-data
             git rebase -X theirs origin/omega-data
