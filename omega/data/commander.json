@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-10-18T13:21:14Z",
+  "generatedAt": "2026-10-18T16:36:59Z",
   "mode": "AUTONOMOUS_READ_ONLY_ROUTER",
   "automation": "Scheduled on GitHub Actions. Freshness depends on GitHub scheduler; not per-block HFT.",
   "targetNetEURPerMinute": 50,
@@ -25,7 +25,7 @@
       "action": "wsrUSD/USDC",
       "status": "NEEDS_SWAP_AND_FORK",
       "source": "evm.json",
-      "sourceFresh": true,
+      "sourceFresh": false,
       "reason": "Onchain pre-accrual health check; upper bound excludes swap/slippage/funding and competition",
       "upperBoundUsd": 0.09118,
       "gasEstimateUsd": 0.01724,
@@ -46,71 +46,78 @@
   "sourceStatus": {
     "evm.json": {
       "timestamp": "2026-10-18T13:19:49.560Z",
-      "ageMinutes": 1.4,
-      "status": "FRESH",
+      "ageMinutes": 197.2,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "sky.json": {
       "timestamp": "2026-10-18T13:20:20.703Z",
-      "ageMinutes": 0.9,
-      "status": "FRESH",
+      "ageMinutes": 196.6,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "keepers.json": {
       "timestamp": "2026-10-18T13:20:10.462Z",
-      "ageMinutes": 1.1,
-      "status": "FRESH",
+      "ageMinutes": 196.8,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "beefy-base.json": {
-      "timestamp": "2026-10-18T09:25:14.558Z",
-      "ageMinutes": 236.0,
+      "timestamp": "2026-10-18T13:28:16.569Z",
+      "ageMinutes": 188.7,
       "status": "STALE",
       "maxAgeMinutes": 30
     },
     "bsc-v3.json": {
       "timestamp": "2026-10-18T13:20:08.383Z",
-      "ageMinutes": 1.1,
-      "status": "FRESH",
+      "ageMinutes": 196.8,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "bsc.json": {
       "timestamp": "2026-10-18T13:19:54.178Z",
-      "ageMinutes": 1.3,
-      "status": "FRESH",
+      "ageMinutes": 197.1,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "triangles.json": {
       "timestamp": "2026-10-18T13:20:43.448Z",
-      "ageMinutes": 0.5,
-      "status": "FRESH",
+      "ageMinutes": 196.3,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "solana-keepers.json": {
-      "timestamp": "2026-10-18T09:56:42Z",
-      "ageMinutes": 204.5,
+      "timestamp": "2026-10-18T13:54:54Z",
+      "ageMinutes": 162.1,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "capture-ledger.json": {
-      "timestamp": "2026-10-18T09:36:31Z",
-      "ageMinutes": 224.7,
+      "timestamp": "2026-10-18T13:32:15Z",
+      "ageMinutes": 184.7,
       "status": "STALE",
       "maxAgeMinutes": 25
     },
     "snapshot.json": {
       "timestamp": "2026-10-18T13:19:03Z",
-      "ageMinutes": 2.2,
-      "status": "FRESH",
+      "ageMinutes": 197.9,
+      "status": "STALE",
       "maxAgeMinutes": 20
     }
   },
   "degradedSources": [
+    "evm.json",
+    "sky.json",
+    "keepers.json",
     "beefy-base.json",
+    "bsc-v3.json",
+    "bsc.json",
+    "triangles.json",
     "solana-keepers.json",
-    "capture-ledger.json"
+    "capture-ledger.json",
+    "snapshot.json"
   ],
-  "degradedCount": 3,
+  "degradedCount": 10,
   "ecosystems": {
     "Morpho": {
       "totalUnderwaterAPI": 30,
@@ -132,7 +139,7 @@
     "Solana": {
       "kaminoTransactionsSampled": 100,
       "recentLiquidations": 0,
-      "l3Orders": 57,
+      "l3Orders": 55,
       "l3Crosses": 0
     },
     "BNB": {
