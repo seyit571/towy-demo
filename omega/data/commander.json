@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-10-30T06:05:43Z",
+  "generatedAt": "2026-10-30T12:43:34Z",
   "mode": "AUTONOMOUS_READ_ONLY_ROUTER",
   "automation": "Scheduled on GitHub Actions. Freshness depends on GitHub scheduler; not per-block HFT.",
   "targetNetEURPerMinute": 50,
@@ -18,83 +18,111 @@
     "atomicReceiptsOk": 8.0,
     "walletBalanceVerifications": 8.0
   },
-  "signalQueue": [],
-  "queueTotal": 0,
+  "signalQueue": [
+    {
+      "network": "Ethereum",
+      "mechanism": "Morpho onchain liquidation",
+      "action": "srRoyUSDC/USDC",
+      "status": "NEEDS_SWAP_AND_FORK",
+      "source": "evm.json",
+      "sourceFresh": false,
+      "reason": "Onchain pre-accrual health check; upper bound excludes swap/slippage/funding and competition",
+      "upperBoundUsd": 2.53084,
+      "gasEstimateUsd": 0.73995,
+      "requiresFullAtomicSimulation": true,
+      "walletProfitVerified": false,
+      "proof": {
+        "marketId": "0xacc49fbf58feb1ac971acce68f8adc177c43682d6a7087bbd4991a05cb7a2c67",
+        "borrower": "0x950fD558f47E234A2fDe23B7d61f7Ccdbcb4A86F",
+        "block": 26305367
+      },
+      "rank": 1,
+      "dispatchReady": false
+    }
+  ],
+  "queueTotal": 1,
   "actionableNow": 0,
   "dispatchReady": 0,
   "sourceStatus": {
     "evm.json": {
-      "timestamp": "2026-10-30T05:50:21.687Z",
-      "ageMinutes": 15.4,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:47:17.480Z",
+      "ageMinutes": 56.3,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "sky.json": {
-      "timestamp": "2026-10-30T05:50:38.943Z",
-      "ageMinutes": 15.1,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:47:48.099Z",
+      "ageMinutes": 55.8,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "keepers.json": {
-      "timestamp": "2026-10-30T05:50:33.432Z",
-      "ageMinutes": 15.2,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:47:37.565Z",
+      "ageMinutes": 55.9,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "beefy-base.json": {
-      "timestamp": "2026-10-30T01:46:27.796Z",
-      "ageMinutes": 259.3,
+      "timestamp": "2026-10-30T07:45:00.646Z",
+      "ageMinutes": 298.6,
       "status": "STALE",
       "maxAgeMinutes": 30
     },
     "bsc-v3.json": {
-      "timestamp": "2026-10-30T05:50:32.221Z",
-      "ageMinutes": 15.2,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:47:35.527Z",
+      "ageMinutes": 56.0,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "bsc.json": {
-      "timestamp": "2026-10-30T05:50:24.441Z",
-      "ageMinutes": 15.3,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:47:21.819Z",
+      "ageMinutes": 56.2,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "triangles.json": {
-      "timestamp": "2026-10-30T05:50:51.327Z",
-      "ageMinutes": 14.9,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:48:08.720Z",
+      "ageMinutes": 55.4,
+      "status": "STALE",
       "maxAgeMinutes": 20
     },
     "solana-keepers.json": {
-      "timestamp": "2026-10-30T00:52:58Z",
-      "ageMinutes": 312.8,
+      "timestamp": "2026-10-30T06:48:50Z",
+      "ageMinutes": 354.7,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "capture-ledger.json": {
-      "timestamp": "2026-10-30T02:29:38Z",
-      "ageMinutes": 216.1,
+      "timestamp": "2026-10-30T08:54:31Z",
+      "ageMinutes": 229.1,
       "status": "STALE",
       "maxAgeMinutes": 25
     },
     "snapshot.json": {
-      "timestamp": "2026-10-30T05:49:40Z",
-      "ageMinutes": 16.1,
-      "status": "FRESH",
+      "timestamp": "2026-10-30T11:46:31Z",
+      "ageMinutes": 57.1,
+      "status": "STALE",
       "maxAgeMinutes": 20
     }
   },
   "degradedSources": [
+    "evm.json",
+    "sky.json",
+    "keepers.json",
     "beefy-base.json",
+    "bsc-v3.json",
+    "bsc.json",
+    "triangles.json",
     "solana-keepers.json",
-    "capture-ledger.json"
+    "capture-ledger.json",
+    "snapshot.json"
   ],
-  "degradedCount": 3,
+  "degradedCount": 10,
   "ecosystems": {
     "Morpho": {
-      "totalUnderwaterAPI": 29,
+      "totalUnderwaterAPI": 27,
       "onchainScreened": 12,
-      "grossUpperBoundPositive": 0
+      "grossUpperBoundPositive": 1
     },
     "Sky": {
       "contractsInspected": 46,
@@ -105,17 +133,17 @@
       "positiveAfterGasEstimate": 0
     },
     "BeefyBase": {
-      "liveStrategies": 54,
+      "liveStrategies": 64,
       "positiveAfterSafetyMargin": 0
     },
     "Solana": {
-      "kaminoTransactionsSampled": 48,
+      "kaminoTransactionsSampled": 97,
       "recentLiquidations": 0,
-      "l3Orders": 56,
+      "l3Orders": 54,
       "l3Crosses": 0
     },
     "BNB": {
-      "optimalCycles": 29563,
+      "optimalCycles": 29637,
       "candidateCyclesPositiveAfterAssumptions": 0
     }
   },
