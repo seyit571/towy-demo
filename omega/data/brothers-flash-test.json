@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-11-17T08:35:26Z",
+  "generatedAt": "2026-11-17T17:50:14Z",
   "strategy": "REPLICA_OF_CBB_BROTHERS_NVDA",
   "mode": "SHADOW_UNEXECUTABLE_FLASH_REPLACEMENT",
   "originalPublishedParameters": {
@@ -24,8 +24,8 @@
   },
   "originalSource": "https://blog.hyperindex.org/equity-perps-arbitrage-bot/",
   "flashLoanDocumentation": "https://aave.com/docs/aave-v3/guides/flash-loans",
-  "sourceSnapshotAt": "2026-11-17T08:35:15Z",
-  "sourceQuotesFresh": false,
+  "sourceSnapshotAt": "2026-11-17T17:50:02Z",
+  "sourceQuotesFresh": true,
   "cashAndMarginAvailableUsd": 0,
   "flashLoanCanSubstituteCapital": false,
   "flashLoanPurpose": "intra-transaction EVM liquidity only, not cross-venue open-position funding",
@@ -39,5 +39,103 @@
   "fundingCanAccrueUsingOnlyFlashLoan": false,
   "blocker": "IBKR broker margin and a multi-hour Hyperliquid perp position survive beyond one blockchain transaction. Flash principal must be returned before transaction end.",
   "reasonNoExactProfit": "Missing real future executions, broker fees/permissions, two-leg fills and actual exit prices. Snapshots cannot yield an exact realized trade PnL.",
-  "skipReason": "No fresh Nasdaq quote. Do not reuse old IBKR-equivalent prices for exact market replay."
+  "equityBid": 153.26,
+  "equityAsk": 153.28,
+  "hyperliquidPerpBid": 153.28,
+  "hyperliquidPerpAsk": 153.29,
+  "fairMid": 153.27,
+  "virtualMakerSell": 153.39,
+  "virtualMakerBuy": 153.14,
+  "sellOrderWouldBePostOnly": true,
+  "buyOrderWouldBePostOnly": true,
+  "perpGrowthModeTakerSideFeeBps": 0.9,
+  "perpGrowthModeMakerSideFeeBps": 0.3,
+  "hyperliquidHourlyFunding": 2.73807e-05,
+  "originalHedgeConfigurations": [
+    {
+      "shares": 55,
+      "equityLongCashNeededUsd": 8430.4,
+      "perpMinimumInitialMarginAt20xUsd": 421.8225,
+      "indicativeCombinedFundingRequirementUsd": 8852.2225,
+      "capitalActuallyAvailableUsd": 0,
+      "flashLoanCanRemainAsEquityBrokerCollateral": false,
+      "exactBrokerFillOrFutureExitObserved": false,
+      "scenarioResults": [
+        {
+          "brokerSlippagePerSharePerSideAssumedUsd": 0.01,
+          "grossEntrySpreadUsd": 6.05,
+          "perpEntryMakerPlusExitTakerFeesUsd": 1.01237,
+          "roundtripBrokerMinCommissionUsd": 2.0,
+          "worstCaseFourHourFundingUsd": 0.92398,
+          "brokerEntryAndExitSlippageCostUsd": 1.1,
+          "conditionalNetIfFuturePerfectConvergenceUsd": 1.01364,
+          "isExecutableOrBooked": false
+        },
+        {
+          "brokerSlippagePerSharePerSideAssumedUsd": 0.05,
+          "grossEntrySpreadUsd": 6.05,
+          "perpEntryMakerPlusExitTakerFeesUsd": 1.01237,
+          "roundtripBrokerMinCommissionUsd": 2.0,
+          "worstCaseFourHourFundingUsd": 0.92398,
+          "brokerEntryAndExitSlippageCostUsd": 5.5,
+          "conditionalNetIfFuturePerfectConvergenceUsd": -3.38636,
+          "isExecutableOrBooked": false
+        },
+        {
+          "brokerSlippagePerSharePerSideAssumedUsd": 0.1,
+          "grossEntrySpreadUsd": 6.05,
+          "perpEntryMakerPlusExitTakerFeesUsd": 1.01237,
+          "roundtripBrokerMinCommissionUsd": 2.0,
+          "worstCaseFourHourFundingUsd": 0.92398,
+          "brokerEntryAndExitSlippageCostUsd": 11.0,
+          "conditionalNetIfFuturePerfectConvergenceUsd": -8.88636,
+          "isExecutableOrBooked": false
+        }
+      ]
+    },
+    {
+      "shares": 400,
+      "equityLongCashNeededUsd": 61312.0,
+      "perpMinimumInitialMarginAt20xUsd": 3067.8,
+      "indicativeCombinedFundingRequirementUsd": 64379.8,
+      "capitalActuallyAvailableUsd": 0,
+      "flashLoanCanRemainAsEquityBrokerCollateral": false,
+      "exactBrokerFillOrFutureExitObserved": false,
+      "scenarioResults": [
+        {
+          "brokerSlippagePerSharePerSideAssumedUsd": 0.01,
+          "grossEntrySpreadUsd": 44.0,
+          "perpEntryMakerPlusExitTakerFeesUsd": 7.36272,
+          "roundtripBrokerMinCommissionUsd": 2.0,
+          "worstCaseFourHourFundingUsd": 6.71988,
+          "brokerEntryAndExitSlippageCostUsd": 8.0,
+          "conditionalNetIfFuturePerfectConvergenceUsd": 19.9174,
+          "isExecutableOrBooked": false
+        },
+        {
+          "brokerSlippagePerSharePerSideAssumedUsd": 0.05,
+          "grossEntrySpreadUsd": 44.0,
+          "perpEntryMakerPlusExitTakerFeesUsd": 7.36272,
+          "roundtripBrokerMinCommissionUsd": 2.0,
+          "worstCaseFourHourFundingUsd": 6.71988,
+          "brokerEntryAndExitSlippageCostUsd": 40.0,
+          "conditionalNetIfFuturePerfectConvergenceUsd": -12.0826,
+          "isExecutableOrBooked": false
+        },
+        {
+          "brokerSlippagePerSharePerSideAssumedUsd": 0.1,
+          "grossEntrySpreadUsd": 44.0,
+          "perpEntryMakerPlusExitTakerFeesUsd": 7.36272,
+          "roundtripBrokerMinCommissionUsd": 2.0,
+          "worstCaseFourHourFundingUsd": 6.71988,
+          "brokerEntryAndExitSlippageCostUsd": 80.0,
+          "conditionalNetIfFuturePerfectConvergenceUsd": -52.0826,
+          "isExecutableOrBooked": false
+        }
+      ]
+    }
+  ],
+  "cashOrBrokerCreditNeededBeforeRealExecution": true,
+  "noCapitalMaxBrokerEquityShares": 0,
+  "fourHourMarketRisk": "Projected full convergence at unchanged fair reference is an assumption, not proven exit"
 }
