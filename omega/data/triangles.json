@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-11-20T13:15:32.995Z",
-  "block": 134701479,
+  "timestamp": "2026-11-20T21:16:44.185Z",
+  "block": 134765645,
   "chainId": 56,
   "scope": "9 tokens, 3 venue factories, all V2 2/3 hop stablecoin cycles with analytical sizing optimizer",
   "sizeOptimizer": "closed_form_constant_product_after_fees",
-  "optimalCandidates": 2062,
+  "optimalCandidates": 1932,
   "method": "V2_RESERVE_MODEL_ONLY_NOT_TRANSACTION",
   "venues": [
     "PancakeV2",
@@ -13,8 +13,8 @@
   ],
   "poolsRead": 87,
   "distinctPaths": 1968,
-  "amountsSampled": 29477,
-  "grossPositiveTests": 2168,
+  "amountsSampled": 29384,
+  "grossPositiveTests": 2153,
   "indicativePositivePaths": 0,
   "positiveAfterFullAtomicSimulation": 0,
   "positiveAfterFullAtomicSimulationNetUsd": 0,
@@ -23,7 +23,7 @@
   "top": [
     {
       "route": "USDT→DOGE→USDT",
-      "amount": 0.002531,
+      "amount": 0.007265,
       "steps": [
         {
           "venue": "PancakeV2",
@@ -41,16 +41,43 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": 0.000048097240173256,
-      "flashPremiumAssumedUsd": 0.0000022779,
+      "grossUsdAssumingPeg": 0.000395838776615892,
+      "flashPremiumAssumedUsd": 0.000006538499999999999,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 0.000002579097240173256,
-      "netIndicativeUsd": -0.03495675975706692,
-      "block": 134701479
+      "competitionStressUsd": 0.000007660838776615892,
+      "netIndicativeUsd": -0.03461836056216073,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→DOGE→USDT",
+      "amount": 0.005036,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "DOGE",
+          "pool": "0x0fA119e6a12e3540c2412f9EdA0221Ffd16a7934",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "DOGE",
+          "to": "USDT",
+          "pool": "0xC5fEaF5cA55b406697f32b4a2811d2670582B821",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": 0.000179328085242091,
+      "flashPremiumAssumedUsd": 0.0000045324,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 0.000005215328085242091,
+      "netIndicativeUsd": -0.034830419642843155,
+      "block": 134765645
     },
     {
       "route": "USDT→CAKE→USDT",
-      "amount": 0.002979,
+      "amount": 0.002277,
       "steps": [
         {
           "venue": "PancakeV2",
@@ -68,39 +95,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": 0.000047602709961724,
-      "flashPremiumAssumedUsd": 0.0000026810999999999996,
+      "grossUsdAssumingPeg": 0.000029508831394027,
+      "flashPremiumAssumedUsd": 0.0000020493,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 0.000003026602709961724,
-      "netIndicativeUsd": -0.03495810499274824,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→CAKE→USDT",
-      "amount": 0.00708,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDT",
-          "to": "CAKE",
-          "pool": "0xA39Af17CE4a8eb807E076805Da1e2B8EA7D0755b",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "CAKE",
-          "to": "USDT",
-          "pool": "0x5032A2fB29B72ad8dAcC71429A2a81DF637433bb",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": 0.000049012858333104,
-      "flashPremiumAssumedUsd": 0.000006372,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 0.000007129012858333104,
-      "netIndicativeUsd": -0.034964488154525235,
-      "block": 134701479
+      "competitionStressUsd": 0.0000023065088313940273,
+      "netIndicativeUsd": -0.03497484697743737,
+      "block": 134765645
     },
     {
       "route": "USDT→DOGE→USDT",
@@ -127,38 +127,11 @@
       "gasAssumedUsd": 0.035,
       "competitionStressUsd": 0.000001116735065136887,
       "netIndicativeUsd": -0.034984370769928254,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→BTCB→USDC",
-      "amount": 0.001658,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "BTCB",
-          "pool": "0x2dF244535624761f6fCc381CaE3e9b903429d9Ff",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BTCB",
-          "to": "USDC",
-          "pool": "0xA8A42a8d7d44b64eeE0Da73465dFbdD44Af24617",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": 0.000012889656639932,
-      "flashPremiumAssumedUsd": 0.0000014921999999999999,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 0.000001670889656639932,
-      "netIndicativeUsd": -0.034990273433016715,
-      "block": 134701479
+      "block": 134765645
     },
     {
       "route": "USDT→CAKE→USDT",
-      "amount": 0.001127,
+      "amount": 0.001318,
       "steps": [
         {
           "venue": "BiswapV2",
@@ -176,97 +149,16 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": 0.000008939328359203,
-      "flashPremiumAssumedUsd": 0.0000010143,
+      "grossUsdAssumingPeg": 0.00001213736785299,
+      "flashPremiumAssumedUsd": 0.0000011862,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 0.000001135939328359203,
-      "netIndicativeUsd": -0.03499321091096916,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→ETH→USDC",
-      "amount": 0.000017,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "ETH",
-          "pool": "0xEa26B78255Df2bBC31C1eBf60010D78670185bD0",
-          "feeBps": 25
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "ETH",
-          "to": "USDC",
-          "pool": "0x2a91097fB2ff5336c7074bdf5fc2C80B432068eA",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": 6.79992122704e-7,
-      "flashPremiumAssumedUsd": 1.5299999999999998e-8,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 1.7679992122704e-8,
-      "netIndicativeUsd": -0.03499935298786942,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→ETH→USDC",
-      "amount": 0.000209,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "ETH",
-          "pool": "0xEa26B78255Df2bBC31C1eBf60010D78670185bD0",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "ETH",
-          "to": "USDC",
-          "pool": "0x49F764eE3Ea8A18901C3f2662B0B76422eD57d74",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": 0.0000010296623175,
-      "flashPremiumAssumedUsd": 1.881e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 2.100296623175e-7,
-      "netIndicativeUsd": -0.03499936846734482,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→ETH→USDC",
-      "amount": 0.000014,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDC",
-          "to": "ETH",
-          "pool": "0x49F764eE3Ea8A18901C3f2662B0B76422eD57d74",
-          "feeBps": 20
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "ETH",
-          "to": "USDC",
-          "pool": "0x2a91097fB2ff5336c7074bdf5fc2C80B432068eA",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": 4.86970141562e-7,
-      "flashPremiumAssumedUsd": 1.2599999999999999e-8,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 1.4486970141562e-8,
-      "netIndicativeUsd": -0.034999540116828584,
-      "block": 134701479
+      "competitionStressUsd": 0.00000133013736785299,
+      "netIndicativeUsd": -0.03499037896951487,
+      "block": 134765645
     },
     {
       "route": "USDT→BSW→USDT",
-      "amount": 0.00004,
+      "amount": 0.00013,
       "steps": [
         {
           "venue": "BiswapV2",
@@ -284,16 +176,97 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": 4.00714769237e-7,
-      "flashPremiumAssumedUsd": 3.6000000000000005e-8,
+      "grossUsdAssumingPeg": 0.000003903684351781,
+      "flashPremiumAssumedUsd": 1.1699999999999999e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 4.0400714769237e-8,
-      "netIndicativeUsd": -0.03499967568594553,
-      "block": 134701479
+      "competitionStressUsd": 1.3390368435178099e-7,
+      "netIndicativeUsd": -0.03499634721933257,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→BTCB→USDC",
+      "amount": 0.000985,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDC",
+          "to": "BTCB",
+          "pool": "0xA8A42a8d7d44b64eeE0Da73465dFbdD44Af24617",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "BTCB",
+          "to": "USDC",
+          "pool": "0x2dF244535624761f6fCc381CaE3e9b903429d9Ff",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": 0.00000540042097435,
+      "flashPremiumAssumedUsd": 8.865e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.9040042097435e-7,
+      "netIndicativeUsd": -0.03499647647944663,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→ETH→USDC",
+      "amount": 0.000033,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "ETH",
+          "pool": "0xEa26B78255Df2bBC31C1eBf60010D78670185bD0",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "ETH",
+          "to": "USDC",
+          "pool": "0x2a91097fB2ff5336c7074bdf5fc2C80B432068eA",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": 0.000002763932128865,
+      "flashPremiumAssumedUsd": 2.97e-8,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 3.5763932128865005e-8,
+      "netIndicativeUsd": -0.03499730153180327,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→ETH→USDC",
+      "amount": 0.000032,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDC",
+          "to": "ETH",
+          "pool": "0x49F764eE3Ea8A18901C3f2662B0B76422eD57d74",
+          "feeBps": 20
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "ETH",
+          "to": "USDC",
+          "pool": "0x2a91097fB2ff5336c7074bdf5fc2C80B432068eA",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": 0.000002583141631051,
+      "flashPremiumAssumedUsd": 2.8799999999999996e-8,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 3.4583141631051e-8,
+      "netIndicativeUsd": -0.03499748024151058,
+      "block": 134765645
     },
     {
       "route": "USDT→BTCB→USDT",
-      "amount": 0.000016,
+      "amount": 0.000041,
       "steps": [
         {
           "venue": "BiswapV2",
@@ -311,16 +284,16 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": 3.1108263294e-7,
-      "flashPremiumAssumedUsd": 1.4399999999999998e-8,
+      "grossUsdAssumingPeg": 0.000001917567643088,
+      "flashPremiumAssumedUsd": 3.69e-8,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 1.6311082632940002e-8,
-      "netIndicativeUsd": -0.034999719628449694,
-      "block": 134701479
+      "competitionStressUsd": 4.2917567643088e-8,
+      "netIndicativeUsd": -0.03499816224992456,
+      "block": 134765645
     },
     {
       "route": "USDT→BTCB→USDT",
-      "amount": 0.000016,
+      "amount": 0.00004,
       "steps": [
         {
           "venue": "PancakeV2",
@@ -338,66 +311,39 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": 3.04490626667e-7,
-      "flashPremiumAssumedUsd": 1.4399999999999998e-8,
+      "grossUsdAssumingPeg": 0.000001892711710009,
+      "flashPremiumAssumedUsd": 3.6000000000000005e-8,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 1.6304490626667002e-8,
-      "netIndicativeUsd": -0.03499972621386396,
-      "block": 134701479
+      "competitionStressUsd": 4.1892711710009004e-8,
+      "netIndicativeUsd": -0.0349981851810017,
+      "block": 134765645
     },
     {
-      "route": "USDC→WBNB→USDC",
-      "amount": 0.001,
+      "route": "USDT→CAKE→USDT",
+      "amount": 0.001042,
       "steps": [
         {
           "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "WBNB",
-          "pool": "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b",
+          "from": "USDT",
+          "to": "CAKE",
+          "pool": "0xA39Af17CE4a8eb807E076805Da1e2B8EA7D0755b",
           "feeBps": 25
         },
         {
-          "venue": "ApeSwap",
-          "from": "WBNB",
-          "to": "USDC",
-          "pool": "0xd00302278693E5084e2B06A996d1D14aE3467fE6",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000002318411872232,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.97681588127768e-7,
-      "netIndicativeUsd": -0.03500421609346036,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→WBNB→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
           "venue": "BiswapV2",
-          "from": "USDC",
-          "to": "WBNB",
-          "pool": "0x06Cd679121Ec37B0A2FD673D4976B09d81791856",
+          "from": "CAKE",
+          "to": "USDT",
+          "pool": "0x5032A2fB29B72ad8dAcC71429A2a81DF637433bb",
           "feeBps": 20
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "WBNB",
-          "to": "USDC",
-          "pool": "0xd00302278693E5084e2B06A996d1D14aE3467fE6",
-          "feeBps": 30
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000002646573284564,
-      "flashPremiumAssumedUsd": 9e-7,
+      "grossUsdAssumingPeg": 0.000002773248549368,
+      "flashPremiumAssumedUsd": 9.377999999999999e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.97353426715436e-7,
-      "netIndicativeUsd": -0.03500454392671128,
-      "block": 134701479
+      "competitionStressUsd": 0.000001044773248549368,
+      "netIndicativeUsd": -0.03499920932469918,
+      "block": 134765645
     },
     {
       "route": "USDC→BUSD→USDC",
@@ -424,34 +370,7 @@
       "gasAssumedUsd": 0.035,
       "competitionStressUsd": 9.971575003065621e-7,
       "netIndicativeUsd": -0.03500473965719375,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→ETH→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "ETH",
-          "pool": "0x63b30de1A998e9E64FD58A21F68D323B9BcD8F85",
-          "feeBps": 20
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "ETH",
-          "to": "USDT",
-          "pool": "0xF5d1FB15a517Bc9F7568751c6a42545CFf28465b",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000002896559160477,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.971034408395229e-7,
-      "netIndicativeUsd": -0.03500479366260132,
-      "block": 134701479
+      "block": 134765645
     },
     {
       "route": "USDC→BUSD→USDC",
@@ -473,498 +392,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000003027010990655,
+      "grossUsdAssumingPeg": -0.000003017044375532,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.96972989009345e-7,
-      "netIndicativeUsd": -0.03500492398397967,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→USDT→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "USDT",
-          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "USDC",
-          "pool": "0x1483767E665B3591677Fd49F724bf7430C18Bf83",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.00000305374668758,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.9694625331242e-7,
-      "netIndicativeUsd": -0.0350049506929409,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→USDC→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "USDC",
-          "pool": "0x1483767E665B3591677Fd49F724bf7430C18Bf83",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "USDT",
-          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000003053746688413,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.969462533115871e-7,
-      "netIndicativeUsd": -0.03500495069294173,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→ETH→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDT",
-          "to": "ETH",
-          "pool": "0x531FEbfeb9a61D948c384ACFBe6dCc51057AEa7e",
-          "feeBps": 25
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "ETH",
-          "to": "USDT",
-          "pool": "0xF5d1FB15a517Bc9F7568751c6a42545CFf28465b",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000003656934202331,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.96343065797669e-7,
-      "netIndicativeUsd": -0.035005553277268134,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→WBNB→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "WBNB",
-          "pool": "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "WBNB",
-          "to": "USDC",
-          "pool": "0x06Cd679121Ec37B0A2FD673D4976B09d81791856",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000003668369127359,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.963316308726411e-7,
-      "netIndicativeUsd": -0.03500556470075823,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→WBNB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "WBNB",
-          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "WBNB",
-          "to": "USDT",
-          "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000003893524461601,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.96106475538399e-7,
-      "netIndicativeUsd": -0.035005789630937145,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→ETH→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "ETH",
-          "pool": "0x63b30de1A998e9E64FD58A21F68D323B9BcD8F85",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "ETH",
-          "to": "USDT",
-          "pool": "0x531FEbfeb9a61D948c384ACFBe6dCc51057AEa7e",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004234398161333,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.957656018386671e-7,
-      "netIndicativeUsd": -0.03500613016376317,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BUSD→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "BUSD",
-          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.00000440364784622,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.9559635215378e-7,
-      "netIndicativeUsd": -0.035006299244198374,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BTCB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDT",
-          "to": "BTCB",
-          "pool": "0x3F803EC2b816Ea7F06EC76aA2B6f2532F9892d62",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BTCB",
-          "to": "USDT",
-          "pool": "0xa987f0b7098585c735cD943ee07544a84e923d1D",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004405336225802,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.95594663774198e-7,
-      "netIndicativeUsd": -0.03500630093088958,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BTCB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "BTCB",
-          "pool": "0xa987f0b7098585c735cD943ee07544a84e923d1D",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "BTCB",
-          "to": "USDT",
-          "pool": "0x3F803EC2b816Ea7F06EC76aA2B6f2532F9892d62",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004584719094675,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.954152809053249e-7,
-      "netIndicativeUsd": -0.03500648013437558,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BUSD→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDT",
-          "to": "BUSD",
-          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004586354483901,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.95413645516099e-7,
-      "netIndicativeUsd": -0.03500648176812942,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→ETH→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDT",
-          "to": "ETH",
-          "pool": "0x531FEbfeb9a61D948c384ACFBe6dCc51057AEa7e",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "ETH",
-          "to": "USDT",
-          "pool": "0x63b30de1A998e9E64FD58A21F68D323B9BcD8F85",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004755576789141,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.95244423210859e-7,
-      "netIndicativeUsd": -0.035006650821212355,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→WBNB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "WBNB",
-          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
-          "feeBps": 20
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "WBNB",
-          "to": "USDT",
-          "pool": "0x83C5b5b309EE8E232Fe9dB217d394e262a71bCC0",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004762370562321,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.952376294376791e-7,
-      "netIndicativeUsd": -0.035006657608191764,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→BUSD→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDC",
-          "to": "BUSD",
-          "pool": "0xC087C78AbaC4A0E900a327444193dBF9BA69058E",
-          "feeBps": 30
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "BUSD",
-          "to": "USDC",
-          "pool": "0x2354ef4DF11afacb85a5C7f98B624072ECcddbB1",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.00000480958257223,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.951904174277702e-7,
-      "netIndicativeUsd": -0.035006704772989665,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BUSD→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "BUSD",
-          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
-          "feeBps": 20
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000004828791299946,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.95171208700054e-7,
-      "netIndicativeUsd": -0.035006723962508646,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→WBNB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDT",
-          "to": "WBNB",
-          "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
-          "feeBps": 25
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "WBNB",
-          "to": "USDT",
-          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.00000509612370479,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.9490387629521e-7,
-      "netIndicativeUsd": -0.03500699102758109,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→WBNB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "WBNB",
-          "pool": "0x83C5b5b309EE8E232Fe9dB217d394e262a71bCC0",
-          "feeBps": 30
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "WBNB",
-          "to": "USDT",
-          "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005124345143934,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94875654856066e-7,
-      "netIndicativeUsd": -0.035007019220798796,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BUSD→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "BUSD",
-          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
-          "feeBps": 30
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005159213810106,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.948407861898941e-7,
-      "netIndicativeUsd": -0.035007054054596295,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→WBNB→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "WBNB",
-          "pool": "0x83C5b5b309EE8E232Fe9dB217d394e262a71bCC0",
-          "feeBps": 30
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "WBNB",
-          "to": "USDT",
-          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005226705269617,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.947732947303828e-7,
-      "netIndicativeUsd": -0.03500712147856435,
-      "block": 134701479
+      "competitionStressUsd": 9.96982955624468e-7,
+      "netIndicativeUsd": -0.035004914027331156,
+      "block": 134765645
     },
     {
       "route": "USDC→WBNB→USDC",
@@ -986,50 +419,77 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005321050434757,
+      "grossUsdAssumingPeg": -0.000003707600139827,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94678949565243e-7,
-      "netIndicativeUsd": -0.035007215729384325,
-      "block": 134701479
+      "competitionStressUsd": 9.96292399860173e-7,
+      "netIndicativeUsd": -0.03500560389253969,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→WBNB→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDC",
+          "to": "WBNB",
+          "pool": "0x06Cd679121Ec37B0A2FD673D4976B09d81791856",
+          "feeBps": 20
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "WBNB",
+          "to": "USDC",
+          "pool": "0xd00302278693E5084e2B06A996d1D14aE3467fE6",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000003998157628945,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.960018423710548e-7,
+      "netIndicativeUsd": -0.03500589415947132,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→ETH→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "ETH",
+          "pool": "0x63b30de1A998e9E64FD58A21F68D323B9BcD8F85",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "ETH",
+          "to": "USDT",
+          "pool": "0x531FEbfeb9a61D948c384ACFBe6dCc51057AEa7e",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004178845878364,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95821154121636e-7,
+      "netIndicativeUsd": -0.03500607466703249,
+      "block": 134765645
     },
     {
       "route": "USDT→BUSD→USDT",
       "amount": 0.001,
       "steps": [
         {
-          "venue": "PancakeV2",
+          "venue": "BiswapV2",
           "from": "USDT",
           "to": "BUSD",
-          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
-          "feeBps": 25
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005418642833673,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94581357166327e-7,
-      "netIndicativeUsd": -0.035007313224190845,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BUSD→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "BUSD",
-          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
-          "feeBps": 30
+          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
+          "feeBps": 20
         },
         {
           "venue": "PancakeV2",
@@ -1040,23 +500,158 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005566376246811,
+      "grossUsdAssumingPeg": -0.000004188337199952,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94433623753189e-7,
-      "netIndicativeUsd": -0.035007460809870564,
-      "block": 134701479
+      "competitionStressUsd": 9.95811662800048e-7,
+      "netIndicativeUsd": -0.035006084148862755,
+      "block": 134765645
     },
     {
       "route": "USDT→WBNB→USDT",
       "amount": 0.001,
       "steps": [
         {
-          "venue": "PancakeV2",
+          "venue": "BiswapV2",
           "from": "USDT",
           "to": "WBNB",
+          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "WBNB",
+          "to": "USDT",
           "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
           "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004200228087038,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.957997719129622e-7,
+      "netIndicativeUsd": -0.03500609602785895,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→USDT→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "USDT",
+          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "USDC",
+          "pool": "0x1483767E665B3591677Fd49F724bf7430C18Bf83",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004423102593263,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95576897406737e-7,
+      "netIndicativeUsd": -0.035006318679490674,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→USDC→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "USDC",
+          "pool": "0x1483767E665B3591677Fd49F724bf7430C18Bf83",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "USDT",
+          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004423102599792,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95576897400208e-7,
+      "netIndicativeUsd": -0.035006318679497196,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BTCB→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "BTCB",
+          "pool": "0xa987f0b7098585c735cD943ee07544a84e923d1D",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "BTCB",
+          "to": "USDT",
+          "pool": "0x3F803EC2b816Ea7F06EC76aA2B6f2532F9892d62",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004431992252512,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95568007747488e-7,
+      "netIndicativeUsd": -0.035006327560260266,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→ETH→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "ETH",
+          "pool": "0x63b30de1A998e9E64FD58A21F68D323B9BcD8F85",
+          "feeBps": 20
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "ETH",
+          "to": "USDT",
+          "pool": "0xF5d1FB15a517Bc9F7568751c6a42545CFf28465b",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004433009753471,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.955669902465289e-7,
+      "netIndicativeUsd": -0.03500632857674372,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→WBNB→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "WBNB",
+          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
+          "feeBps": 20
         },
         {
           "venue": "ApeSwap",
@@ -1067,12 +662,39 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005861635962558,
+      "grossUsdAssumingPeg": -0.000004518308516515,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94138364037442e-7,
-      "netIndicativeUsd": -0.035007755774326604,
-      "block": 134701479
+      "competitionStressUsd": 9.95481691483485e-7,
+      "netIndicativeUsd": -0.035006413790208,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BTCB→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "BTCB",
+          "pool": "0x3F803EC2b816Ea7F06EC76aA2B6f2532F9892d62",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BTCB",
+          "to": "USDT",
+          "pool": "0xa987f0b7098585c735cD943ee07544a84e923d1D",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004558068885383,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.954419311146169e-7,
+      "netIndicativeUsd": -0.0350064535108165,
+      "block": 134765645
     },
     {
       "route": "USDT→USDC→USDT",
@@ -1094,12 +716,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005934190869204,
+      "grossUsdAssumingPeg": -0.000004566913700471,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94065809130796e-7,
-      "netIndicativeUsd": -0.03500782825667834,
-      "block": 134701479
+      "competitionStressUsd": 9.95433086299529e-7,
+      "netIndicativeUsd": -0.035006462346786775,
+      "block": 134765645
     },
     {
       "route": "USDC→USDT→USDC",
@@ -1121,93 +743,336 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000005934190907096,
+      "grossUsdAssumingPeg": -0.00000456691373232,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.94065809092904e-7,
-      "netIndicativeUsd": -0.03500782825671619,
-      "block": 134701479
+      "competitionStressUsd": 9.954330862676802e-7,
+      "netIndicativeUsd": -0.03500646234681859,
+      "block": 134765645
     },
     {
-      "route": "USDC→BUSD→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "BUSD",
-          "pool": "0x2354ef4DF11afacb85a5C7f98B624072ECcddbB1",
-          "feeBps": 25
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "BUSD",
-          "to": "USDC",
-          "pool": "0xC087C78AbaC4A0E900a327444193dBF9BA69058E",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000006174987679475,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.938250123205251e-7,
-      "netIndicativeUsd": -0.0350080688126918,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→BUSD→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDC",
-          "to": "BUSD",
-          "pool": "0x6f2829B3061211C24a34583647e222f72Ff2e962",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "BUSD",
-          "to": "USDC",
-          "pool": "0x2354ef4DF11afacb85a5C7f98B624072ECcddbB1",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000006229982596969,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.93770017403031e-7,
-      "netIndicativeUsd": -0.035008123752614376,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→DOGE→USDT",
+      "route": "USDT→WBNB→USDT",
       "amount": 0.001,
       "steps": [
         {
           "venue": "PancakeV2",
           "from": "USDT",
-          "to": "DOGE",
-          "pool": "0x0fA119e6a12e3540c2412f9EdA0221Ffd16a7934",
+          "to": "WBNB",
+          "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
           "feeBps": 25
         },
         {
-          "venue": "ApeSwap",
-          "from": "DOGE",
+          "venue": "BiswapV2",
+          "from": "WBNB",
           "to": "USDT",
-          "pool": "0xC5fEaF5cA55b406697f32b4a2811d2670582B821",
+          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004789696365575,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95210303634425e-7,
+      "netIndicativeUsd": -0.03500668490666921,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BUSD→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "BUSD",
+          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BUSD",
+          "to": "USDT",
+          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004801579070495,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.951984209295052e-7,
+      "netIndicativeUsd": -0.03500669677749143,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→ETH→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "ETH",
+          "pool": "0x531FEbfeb9a61D948c384ACFBe6dCc51057AEa7e",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "ETH",
+          "to": "USDT",
+          "pool": "0x63b30de1A998e9E64FD58A21F68D323B9BcD8F85",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004811098675994,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95188901324006e-7,
+      "netIndicativeUsd": -0.03500670628757732,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→BUSD→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDC",
+          "to": "BUSD",
+          "pool": "0xC087C78AbaC4A0E900a327444193dBF9BA69058E",
+          "feeBps": 30
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "BUSD",
+          "to": "USDC",
+          "pool": "0x2354ef4DF11afacb85a5C7f98B624072ECcddbB1",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004819532614303,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.95180467385697e-7,
+      "netIndicativeUsd": -0.03500671471308169,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BUSD→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "BUSD",
+          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
+          "feeBps": 30
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BUSD",
+          "to": "USDT",
+          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000004987163207168,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.950128367928321e-7,
+      "netIndicativeUsd": -0.03500688217604396,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BUSD→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "BUSD",
+          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
+          "feeBps": 20
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "BUSD",
+          "to": "USDT",
+          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
           "feeBps": 30
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000006569908529813,
+      "grossUsdAssumingPeg": -0.00000500086928561,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.93430091470187e-7,
-      "netIndicativeUsd": -0.03500846333862128,
-      "block": 134701479
+      "competitionStressUsd": 9.9499913071439e-7,
+      "netIndicativeUsd": -0.03500689586841633,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BUSD→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "BUSD",
+          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
+          "feeBps": 30
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "BUSD",
+          "to": "USDT",
+          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005179299675681,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.948207003243189e-7,
+      "netIndicativeUsd": -0.03500707412037601,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→ETH→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "ETH",
+          "pool": "0x531FEbfeb9a61D948c384ACFBe6dCc51057AEa7e",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "ETH",
+          "to": "USDT",
+          "pool": "0xF5d1FB15a517Bc9F7568751c6a42545CFf28465b",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005247708797724,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.947522912022762e-7,
+      "netIndicativeUsd": -0.035007142461088936,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→WBNB→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "WBNB",
+          "pool": "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "WBNB",
+          "to": "USDC",
+          "pool": "0x06Cd679121Ec37B0A2FD673D4976B09d81791856",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.00000528188620645,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.9471811379355e-7,
+      "netIndicativeUsd": -0.03500717660432025,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→WBNB→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "WBNB",
+          "pool": "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "WBNB",
+          "to": "USDC",
+          "pool": "0xd00302278693E5084e2B06A996d1D14aE3467fE6",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.00000528393345687,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.9471606654313e-7,
+      "netIndicativeUsd": -0.035007178649523414,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→WBNB→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "WBNB",
+          "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "WBNB",
+          "to": "USDT",
+          "pool": "0x83C5b5b309EE8E232Fe9dB217d394e262a71bCC0",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005311576648422,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.94688423351578e-7,
+      "netIndicativeUsd": -0.035007206265071776,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→WBNB→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "WBNB",
+          "pool": "0x83C5b5b309EE8E232Fe9dB217d394e262a71bCC0",
+          "feeBps": 30
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "WBNB",
+          "to": "USDT",
+          "pool": "0x8840C6252e2e86e545deFb6da98B2a0E26d8C1BA",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005470628605093,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.945293713949072e-7,
+      "netIndicativeUsd": -0.03500736515797649,
+      "block": 134765645
     },
     {
       "route": "USDT→ETH→USDT",
@@ -1229,12 +1094,66 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000007093982890149,
+      "grossUsdAssumingPeg": -0.000005561926566058,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.92906017109851e-7,
-      "netIndicativeUsd": -0.03500898688890726,
-      "block": 134701479
+      "competitionStressUsd": 9.944380734339419e-7,
+      "netIndicativeUsd": -0.0350074563646395,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→WBNB→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "WBNB",
+          "pool": "0x83C5b5b309EE8E232Fe9dB217d394e262a71bCC0",
+          "feeBps": 30
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "WBNB",
+          "to": "USDT",
+          "pool": "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005674542774321,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.94325457225679e-7,
+      "netIndicativeUsd": -0.03500756886823155,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→WBNB→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDC",
+          "to": "WBNB",
+          "pool": "0xd00302278693E5084e2B06A996d1D14aE3467fE6",
+          "feeBps": 30
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "WBNB",
+          "to": "USDC",
+          "pool": "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005723911215979,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.942760887840211e-7,
+      "netIndicativeUsd": -0.035007618187304766,
+      "block": 134765645
     },
     {
       "route": "USDT→ETH→USDT",
@@ -1256,12 +1175,39 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000007331602147692,
+      "grossUsdAssumingPeg": -0.000005744445955777,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.92668397852308e-7,
-      "netIndicativeUsd": -0.03500922427054554,
-      "block": 134701479
+      "competitionStressUsd": 9.94255554044223e-7,
+      "netIndicativeUsd": -0.03500763870150983,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BUSD→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "BUSD",
+          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "BUSD",
+          "to": "USDT",
+          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000005805626273974,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.94194373726026e-7,
+      "netIndicativeUsd": -0.0350076998206477,
+      "block": 134765645
     },
     {
       "route": "USDC→WBNB→USDC",
@@ -1283,12 +1229,66 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000007358138945655,
+      "grossUsdAssumingPeg": -0.000006011820143145,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.926418610543452e-7,
-      "netIndicativeUsd": -0.03500925078080672,
-      "block": 134701479
+      "competitionStressUsd": 9.93988179856855e-7,
+      "netIndicativeUsd": -0.035007905808323005,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→BUSD→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "BUSD",
+          "pool": "0x2354ef4DF11afacb85a5C7f98B624072ECcddbB1",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "BUSD",
+          "to": "USDC",
+          "pool": "0xC087C78AbaC4A0E900a327444193dBF9BA69058E",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000006165051189727,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.93834948810273e-7,
+      "netIndicativeUsd": -0.03500805888613854,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→BUSD→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDC",
+          "to": "BUSD",
+          "pool": "0x6f2829B3061211C24a34583647e222f72Ff2e962",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "BUSD",
+          "to": "USDC",
+          "pool": "0x2354ef4DF11afacb85a5C7f98B624072ECcddbB1",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.0000062399184377,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.937600815623001e-7,
+      "netIndicativeUsd": -0.035008133678519265,
+      "block": 134765645
     },
     {
       "route": "USDC→BUSD→USDC",
@@ -1315,61 +1315,7 @@
       "gasAssumedUsd": 0.035,
       "competitionStressUsd": 9.92590252152968e-7,
       "netIndicativeUsd": -0.03500930233809919,
-      "block": 134701479
-    },
-    {
-      "route": "USDC→USDT→USDC",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "USDT",
-          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
-          "feeBps": 25
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "USDC",
-          "pool": "0xcd1e0B85B72EA3Ecdf8A4B79c7bf9bCFf5113829",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000007712431595865,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.922875684041351e-7,
-      "netIndicativeUsd": -0.035009604719164276,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→USDC→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "USDC",
-          "pool": "0xcd1e0B85B72EA3Ecdf8A4B79c7bf9bCFf5113829",
-          "feeBps": 30
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "USDC",
-          "to": "USDT",
-          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.00000771448002713,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.9228551997287e-7,
-      "netIndicativeUsd": -0.03500960676554711,
-      "block": 134701479
+      "block": 134765645
     },
     {
       "route": "USDC→USDT→USDC",
@@ -1391,12 +1337,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000008646678470738,
+      "grossUsdAssumingPeg": -0.000008059573246196,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.913533215292619e-7,
-      "netIndicativeUsd": -0.03501053803179227,
-      "block": 134701479
+      "competitionStressUsd": 9.91940426753804e-7,
+      "netIndicativeUsd": -0.035009951513672956,
+      "block": 134765645
     },
     {
       "route": "USDT→USDC→USDT",
@@ -1418,39 +1364,66 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000008652346211071,
+      "grossUsdAssumingPeg": -0.000008062967284108,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.913476537889291e-7,
-      "netIndicativeUsd": -0.03501054369386486,
-      "block": 134701479
+      "competitionStressUsd": 9.919370327158922e-7,
+      "netIndicativeUsd": -0.035009954904316826,
+      "block": 134765645
     },
     {
-      "route": "USDC→WBNB→USDC",
+      "route": "USDC→USDT→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "USDT",
+          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
+          "feeBps": 25
+        },
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "USDC",
+          "pool": "0xcd1e0B85B72EA3Ecdf8A4B79c7bf9bCFf5113829",
+          "feeBps": 30
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000008483272696644,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.915167273033561e-7,
+      "netIndicativeUsd": -0.035010374789423954,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→USDC→USDT",
       "amount": 0.001,
       "steps": [
         {
           "venue": "ApeSwap",
-          "from": "USDC",
-          "to": "WBNB",
-          "pool": "0xd00302278693E5084e2B06A996d1D14aE3467fE6",
+          "from": "USDT",
+          "to": "USDC",
+          "pool": "0xcd1e0B85B72EA3Ecdf8A4B79c7bf9bCFf5113829",
           "feeBps": 30
         },
         {
           "venue": "PancakeV2",
-          "from": "WBNB",
-          "to": "USDC",
-          "pool": "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b",
+          "from": "USDC",
+          "to": "USDT",
+          "pool": "0xEc6557348085Aa57C72514D67070dC863C0a5A8c",
           "feeBps": 25
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000008678626904275,
+      "grossUsdAssumingPeg": -0.000008488307933974,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.91321373095725e-7,
-      "netIndicativeUsd": -0.03501056994827737,
-      "block": 134701479
+      "competitionStressUsd": 9.91511692066026e-7,
+      "netIndicativeUsd": -0.03501037981962605,
+      "block": 134765645
     },
     {
       "route": "USDT→USDC→USDT",
@@ -1472,12 +1445,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000009022413129462,
+      "grossUsdAssumingPeg": -0.000009608951482662,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.90977586870538e-7,
-      "netIndicativeUsd": -0.03501091339071634,
-      "block": 134701479
+      "competitionStressUsd": 9.903910485173379e-7,
+      "netIndicativeUsd": -0.035011499342531185,
+      "block": 134765645
     },
     {
       "route": "USDC→USDT→USDC",
@@ -1499,12 +1472,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000009032077664057,
+      "grossUsdAssumingPeg": -0.000009620880825219,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.90967922335943e-7,
-      "netIndicativeUsd": -0.0350109230455864,
-      "block": 134701479
+      "competitionStressUsd": 9.90379119174781e-7,
+      "netIndicativeUsd": -0.035011511259944395,
+      "block": 134765645
     },
     {
       "route": "USDT→USDC→USDT",
@@ -1526,12 +1499,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000010943378675927,
+      "grossUsdAssumingPeg": -0.00001017444203547,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.89056621324073e-7,
-      "netIndicativeUsd": -0.03501283243529726,
-      "block": 134701479
+      "competitionStressUsd": 9.8982555796453e-7,
+      "netIndicativeUsd": -0.035012064267593436,
+      "block": 134765645
     },
     {
       "route": "USDC→USDT→USDC",
@@ -1553,39 +1526,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000010960450649789,
+      "grossUsdAssumingPeg": -0.000010188552405388,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.89039549350211e-7,
-      "netIndicativeUsd": -0.035012849490199144,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→DOGE→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "DOGE",
-          "pool": "0xC5fEaF5cA55b406697f32b4a2811d2670582B821",
-          "feeBps": 30
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "DOGE",
-          "to": "USDT",
-          "pool": "0x0fA119e6a12e3540c2412f9EdA0221Ffd16a7934",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000016704902638283,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.83295097361717e-7,
-      "netIndicativeUsd": -0.035018588197735644,
-      "block": 134701479
+      "competitionStressUsd": 9.89811447594612e-7,
+      "netIndicativeUsd": -0.035012078363852984,
+      "block": 134765645
     },
     {
       "route": "USDT→CAKE→USDT",
@@ -1607,66 +1553,66 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000021374733762713,
+      "grossUsdAssumingPeg": -0.000013062058621186,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.786252662372872e-7,
-      "netIndicativeUsd": -0.03502325335902896,
-      "block": 134701479
+      "competitionStressUsd": 9.869379413788142e-7,
+      "netIndicativeUsd": -0.035014948996562566,
+      "block": 134765645
+    },
+    {
+      "route": "USDC→ETH→USDC",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDC",
+          "to": "ETH",
+          "pool": "0xEa26B78255Df2bBC31C1eBf60010D78670185bD0",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "ETH",
+          "to": "USDC",
+          "pool": "0x49F764eE3Ea8A18901C3f2662B0B76422eD57d74",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000013686058359446,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.86313941640554e-7,
+      "netIndicativeUsd": -0.03501557237230109,
+      "block": 134765645
     },
     {
       "route": "USDC→BTCB→USDC",
       "amount": 0.001,
       "steps": [
         {
-          "venue": "BiswapV2",
+          "venue": "PancakeV2",
           "from": "USDC",
           "to": "BTCB",
-          "pool": "0xA8A42a8d7d44b64eeE0Da73465dFbdD44Af24617",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "BTCB",
-          "to": "USDC",
           "pool": "0x2dF244535624761f6fCc381CaE3e9b903429d9Ff",
           "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000025737012617822,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.742629873821781e-7,
-      "netIndicativeUsd": -0.035027611275605205,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→CAKE→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "ApeSwap",
-          "from": "USDT",
-          "to": "CAKE",
-          "pool": "0xC32f6cF83C153729153f15bDFD5BbC9E9148947F",
-          "feeBps": 30
         },
         {
           "venue": "BiswapV2",
-          "from": "CAKE",
-          "to": "USDT",
-          "pool": "0x5032A2fB29B72ad8dAcC71429A2a81DF637433bb",
+          "from": "BTCB",
+          "to": "USDC",
+          "pool": "0xA8A42a8d7d44b64eeE0Da73465dFbdD44Af24617",
           "feeBps": 20
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000028724365450799,
+      "grossUsdAssumingPeg": -0.000021382287567138,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.71275634549201e-7,
-      "netIndicativeUsd": -0.035030595641085356,
-      "block": 134701479
+      "competitionStressUsd": 9.786177124328621e-7,
+      "netIndicativeUsd": -0.035023260905279574,
+      "block": 134765645
     },
     {
       "route": "USDC→ETH→USDC",
@@ -1688,12 +1634,39 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000030621355212692,
+      "grossUsdAssumingPeg": -0.000024563126024434,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.69378644787308e-7,
-      "netIndicativeUsd": -0.03503249073385748,
-      "block": 134701479
+      "competitionStressUsd": 9.75436873975566e-7,
+      "netIndicativeUsd": -0.035026438562898415,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→CAKE→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "CAKE",
+          "pool": "0xC32f6cF83C153729153f15bDFD5BbC9E9148947F",
+          "feeBps": 30
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "CAKE",
+          "to": "USDT",
+          "pool": "0x5032A2fB29B72ad8dAcC71429A2a81DF637433bb",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000031357111572846,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.686428884271541e-7,
+      "netIndicativeUsd": -0.03503322575446128,
+      "block": 134765645
     },
     {
       "route": "USDT→CAKE→USDT",
@@ -1715,39 +1688,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000044356080753983,
+      "grossUsdAssumingPeg": -0.000038805657993592,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.55643919246017e-7,
-      "netIndicativeUsd": -0.03504621172467323,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→DOGE→USDT",
-      "amount": 0.001,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "DOGE",
-          "pool": "0xC17555705C3bdc8Ec3e0d33dC9Bbe78A36fffAC2",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "DOGE",
-          "to": "USDT",
-          "pool": "0x0fA119e6a12e3540c2412f9EdA0221Ffd16a7934",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000049950734547872,
-      "flashPremiumAssumedUsd": 9e-7,
-      "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.50049265452128e-7,
-      "netIndicativeUsd": -0.03505180078381333,
-      "block": 134701479
+      "competitionStressUsd": 9.61194342006408e-7,
+      "netIndicativeUsd": -0.0350406668523356,
+      "block": 134765645
     },
     {
       "route": "USDT→DOGE→USDT",
@@ -1774,7 +1720,61 @@
       "gasAssumedUsd": 0.035,
       "competitionStressUsd": 9.488104927831421e-7,
       "netIndicativeUsd": -0.035053038317709645,
-      "block": 134701479
+      "block": 134765645
+    },
+    {
+      "route": "USDT→DOGE→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "ApeSwap",
+          "from": "USDT",
+          "to": "DOGE",
+          "pool": "0xC5fEaF5cA55b406697f32b4a2811d2670582B821",
+          "feeBps": 30
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "DOGE",
+          "to": "USDT",
+          "pool": "0x0fA119e6a12e3540c2412f9EdA0221Ffd16a7934",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000081760194138377,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 9.18239805861623e-7,
+      "netIndicativeUsd": -0.03508357843394424,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→DOGE→USDT",
+      "amount": 0.001,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "DOGE",
+          "pool": "0xC17555705C3bdc8Ec3e0d33dC9Bbe78A36fffAC2",
+          "feeBps": 20
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "DOGE",
+          "to": "USDT",
+          "pool": "0x0fA119e6a12e3540c2412f9EdA0221Ffd16a7934",
+          "feeBps": 25
+        }
+      ],
+      "hopCount": 2,
+      "grossUsdAssumingPeg": -0.000112806465410963,
+      "flashPremiumAssumedUsd": 9e-7,
+      "gasAssumedUsd": 0.035,
+      "competitionStressUsd": 8.87193534589037e-7,
+      "netIndicativeUsd": -0.03511459365894556,
+      "block": 134765645
     },
     {
       "route": "USDT→BSW→USDT",
@@ -1796,12 +1796,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000190388702358226,
+      "grossUsdAssumingPeg": -0.000221275036133282,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 8.096112976417739e-7,
-      "netIndicativeUsd": -0.03519209831365587,
-      "block": 134701479
+      "competitionStressUsd": 7.78724963866718e-7,
+      "netIndicativeUsd": -0.03522295376109715,
+      "block": 134765645
     },
     {
       "route": "USDT→BTCB→USDT",
@@ -1823,12 +1823,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000525444468051252,
+      "grossUsdAssumingPeg": -0.00055053214935888,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 4.74555531948748e-7,
-      "netIndicativeUsd": -0.0355268190235832,
-      "block": 134701479
+      "competitionStressUsd": 4.4946785064112e-7,
+      "netIndicativeUsd": -0.03555188161720952,
+      "block": 134765645
     },
     {
       "route": "USDT→BTCB→USDT",
@@ -1850,12 +1850,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000525724947999732,
+      "grossUsdAssumingPeg": -0.000550728880095806,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 4.74275052000268e-7,
-      "netIndicativeUsd": -0.035527099223051736,
-      "block": 134701479
+      "competitionStressUsd": 4.49271119904194e-7,
+      "netIndicativeUsd": -0.035552078151215714,
+      "block": 134765645
     },
     {
       "route": "USDC→ETH→USDC",
@@ -1877,12 +1877,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000706044425644641,
+      "grossUsdAssumingPeg": -0.000731092899805276,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 2.93955574355359e-7,
-      "netIndicativeUsd": -0.035707238381218996,
-      "block": 134701479
+      "competitionStressUsd": 2.6890710019472404e-7,
+      "netIndicativeUsd": -0.03573226180690547,
+      "block": 134765645
     },
     {
       "route": "USDC→ETH→USDC",
@@ -1904,12 +1904,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000708595564595622,
+      "grossUsdAssumingPeg": -0.000731641830801745,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 2.91404435404378e-7,
-      "netIndicativeUsd": -0.03570978696903103,
-      "block": 134701479
+      "competitionStressUsd": 2.6835816919825503e-7,
+      "netIndicativeUsd": -0.03573281018897095,
+      "block": 134765645
     },
     {
       "route": "USDC→BSW→USDC",
@@ -1936,7 +1936,7 @@
       "gasAssumedUsd": 0.035,
       "competitionStressUsd": 1.090075623652e-8,
       "netIndicativeUsd": -0.03599001014451972,
-      "block": 134701479
+      "block": 134765645
     },
     {
       "route": "USDC→BSW→USDC",
@@ -1963,7 +1963,7 @@
       "gasAssumedUsd": 0.035,
       "competitionStressUsd": 9.530162644133999e-9,
       "netIndicativeUsd": -0.03599137936751851,
-      "block": 134701479
+      "block": 134765645
     },
     {
       "route": "USDC→CAKE→USDC",
@@ -1985,12 +1985,12 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000999999062666783,
+      "grossUsdAssumingPeg": -0.000999999062666769,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 9.37333217e-13,
-      "netIndicativeUsd": -0.03600089906360412,
-      "block": 134701479
+      "competitionStressUsd": 9.37333231e-13,
+      "netIndicativeUsd": -0.036000899063604104,
+      "block": 134765645
     },
     {
       "route": "USDC→CAKE→USDC",
@@ -2012,118 +2012,16 @@
         }
       ],
       "hopCount": 2,
-      "grossUsdAssumingPeg": -0.000999999750783502,
+      "grossUsdAssumingPeg": -0.000999999765805921,
       "flashPremiumAssumedUsd": 9e-7,
       "gasAssumedUsd": 0.035,
-      "competitionStressUsd": 2.49216498e-13,
-      "netIndicativeUsd": -0.036000899751032725,
-      "block": 134701479
+      "competitionStressUsd": 2.34194079e-13,
+      "netIndicativeUsd": -0.036000899766040116,
+      "block": 134765645
     },
     {
       "route": "USDT→BSW→BUSD→USDT",
-      "amount": 0.129381,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "BSW",
-          "pool": "0x2b30c317ceDFb554Ec525F85E79538D59970BEb0",
-          "feeBps": 20
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BSW",
-          "to": "BUSD",
-          "pool": "0xB22Bc4DB1DCd0B45680b4D831F8C06CFf50Ee4D6",
-          "feeBps": 20
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0xDA8ceb724A06819c0A5cDb4304ea0cB27F8304cF",
-          "feeBps": 20
-        }
-      ],
-      "hopCount": 3,
-      "grossUsdAssumingPeg": 0.001770531312076266,
-      "flashPremiumAssumedUsd": 0.00011644289999999999,
-      "gasAssumedUsd": 0.065,
-      "competitionStressUsd": 0.00013115153131207626,
-      "netIndicativeUsd": -0.06347706311923582,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BSW→BUSD→USDT",
-      "amount": 0.127109,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "BSW",
-          "pool": "0x2b30c317ceDFb554Ec525F85E79538D59970BEb0",
-          "feeBps": 20
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BSW",
-          "to": "BUSD",
-          "pool": "0xB22Bc4DB1DCd0B45680b4D831F8C06CFf50Ee4D6",
-          "feeBps": 20
-        },
-        {
-          "venue": "PancakeV2",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0x7EFaEf62fDdCCa950418312c6C91Aef321375A00",
-          "feeBps": 25
-        }
-      ],
-      "hopCount": 3,
-      "grossUsdAssumingPeg": 0.00171306632050051,
-      "flashPremiumAssumedUsd": 0.00011439809999999999,
-      "gasAssumedUsd": 0.065,
-      "competitionStressUsd": 0.0001288220663205005,
-      "netIndicativeUsd": -0.06353015384582,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BSW→BUSD→USDT",
-      "amount": 0.124717,
-      "steps": [
-        {
-          "venue": "BiswapV2",
-          "from": "USDT",
-          "to": "BSW",
-          "pool": "0x2b30c317ceDFb554Ec525F85E79538D59970BEb0",
-          "feeBps": 20
-        },
-        {
-          "venue": "BiswapV2",
-          "from": "BSW",
-          "to": "BUSD",
-          "pool": "0xB22Bc4DB1DCd0B45680b4D831F8C06CFf50Ee4D6",
-          "feeBps": 20
-        },
-        {
-          "venue": "ApeSwap",
-          "from": "BUSD",
-          "to": "USDT",
-          "pool": "0x2e707261d086687470B515B320478Eb1C88D49bb",
-          "feeBps": 30
-        }
-      ],
-      "hopCount": 3,
-      "grossUsdAssumingPeg": 0.001653840687443688,
-      "flashPremiumAssumedUsd": 0.00011224529999999999,
-      "gasAssumedUsd": 0.065,
-      "competitionStressUsd": 0.0001263708406874437,
-      "netIndicativeUsd": -0.06358477545324374,
-      "block": 134701479
-    },
-    {
-      "route": "USDT→BSW→BUSD→USDT",
-      "amount": 0.033231,
+      "amount": 0.066002,
       "steps": [
         {
           "venue": "BiswapV2",
@@ -2148,16 +2046,16 @@
         }
       ],
       "hopCount": 3,
-      "grossUsdAssumingPeg": 0.000691383794060983,
-      "flashPremiumAssumedUsd": 0.000029907899999999995,
+      "grossUsdAssumingPeg": 0.002701910661622804,
+      "flashPremiumAssumedUsd": 0.000059401800000000004,
       "gasAssumedUsd": 0.065,
-      "competitionStressUsd": 0.00003392238379406098,
-      "netIndicativeUsd": -0.06437244648973307,
-      "block": 134701479
+      "competitionStressUsd": 0.00006870391066162281,
+      "netIndicativeUsd": -0.062426195049038825,
+      "block": 134765645
     },
     {
       "route": "USDT→BSW→BUSD→USDT",
-      "amount": 0.032864,
+      "amount": 0.065832,
       "steps": [
         {
           "venue": "BiswapV2",
@@ -2182,16 +2080,16 @@
         }
       ],
       "hopCount": 3,
-      "grossUsdAssumingPeg": 0.000676882044719108,
-      "flashPremiumAssumedUsd": 0.000029577599999999996,
+      "grossUsdAssumingPeg": 0.00268835567240168,
+      "flashPremiumAssumedUsd": 0.0000592488,
       "gasAssumedUsd": 0.065,
-      "competitionStressUsd": 0.00003354088204471911,
-      "netIndicativeUsd": -0.0643862364373256,
-      "block": 134701479
+      "competitionStressUsd": 0.00006852035567240169,
+      "netIndicativeUsd": -0.06243941348327073,
+      "block": 134765645
     },
     {
       "route": "USDT→BSW→BUSD→USDT",
-      "amount": 0.03248,
+      "amount": 0.065113,
       "steps": [
         {
           "venue": "BiswapV2",
@@ -2216,12 +2114,114 @@
         }
       ],
       "hopCount": 3,
-      "grossUsdAssumingPeg": 0.000661899303959497,
-      "flashPremiumAssumedUsd": 0.000029232,
+      "grossUsdAssumingPeg": 0.002631322475895047,
+      "flashPremiumAssumedUsd": 0.000058601700000000005,
       "gasAssumedUsd": 0.065,
-      "competitionStressUsd": 0.0000331418993039595,
-      "netIndicativeUsd": -0.06440047459534447,
-      "block": 134701479
+      "competitionStressUsd": 0.00006774432247589505,
+      "netIndicativeUsd": -0.06249502354658085,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→CAKE→BSW→USDT",
+      "amount": 0.024944,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "CAKE",
+          "pool": "0xA39Af17CE4a8eb807E076805Da1e2B8EA7D0755b",
+          "feeBps": 25
+        },
+        {
+          "venue": "PancakeV2",
+          "from": "CAKE",
+          "to": "BSW",
+          "pool": "0x009cb45c1286B31501edf12041E955676d4bE153",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BSW",
+          "to": "USDT",
+          "pool": "0x2b30c317ceDFb554Ec525F85E79538D59970BEb0",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 3,
+      "grossUsdAssumingPeg": 0.000786400049577363,
+      "flashPremiumAssumedUsd": 0.0000224496,
+      "gasAssumedUsd": 0.065,
+      "competitionStressUsd": 0.000025730400049577364,
+      "netIndicativeUsd": -0.06426177995047222,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BTCB→BSW→USDT",
+      "amount": 0.02308,
+      "steps": [
+        {
+          "venue": "BiswapV2",
+          "from": "USDT",
+          "to": "BTCB",
+          "pool": "0xa987f0b7098585c735cD943ee07544a84e923d1D",
+          "feeBps": 20
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BTCB",
+          "to": "BSW",
+          "pool": "0x53eA66a84F654d3880a8032bA7552600D41562dF",
+          "feeBps": 20
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BSW",
+          "to": "USDT",
+          "pool": "0x2b30c317ceDFb554Ec525F85E79538D59970BEb0",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 3,
+      "grossUsdAssumingPeg": 0.000606481735953715,
+      "flashPremiumAssumedUsd": 0.000020772,
+      "gasAssumedUsd": 0.065,
+      "competitionStressUsd": 0.000023686481735953713,
+      "netIndicativeUsd": -0.06443797674578224,
+      "block": 134765645
+    },
+    {
+      "route": "USDT→BTCB→BSW→USDT",
+      "amount": 0.022819,
+      "steps": [
+        {
+          "venue": "PancakeV2",
+          "from": "USDT",
+          "to": "BTCB",
+          "pool": "0x3F803EC2b816Ea7F06EC76aA2B6f2532F9892d62",
+          "feeBps": 25
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BTCB",
+          "to": "BSW",
+          "pool": "0x53eA66a84F654d3880a8032bA7552600D41562dF",
+          "feeBps": 20
+        },
+        {
+          "venue": "BiswapV2",
+          "from": "BSW",
+          "to": "USDT",
+          "pool": "0x2b30c317ceDFb554Ec525F85E79538D59970BEb0",
+          "feeBps": 20
+        }
+      ],
+      "hopCount": 3,
+      "grossUsdAssumingPeg": 0.000593020695790349,
+      "flashPremiumAssumedUsd": 0.000020537099999999997,
+      "gasAssumedUsd": 0.065,
+      "competitionStressUsd": 0.00002341202069579035,
+      "netIndicativeUsd": -0.06445092842490545,
+      "block": 134765645
     }
   ],
   "topIndicativePositive": []
