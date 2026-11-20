@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-11-20T10:29:48Z",
+  "generatedAt": "2026-11-20T18:44:42Z",
   "mode": "AUTONOMOUS_READ_ONLY_ROUTER",
   "automation": "Scheduled on GitHub Actions. Freshness depends on GitHub scheduler; not per-block HFT.",
   "targetNetEURPerMinute": 50,
@@ -18,68 +18,85 @@
     "atomicReceiptsOk": 8.0,
     "walletBalanceVerifications": 8.0
   },
-  "signalQueue": [],
-  "queueTotal": 0,
+  "signalQueue": [
+    {
+      "network": "Solana",
+      "mechanism": "Velocity keeper matcher",
+      "action": "BTC-PERP",
+      "status": "ORDER_BOOK_CROSSED_ONLY",
+      "source": "solana-keepers.json",
+      "sourceFresh": false,
+      "reason": "1 crossed book candidate(s); neither fillable instructions nor keeper reward yet simulated.",
+      "upperBoundUsd": null,
+      "gasEstimateUsd": null,
+      "requiresFullAtomicSimulation": true,
+      "walletProfitVerified": false,
+      "proof": null,
+      "rank": 1,
+      "dispatchReady": false
+    }
+  ],
+  "queueTotal": 1,
   "actionableNow": 0,
   "dispatchReady": 0,
   "sourceStatus": {
     "evm.json": {
-      "timestamp": "2026-11-20T04:18:06.953Z",
-      "ageMinutes": 371.7,
+      "timestamp": "2026-11-20T13:14:50.253Z",
+      "ageMinutes": 329.9,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "sky.json": {
-      "timestamp": "2026-11-20T04:18:18.865Z",
-      "ageMinutes": 371.5,
+      "timestamp": "2026-11-20T13:15:14.446Z",
+      "ageMinutes": 329.5,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "keepers.json": {
-      "timestamp": "2026-11-20T04:18:15.411Z",
-      "ageMinutes": 371.6,
+      "timestamp": "2026-11-20T13:15:06.913Z",
+      "ageMinutes": 329.6,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "beefy-base.json": {
-      "timestamp": "2026-11-20T08:36:13.908Z",
-      "ageMinutes": 113.6,
+      "timestamp": "2026-11-20T17:12:47.905Z",
+      "ageMinutes": 91.9,
       "status": "STALE",
       "maxAgeMinutes": 30
     },
     "bsc-v3.json": {
-      "timestamp": "2026-11-20T04:18:13.918Z",
-      "ageMinutes": 371.6,
+      "timestamp": "2026-11-20T13:15:05.240Z",
+      "ageMinutes": 329.6,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "bsc.json": {
-      "timestamp": "2026-11-20T04:18:08.924Z",
-      "ageMinutes": 371.7,
+      "timestamp": "2026-11-20T13:14:53.925Z",
+      "ageMinutes": 329.8,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "triangles.json": {
-      "timestamp": "2026-11-20T04:18:26.768Z",
-      "ageMinutes": 371.4,
+      "timestamp": "2026-11-20T13:15:32.995Z",
+      "ageMinutes": 329.2,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "solana-keepers.json": {
-      "timestamp": "2026-11-20T05:56:59Z",
-      "ageMinutes": 272.8,
+      "timestamp": "2026-11-20T15:18:03Z",
+      "ageMinutes": 206.7,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "capture-ledger.json": {
-      "timestamp": "2026-11-20T08:34:11Z",
-      "ageMinutes": 115.6,
+      "timestamp": "2026-11-20T17:14:31Z",
+      "ageMinutes": 90.2,
       "status": "STALE",
       "maxAgeMinutes": 25
     },
     "snapshot.json": {
-      "timestamp": "2026-11-20T04:17:27Z",
-      "ageMinutes": 372.4,
+      "timestamp": "2026-11-20T13:14:06Z",
+      "ageMinutes": 330.6,
       "status": "STALE",
       "maxAgeMinutes": 20
     }
@@ -99,7 +116,7 @@
   "degradedCount": 10,
   "ecosystems": {
     "Morpho": {
-      "totalUnderwaterAPI": 39,
+      "totalUnderwaterAPI": 41,
       "onchainScreened": 14,
       "grossUpperBoundPositive": 0
     },
@@ -116,13 +133,13 @@
       "positiveAfterSafetyMargin": 0
     },
     "Solana": {
-      "kaminoTransactionsSampled": 100,
-      "recentLiquidations": 3,
-      "l3Orders": 55,
-      "l3Crosses": 0
+      "kaminoTransactionsSampled": 69,
+      "recentLiquidations": 10,
+      "l3Orders": 60,
+      "l3Crosses": 1
     },
     "BNB": {
-      "optimalCycles": 29581,
+      "optimalCycles": 29477,
       "candidateCyclesPositiveAfterAssumptions": 0
     }
   },
