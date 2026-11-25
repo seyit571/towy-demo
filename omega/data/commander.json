@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-11-25T00:52:22Z",
+  "generatedAt": "2026-11-25T09:17:44Z",
   "mode": "AUTONOMOUS_READ_ONLY_ROUTER",
   "automation": "Scheduled on GitHub Actions. Freshness depends on GitHub scheduler; not per-block HFT.",
   "targetNetEURPerMinute": 50,
@@ -18,68 +18,85 @@
     "atomicReceiptsOk": 8.0,
     "walletBalanceVerifications": 8.0
   },
-  "signalQueue": [],
-  "queueTotal": 0,
+  "signalQueue": [
+    {
+      "network": "Solana",
+      "mechanism": "Velocity keeper matcher",
+      "action": "SOL-PERP",
+      "status": "ORDER_BOOK_CROSSED_ONLY",
+      "source": "solana-keepers.json",
+      "sourceFresh": false,
+      "reason": "9 crossed book candidate(s); neither fillable instructions nor keeper reward yet simulated.",
+      "upperBoundUsd": null,
+      "gasEstimateUsd": null,
+      "requiresFullAtomicSimulation": true,
+      "walletProfitVerified": false,
+      "proof": null,
+      "rank": 1,
+      "dispatchReady": false
+    }
+  ],
+  "queueTotal": 1,
   "actionableNow": 0,
   "dispatchReady": 0,
   "sourceStatus": {
     "evm.json": {
-      "timestamp": "2026-11-24T21:04:30.142Z",
-      "ageMinutes": 227.9,
+      "timestamp": "2026-11-25T04:08:21.135Z",
+      "ageMinutes": 309.4,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "sky.json": {
-      "timestamp": "2026-11-24T21:04:54.728Z",
-      "ageMinutes": 227.5,
+      "timestamp": "2026-11-25T04:08:38.882Z",
+      "ageMinutes": 309.1,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "keepers.json": {
-      "timestamp": "2026-11-24T21:04:46.982Z",
-      "ageMinutes": 227.6,
+      "timestamp": "2026-11-25T04:08:33.661Z",
+      "ageMinutes": 309.2,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "beefy-base.json": {
-      "timestamp": "2026-11-25T00:48:03.440Z",
-      "ageMinutes": 4.3,
+      "timestamp": "2026-11-25T09:14:36.846Z",
+      "ageMinutes": 3.1,
       "status": "FRESH",
       "maxAgeMinutes": 30
     },
     "bsc-v3.json": {
-      "timestamp": "2026-11-24T21:04:45.309Z",
-      "ageMinutes": 227.6,
+      "timestamp": "2026-11-25T04:08:32.369Z",
+      "ageMinutes": 309.2,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "bsc.json": {
-      "timestamp": "2026-11-24T21:04:33.825Z",
-      "ageMinutes": 227.8,
+      "timestamp": "2026-11-25T04:08:24.185Z",
+      "ageMinutes": 309.3,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "triangles.json": {
-      "timestamp": "2026-11-24T21:05:12.126Z",
-      "ageMinutes": 227.2,
+      "timestamp": "2026-11-25T04:08:51.675Z",
+      "ageMinutes": 308.9,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "solana-keepers.json": {
-      "timestamp": "2026-11-24T23:14:51Z",
-      "ageMinutes": 97.5,
+      "timestamp": "2026-11-25T05:29:29Z",
+      "ageMinutes": 228.3,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "capture-ledger.json": {
-      "timestamp": "2026-11-25T00:02:05Z",
-      "ageMinutes": 50.3,
+      "timestamp": "2026-11-25T08:17:37Z",
+      "ageMinutes": 60.1,
       "status": "STALE",
       "maxAgeMinutes": 25
     },
     "snapshot.json": {
-      "timestamp": "2026-11-24T21:03:45Z",
-      "ageMinutes": 228.6,
+      "timestamp": "2026-11-25T04:07:37Z",
+      "ageMinutes": 310.1,
       "status": "STALE",
       "maxAgeMinutes": 20
     }
@@ -98,8 +115,8 @@
   "degradedCount": 9,
   "ecosystems": {
     "Morpho": {
-      "totalUnderwaterAPI": 36,
-      "onchainScreened": 13,
+      "totalUnderwaterAPI": 38,
+      "onchainScreened": 14,
       "grossUpperBoundPositive": 0
     },
     "Sky": {
@@ -118,10 +135,10 @@
       "kaminoTransactionsSampled": 100,
       "recentLiquidations": 0,
       "l3Orders": 74,
-      "l3Crosses": 0
+      "l3Crosses": 9
     },
     "BNB": {
-      "optimalCycles": 28591,
+      "optimalCycles": 28773,
       "candidateCyclesPositiveAfterAssumptions": 0
     }
   },
