@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-11-26T20:05:52Z",
+  "generatedAt": "2026-11-27T02:47:04Z",
   "mode": "AUTONOMOUS_READ_ONLY_ROUTER",
   "automation": "Scheduled on GitHub Actions. Freshness depends on GitHub scheduler; not per-block HFT.",
   "targetNetEURPerMinute": 50,
@@ -18,68 +18,88 @@
     "atomicReceiptsOk": 8.0,
     "walletBalanceVerifications": 8.0
   },
-  "signalQueue": [],
-  "queueTotal": 0,
+  "signalQueue": [
+    {
+      "network": "Base",
+      "mechanism": "Beefy harvest caller",
+      "action": "aero-cow-base-usdc-antc-vault",
+      "status": "RPC_RECEIPT_ONLY",
+      "source": "beefy-base.json",
+      "sourceFresh": true,
+      "reason": "Positive RPC net ETH estimate excludes L1 data fee; no full fork wallet balance verified",
+      "upperBoundUsd": null,
+      "gasEstimateUsd": null,
+      "requiresFullAtomicSimulation": true,
+      "walletProfitVerified": false,
+      "proof": {
+        "address": "0x18f34B962731A3E720BA1c9087fdA2309860dCd9",
+        "netBeforeL1DataFeeEth": 1.156014561669e-06
+      },
+      "rank": 1,
+      "dispatchReady": false
+    }
+  ],
+  "queueTotal": 1,
   "actionableNow": 0,
   "dispatchReady": 0,
   "sourceStatus": {
     "evm.json": {
-      "timestamp": "2026-11-26T15:08:56.344Z",
-      "ageMinutes": 296.9,
+      "timestamp": "2026-11-26T23:52:02.812Z",
+      "ageMinutes": 175.0,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "sky.json": {
-      "timestamp": "2026-11-26T15:09:10.220Z",
-      "ageMinutes": 296.7,
+      "timestamp": "2026-11-26T23:52:33.792Z",
+      "ageMinutes": 174.5,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "keepers.json": {
-      "timestamp": "2026-11-26T15:09:06.284Z",
-      "ageMinutes": 296.8,
+      "timestamp": "2026-11-26T23:52:24.103Z",
+      "ageMinutes": 174.7,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "beefy-base.json": {
-      "timestamp": "2026-11-26T20:03:18.148Z",
-      "ageMinutes": 2.6,
+      "timestamp": "2026-11-27T02:44:57.964Z",
+      "ageMinutes": 2.1,
       "status": "FRESH",
       "maxAgeMinutes": 30
     },
     "bsc-v3.json": {
-      "timestamp": "2026-11-26T15:09:05.064Z",
-      "ageMinutes": 296.8,
+      "timestamp": "2026-11-26T23:52:22.094Z",
+      "ageMinutes": 174.7,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "bsc.json": {
-      "timestamp": "2026-11-26T15:08:58.741Z",
-      "ageMinutes": 296.9,
+      "timestamp": "2026-11-26T23:52:08.112Z",
+      "ageMinutes": 174.9,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "triangles.json": {
-      "timestamp": "2026-11-26T15:09:20.204Z",
-      "ageMinutes": 296.5,
+      "timestamp": "2026-11-26T23:52:54.777Z",
+      "ageMinutes": 174.2,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "solana-keepers.json": {
-      "timestamp": "2026-11-26T18:37:15Z",
-      "ageMinutes": 88.6,
+      "timestamp": "2026-11-27T01:56:17Z",
+      "ageMinutes": 50.8,
       "status": "STALE",
       "maxAgeMinutes": 20
     },
     "capture-ledger.json": {
-      "timestamp": "2026-11-26T19:48:59Z",
-      "ageMinutes": 16.9,
+      "timestamp": "2026-11-27T02:27:36Z",
+      "ageMinutes": 19.5,
       "status": "FRESH",
       "maxAgeMinutes": 25
     },
     "snapshot.json": {
-      "timestamp": "2026-11-26T15:08:13Z",
-      "ageMinutes": 297.7,
+      "timestamp": "2026-11-26T23:51:14Z",
+      "ageMinutes": 175.8,
       "status": "STALE",
       "maxAgeMinutes": 20
     }
@@ -116,11 +136,11 @@
     "Solana": {
       "kaminoTransactionsSampled": 100,
       "recentLiquidations": 0,
-      "l3Orders": 58,
+      "l3Orders": 45,
       "l3Crosses": 0
     },
     "BNB": {
-      "optimalCycles": 29160,
+      "optimalCycles": 28321,
       "candidateCyclesPositiveAfterAssumptions": 0
     }
   },
